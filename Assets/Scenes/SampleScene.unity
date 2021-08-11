@@ -219,17 +219,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6893768b328b3d240b9badc799e40f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunActive: 0
-  speed: 6
+  maxSpeed: 5
+  isRunActive: 1
+  speedMultiplier: 0.5
   groundChecker: {fileID: 792473876}
   groundDetectRadius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  speedMultiplier: 1.5
-  isDoubleJumpActive: 0
   jumpForce: 10
+  isMultipleJumpsActive: 0
   extraJumps: 1
+  speed: 0
 --- !u!212 &380592505
 SpriteRenderer:
   m_ObjectHideFlags: 0

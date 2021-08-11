@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Move Settings")]
-    [SerializeField] private float speed;
+    [SerializeField] private float maxSpeed;
     [SerializeField] private bool isRunActive;
     [SerializeField] private float speedMultiplier;
     [SerializeField] private Transform groundChecker;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isMultipleJumpsActive;
     [SerializeField] private int extraJumps;
 
+    [SerializeField] private float speed;
     private int jumps;
     private bool isGrounded;
     private bool isFacingRight;
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = true;
         isGrounded = false;
         jumps = extraJumps;
+        speed = maxSpeed;
     }
 
     private void FixedUpdate()
@@ -42,32 +45,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        if (isRunActive && Input.GetKeyDown(KeyCode.LeftShift))
+        switch (isRunActive)
         {
-            speed *= speedMultiplier;
-        }
-        else if (isRunActive && Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            speed /= speedMultiplier;
+            case true when Input.GetKeyDown(KeyCode.LeftShift):
+                speed *= speedMultiplier;
+
+                break;
+            case true when Input.GetKeyUp(KeyCode.LeftShift):
+                speed /= speedMultiplier;
+
+                break;
         }
     }
 
     private void Jump()
     {
-        if (isGrounded)
+        if (!Input.GetKeyDown(KeyCode.Space)) return;
+
+        if (isGrounded && jumps != extraJumps)
         {
             jumps = extraJumps;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isMultipleJumpsActive)
+        if (jumps > 0 && isMultipleJumpsActive)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            CalculateJumpVelocity();
             jumps--;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isMultipleJumpsActive)
+        else if (isGrounded && !isMultipleJumpsActive)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            CalculateJumpVelocity();
         }
+    }
+
+    private void CalculateJumpVelocity()
+    {
+        rb.velocity = Vector2.up * jumpForce;
     }
 
     private void Move()
