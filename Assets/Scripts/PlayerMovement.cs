@@ -1,21 +1,20 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Move Settings")]
-    [SerializeField] private bool isRunActive;
     [SerializeField] private float speed;
+    [SerializeField] private bool isRunActive;
+    [SerializeField] private float speedMultiplier;
     [SerializeField] private Transform groundChecker;
     [SerializeField] private float groundDetectRadius;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private float speedMultiplier;
 
     [Header("Jump Settings")]
-    [SerializeField] private bool isDoubleJumpActive;
     [SerializeField] private float jumpForce;
+    [SerializeField] private bool isMultipleJumpsActive;
     [SerializeField] private int extraJumps;
-   
+
     private int jumps;
     private bool isGrounded;
     private bool isFacingRight;
@@ -45,11 +44,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isRunActive && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed *=speedMultiplier;
+            speed *= speedMultiplier;
         }
         else if (isRunActive && Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed /=speedMultiplier;
+            speed /= speedMultiplier;
         }
     }
 
@@ -60,12 +59,12 @@ public class PlayerMovement : MonoBehaviour
             jumps = extraJumps;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isDoubleJumpActive)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isMultipleJumpsActive)
         {
             rb.velocity = Vector2.up * jumpForce;
             jumps--;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isDoubleJumpActive)
+        else if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isMultipleJumpsActive)
         {
             rb.velocity = Vector2.up * jumpForce;
         }
