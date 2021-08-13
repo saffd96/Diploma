@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-[RequireComponent(typeof(AnimationController))]
+[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Move Settings")]
@@ -22,8 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float extraJumpVfxLifeTime;
 
     private GameObject dustFromRun;
-    private GameObject jumpVfx;
-    private AnimationController animationController;
+    private PlayerAnimationController playerAnimationController;
     private float speed;
     private int jumps;
     private bool isGrounded;
@@ -39,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        animationController = GetComponent<AnimationController>();
+        playerAnimationController = GetComponent<PlayerAnimationController>();
         rb = GetComponent<Rigidbody2D>();
         isFacingRight = true;
         isGrounded = false;
@@ -61,11 +60,11 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         isGrounded = Physics2D.OverlapCircle(feetsPostion.position, groundDetectRadius, whatIsGround);
-        animationController.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
+        playerAnimationController.SetIsGrounded(isGrounded);
 
         moveInput = Input.GetAxis("Horizontal");
 
-        animationController.SetFloat(AnimationFloatNames.Speed, Mathf.Abs(moveInput));
+        playerAnimationController.SetSpeed(moveInput);
 
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
@@ -91,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        animationController.SetTrigger(AnimationTriggerNames.Jump);
+        playerAnimationController.Jump();
         rb.velocity = Vector2.up * jumpForce;
     }
 
@@ -104,13 +103,13 @@ public class PlayerMovement : MonoBehaviour
             case true when Input.GetKeyDown(KeyCode.LeftShift):
                 dustFromRun = Instantiate(runVfx, transform);
                 dustFromRun.SetActive(false);
-                animationController.SetBool(AnimationBoolNames.IsRunning, true);
+                playerAnimationController.SetIsRunning(true);
                 speed *= runningSpeedMultiplier;
 
                 break;
             case true when Input.GetKeyUp(KeyCode.LeftShift):
                 Destroy(dustFromRun);
-                animationController.SetBool(AnimationBoolNames.IsRunning, false);
+                playerAnimationController.SetIsRunning(false);
                 speed /= runningSpeedMultiplier;
 
                 break;
@@ -125,11 +124,6 @@ public class PlayerMovement : MonoBehaviour
         {
             jumps = extraJumps;
         }
-        else
-        {
-            jumpVfx = Instantiate(extraJumpVfx, transform.position, quaternion.identity);
-            Destroy(jumpVfx, extraJumpVfxLifeTime);
-        }
 
         switch (isMultipleJumpsActive)
         {
@@ -141,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
                 jumps--;
 
+                if (!isGrounded)
+                {
+                    Instantiate(extraJumpVfx, transform.position, quaternion.identity);
+                }
+
                 break;
         }
     }
@@ -149,8 +148,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dustFromRun != null)
         {
-            dustFromRun.SetActive(animationController.GetFloat(AnimationFloatNames.Speed) > 0.5f
-                && animationController.GetBool(AnimationBoolNames.IsGrounded));
+            dustFromRun.SetActive(
+                playerAnimationController.GetSpeed() > 0.5f && playerAnimationController.GetGrounded());
         }
     }
 }

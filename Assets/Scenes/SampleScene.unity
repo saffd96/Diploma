@@ -226,13 +226,13 @@ MonoBehaviour:
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
   feetsPostion: {fileID: 792473876}
-  groundDetectRadius: 0.1
+  groundDetectRadius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   jumpForce: 10
   isMultipleJumpsActive: 1
-  extraJumps: 1
+  extraJumps: 5
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   extraJumpVfxLifeTime: 0.33
 --- !u!212 &380592505

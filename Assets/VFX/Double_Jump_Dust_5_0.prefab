@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5923469385799962170}
   - component: {fileID: 733348081590899246}
   - component: {fileID: 3032559833572506047}
+  - component: {fileID: 6642636986914622589}
   m_Layer: 0
   m_Name: Double_Jump_Dust_5_0
   m_TagString: Untagged
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6642636986914622589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480710757439887269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36d854fc3ab48f1b95401f7b9d68634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7400000, guid: 65bcd9058be97d84cb18f7379ee3fd26, type: 2}
