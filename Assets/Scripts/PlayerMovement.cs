@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runningSpeedMultiplier;
     [SerializeField] private GameObject runVfx;
     [Space]
-    [SerializeField] private Transform feetsPostion;
+    [SerializeField] private Transform legsPosition;
     [SerializeField] private float groundDetectRadius;
     [SerializeField] private LayerMask whatIsGround;
 
@@ -19,8 +19,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isMultipleJumpsActive;
     [SerializeField] private int extraJumps;
     [SerializeField] private GameObject extraJumpVfx;
-    [SerializeField] private float extraJumpVfxLifeTime;
 
+    [Header("Shadow Settings")]
+    [SerializeField] private Transform shadowTransform;
+    [SerializeField] private float shadowShowRange = 3f;
+
+    private RaycastHit2D hit;
     private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
     private float speed;
@@ -29,11 +33,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight;
     private Rigidbody2D rb;
     private float moveInput;
+    private bool isShiftPressed;
+    private bool isShadowEnabled;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(feetsPostion.position, groundDetectRadius);
+        Gizmos.DrawWireSphere(legsPosition.position, groundDetectRadius);
     }
 
     private void Awake()
@@ -55,18 +61,24 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckJumpCondition();
         CheckRunCondition();
+        MoveShadow();
     }
 
     private void Move()
     {
-        isGrounded = Physics2D.OverlapCircle(feetsPostion.position, groundDetectRadius, whatIsGround);
+        isGrounded = Physics2D.OverlapCircle(legsPosition.position, groundDetectRadius, whatIsGround);
         playerAnimationController.SetIsGrounded(isGrounded);
 
         moveInput = Input.GetAxis("Horizontal");
 
-        playerAnimationController.SetSpeed(moveInput);
+        playerAnimationController.SetSpeed(Mathf.Abs(moveInput));
 
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+        if (!isGrounded)
+        {
+            playerAnimationController.SetVelocity(rb.velocity.y);
+        }
 
         if (moveInput > 0 && !isFacingRight)
         {
@@ -100,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
 
         switch (isRunActive)
         {
-            case true when Input.GetKeyDown(KeyCode.LeftShift):
+            case true when Input.GetKey(KeyCode.LeftShift) && isGrounded && !isShiftPressed:
+                isShiftPressed = true;
                 dustFromRun = Instantiate(runVfx, transform);
                 dustFromRun.SetActive(false);
                 playerAnimationController.SetIsRunning(true);
@@ -111,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(dustFromRun);
                 playerAnimationController.SetIsRunning(false);
                 speed /= runningSpeedMultiplier;
+                isShiftPressed = false;
 
                 break;
         }
@@ -151,5 +165,21 @@ public class PlayerMovement : MonoBehaviour
             dustFromRun.SetActive(
                 playerAnimationController.GetSpeed() > 0.5f && playerAnimationController.GetGrounded());
         }
+    }
+
+    private void MoveShadow()
+    {
+        var position = transform.position;
+        
+        hit = Physics2D.Raycast(position, Vector2.down, shadowShowRange, LayerMask.GetMask(Layers.Ground));
+        
+        isShadowEnabled = hit.collider != null; 
+
+        if (isShadowEnabled)
+        {
+            shadowTransform.position = hit.point;
+        }
+        
+        shadowTransform.gameObject.SetActive(isShadowEnabled);
     }
 }

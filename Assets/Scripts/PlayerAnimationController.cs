@@ -9,6 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
     private int jumpId;
     private int getDamageId;
     private int speedId;
+    private int velocityId;
     private int isRunningId;
     private int isGroundedId;
     private int isDeadId;
@@ -21,6 +22,7 @@ public class PlayerAnimationController : MonoBehaviour
         jumpId = Animator.StringToHash(AnimationTriggerNames.Jump);
         getDamageId = Animator.StringToHash(AnimationTriggerNames.GetDamage);
         speedId = Animator.StringToHash(AnimationFloatNames.Speed);
+        velocityId = Animator.StringToHash(AnimationFloatNames.Velocity);
         isRunningId = Animator.StringToHash(AnimationBoolNames.IsRunning);
         isGroundedId = Animator.StringToHash(AnimationBoolNames.IsGrounded);
         isDeadId = Animator.StringToHash(AnimationBoolNames.IsDead);
@@ -38,6 +40,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void SetSpeed(float value)
     {
         anim.SetFloat(speedId, value);
+    }
+    public void SetVelocity(float value)
+    {
+        anim.SetFloat(velocityId, value);
     }
 
     public void SetIsRunning(bool value)

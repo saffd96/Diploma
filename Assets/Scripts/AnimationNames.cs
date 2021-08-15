@@ -7,6 +7,7 @@ public class AnimationTriggerNames
 public class AnimationFloatNames
 {
     public const string Speed = "Speed";
+    public const string Velocity = "Velocity";
 }
 
 public class AnimationBoolNames
