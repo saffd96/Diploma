@@ -4,6 +4,7 @@ public class AnimationTriggerNames
     public const string GetDamage = "GetDamage";
 }
 
+
 public class AnimationFloatNames
 {
     public const string Speed = "Speed";
