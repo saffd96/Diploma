@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1963225137869267991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792138301657510428}
+  m_Layer: 7
+  m_Name: ColliderDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792138301657510428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963225137869267991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4955594709239865563}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3269315661956905437
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +148,7 @@ Transform:
   m_Children:
   - {fileID: 4955594709635395765}
   - {fileID: 3160837874213951228}
+  - {fileID: 792138301657510428}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -137,6 +168,8 @@ MonoBehaviour:
   isRunActive: 1
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
+  colliderDetector: {fileID: 792138301657510428}
+  colliderDetectRadius: 0.2
   legsPosition: {fileID: 4955594709635395765}
   groundDetectRadius: 0.2
   whatIsGround:
@@ -147,7 +180,7 @@ MonoBehaviour:
   extraJumps: 1
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   shadowTransform: {fileID: 3160837874213951228}
-  shadowShowValue: 3
+  shadowShowRange: 3
 --- !u!114 &4955594709239865565
 MonoBehaviour:
   m_ObjectHideFlags: 0

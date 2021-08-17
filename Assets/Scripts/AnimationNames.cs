@@ -18,4 +18,5 @@ public class AnimationBoolNames
     public const string IsGrounded = "IsGrounded";
     public const string IsDead = "IsDead";
     public const string IsClimbing = "IsClimbing";
+    public const string IsPushing = "IsPushing";
 }

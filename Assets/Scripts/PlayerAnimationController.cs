@@ -6,15 +6,16 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator anim;
 
-    private int jumpId;
     private int getDamageId;
+    private int jumpId;
     private int speedId;
     private int velocityId;
     private int isRunningId;
     private int isGroundedId;
     private int isDeadId;
     private int isClimbingId;
-    private int climbingSpeedId;
+    private int isClimbingSpeedId;
+    private int isPushingId;
 
     
     private void Awake()
@@ -23,13 +24,16 @@ public class PlayerAnimationController : MonoBehaviour
         
         jumpId = Animator.StringToHash(AnimationTriggerNames.Jump);
         getDamageId = Animator.StringToHash(AnimationTriggerNames.GetDamage);
+        
         speedId = Animator.StringToHash(AnimationFloatNames.Speed);
         velocityId = Animator.StringToHash(AnimationFloatNames.Velocity);
+        isClimbingSpeedId = Animator.StringToHash(AnimationFloatNames.ClimbingSpeed);
+        
         isRunningId = Animator.StringToHash(AnimationBoolNames.IsRunning);
         isGroundedId = Animator.StringToHash(AnimationBoolNames.IsGrounded);
         isDeadId = Animator.StringToHash(AnimationBoolNames.IsDead);
         isClimbingId = Animator.StringToHash(AnimationBoolNames.IsClimbing);
-        climbingSpeedId = Animator.StringToHash(AnimationFloatNames.ClimbingSpeed);
+        isPushingId = Animator.StringToHash(AnimationBoolNames.IsPushing);
     }
 
     public void Jump()
@@ -47,7 +51,7 @@ public class PlayerAnimationController : MonoBehaviour
     } 
     public void SetClimbingSpeed(float value)
     {
-        anim.SetFloat(climbingSpeedId, value);
+        anim.SetFloat(isClimbingSpeedId, value);
     }
     public void SetVelocity(float value)
     {
@@ -67,6 +71,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void SetIsClimbing(bool value)
     {
         anim.SetBool(isClimbingId, value);
+    }
+    public void SetIsPushing(bool value)
+    {
+        anim.SetBool(isPushingId, value);
     }
     
     public void SetIsDead(bool value)

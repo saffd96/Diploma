@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isRunActive;
     [SerializeField] private float runningSpeedMultiplier;
     [SerializeField] private GameObject runVfx;
+    [SerializeField] private Transform colliderDetector;
+    [SerializeField] private float colliderDetectRadius;
     [Space]
     [SerializeField] private Transform legsPosition;
     [SerializeField] private float groundDetectRadius;
@@ -23,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Shadow Settings")]
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
+
+    // private StateMachine stateMachine;
 
     private RaycastHit2D hit;
     private GameObject dustFromRun;
@@ -43,25 +48,43 @@ public class PlayerMovement : MonoBehaviour
     private bool isShiftPressed;
     private bool isShadowEnabled;
     private bool isClimbing;
+    private bool isPushing;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(legsPosition.position, groundDetectRadius);
+        Gizmos.DrawWireSphere(colliderDetector.position, colliderDetectRadius);
     }
+    //
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.collider.CompareTag(Tags.PushingObject))
+    //     {
+    //         CheckPushCondition();
+    //     }
+    // }
+    //
+    // private void OnCollisionExit2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag(Tags.PushingObject))
+    //     {
+    //         CheckPushCondition();
+    //     }
+    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(Tags.ClimbObject))
-        {
-            isClimbing = true;
-        }
+        if (!other.CompareTag(Tags.ClimbObject)) return;
 
+        isClimbing = true;
         CheckClimbCondition();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (!other.CompareTag(Tags.ClimbObject)) return;
+
         isClimbing = false;
         CheckClimbCondition();
     }
@@ -79,29 +102,15 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        Climb();
     }
 
     private void Update()
     {
         CheckJumpCondition();
         CheckRunCondition();
-
+        CheckPushCondition();
         MoveShadow();
-    }
-
-    private void CheckClimbCondition()
-    {
-        if (isClimbing)
-        {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-        }
-        else
-        {
-            playerAnimationController.SetClimbingSpeed(0);
-            rb.bodyType = RigidbodyType2D.Dynamic;
-        }
-
-        playerAnimationController.SetIsClimbing(isClimbing);
     }
 
     private void Move()
@@ -110,19 +119,10 @@ public class PlayerMovement : MonoBehaviour
         playerAnimationController.SetIsGrounded(isGrounded);
 
         moveHorizontalInput = Input.GetAxis("Horizontal");
-        moveVerticalInput = Input.GetAxis("Vertical");
-
-        playerAnimationController.SetSpeed(Mathf.Abs(moveHorizontalInput));
-
-        if (isClimbing)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, moveVerticalInput * speed);
-            playerAnimationController.SetClimbingSpeed(Mathf.Abs(moveVerticalInput));
-        }
 
         rb.velocity = new Vector2(moveHorizontalInput * speed, rb.velocity.y);
 
-        if (!isGrounded)
+        if (!isGrounded&&!isClimbing)
         {
             playerAnimationController.SetVelocity(rb.velocity.y);
         }
@@ -134,6 +134,19 @@ public class PlayerMovement : MonoBehaviour
         else if (moveHorizontalInput < 0 && isFacingRight)
         {
             Flip();
+        }
+    }
+
+    private void Climb()
+    {
+        moveVerticalInput = Input.GetAxis("Vertical");
+
+        playerAnimationController.SetSpeed(Mathf.Abs(moveHorizontalInput));
+
+        if (isClimbing)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, moveVerticalInput * speed);
+            playerAnimationController.SetClimbingSpeed(Mathf.Abs(moveVerticalInput));
         }
     }
 
@@ -181,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Space)) return;
 
-        if (isGrounded || isClimbing)
+        if (isGrounded)
         {
             jumps = extraJumps;
         }
@@ -203,6 +216,27 @@ public class PlayerMovement : MonoBehaviour
 
                 break;
         }
+    }
+
+    private void CheckClimbCondition()
+    {
+        if (isClimbing)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+        else
+        {
+            playerAnimationController.SetClimbingSpeed(0);
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+
+        playerAnimationController.SetIsClimbing(isClimbing);
+    }
+
+    private void CheckPushCondition()
+    {
+        isPushing = Physics2D.OverlapCircle(colliderDetector.position, colliderDetectRadius, LayerMask.GetMask(Layers.InteractObjects));
+        playerAnimationController.SetIsPushing(isPushing);
     }
 
     private void SetActiveDustFromRun()
