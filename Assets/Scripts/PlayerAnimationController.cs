@@ -13,6 +13,8 @@ public class PlayerAnimationController : MonoBehaviour
     private int isRunningId;
     private int isGroundedId;
     private int isDeadId;
+    private int isClimbingId;
+    private int climbingSpeedId;
 
     
     private void Awake()
@@ -26,6 +28,8 @@ public class PlayerAnimationController : MonoBehaviour
         isRunningId = Animator.StringToHash(AnimationBoolNames.IsRunning);
         isGroundedId = Animator.StringToHash(AnimationBoolNames.IsGrounded);
         isDeadId = Animator.StringToHash(AnimationBoolNames.IsDead);
+        isClimbingId = Animator.StringToHash(AnimationBoolNames.IsClimbing);
+        climbingSpeedId = Animator.StringToHash(AnimationFloatNames.ClimbingSpeed);
     }
 
     public void Jump()
@@ -40,6 +44,10 @@ public class PlayerAnimationController : MonoBehaviour
     public void SetSpeed(float value)
     {
         anim.SetFloat(speedId, value);
+    } 
+    public void SetClimbingSpeed(float value)
+    {
+        anim.SetFloat(climbingSpeedId, value);
     }
     public void SetVelocity(float value)
     {
@@ -56,6 +64,11 @@ public class PlayerAnimationController : MonoBehaviour
         anim.SetBool(isGroundedId, value);
     }
 
+    public void SetIsClimbing(bool value)
+    {
+        anim.SetBool(isClimbingId, value);
+    }
+    
     public void SetIsDead(bool value)
     {
         anim.SetBool(isDeadId, value);

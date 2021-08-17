@@ -1,9 +1,22 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimationController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerSM : MonoBehaviour
 {
+    private enum State
+    {
+        Idle,
+        Walk,
+        Climb,
+        Jump,
+        Push,
+        Run,
+        Throw,
+        Attack,
+        WalkAndAttack,
+        Dead
+    }
+    
     [Header("Move Settings")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private bool isRunActive;
@@ -23,50 +36,28 @@ public class PlayerMovement : MonoBehaviour
     [Header("Shadow Settings")]
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
-
+    
     private RaycastHit2D hit;
     private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
-
-    private Rigidbody2D rb;
-
-    private float moveHorizontalInput;
-    private float moveVerticalInput;
-
     private float speed;
-
     private int jumps;
-
     private bool isGrounded;
     private bool isFacingRight;
-
+    private Rigidbody2D rb;
+    private float moveInput;
     private bool isShiftPressed;
     private bool isShadowEnabled;
-    private bool isClimbing;
-
+    
+    private State currentState;
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(legsPosition.position, groundDetectRadius);
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag(Tags.ClimbObject))
-        {
-            isClimbing = true;
-        }
-
-        CheckClimbCondition();
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        isClimbing = false;
-        CheckClimbCondition();
-    }
-
-    private void Awake()
+    
+    protected void Awake()
     {
         playerAnimationController = GetComponent<PlayerAnimationController>();
         rb = GetComponent<Rigidbody2D>();
@@ -74,92 +65,125 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
+        
+        SetState(State.Idle);
     }
 
     private void Update()
     {
-        CheckJumpCondition();
-        CheckRunCondition();
-
+        if (currentState == State.Dead) return;
+        Debug.Log(currentState);
+        
         MoveShadow();
+        CheckNewState();
+        UpdateCurrentState();
     }
-
-    private void CheckClimbCondition()
+    
+    private void SetState(State newState)
     {
-        if (isClimbing)
+        if (currentState == newState)
         {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-        }
-        else
-        {
-            playerAnimationController.SetClimbingSpeed(0);
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            return;
         }
 
-        playerAnimationController.SetIsClimbing(isClimbing);
+        switch (newState)
+        {
+            case State.Idle:
+                moveInput = 0;
+                
+                break;
+            
+            case State.Walk:
+                moveInput = 0f;
+                
+                break;
+            
+            case State.Run:
+                moveInput = 0f;
+
+                break;
+            
+            case State.Jump:
+                moveInput = 0f;
+
+                break;
+        }
+
+        currentState = newState;
     }
 
-    private void Move()
+    private void CheckNewState()
     {
         isGrounded = Physics2D.OverlapCircle(legsPosition.position, groundDetectRadius, whatIsGround);
-        playerAnimationController.SetIsGrounded(isGrounded);
+        moveInput = Input.GetAxis("Horizontal");
 
-        moveHorizontalInput = Input.GetAxis("Horizontal");
-        moveVerticalInput = Input.GetAxis("Vertical");
-
-        playerAnimationController.SetSpeed(Mathf.Abs(moveHorizontalInput));
-
-        if (isClimbing)
+        if (isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, moveVerticalInput * speed);
-            playerAnimationController.SetClimbingSpeed(Mathf.Abs(moveVerticalInput));
+            SetState(Mathf.Abs(Input.GetAxis("Horizontal")) > 0f ? State.Walk : State.Idle);
         }
 
-        rb.velocity = new Vector2(moveHorizontalInput * speed, rb.velocity.y);
+        else if (currentState == State.Walk && isRunActive && isShiftPressed)
+        {
+            SetState(State.Run);
+        }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetState(State.Jump);
+        }
+    }
+
+    private void UpdateCurrentState()
+    {
+        switch (currentState)
+        {
+            case State.Idle:
+
+                break;
+            case State.Walk:
+                Walk();
+
+                break;
+            case State.Run:
+                Run();
+
+                break;
+            case State.Jump:
+                JumpState();
+
+                break;
+        }
+    }
+
+    private void Walk()
+    {
+        playerAnimationController.SetIsGrounded(isGrounded);
+        moveInput = Input.GetAxis("Horizontal");
+        playerAnimationController.SetSpeed(Mathf.Abs(moveInput));
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        
         if (!isGrounded)
         {
             playerAnimationController.SetVelocity(rb.velocity.y);
         }
 
-        if (moveHorizontalInput > 0 && !isFacingRight)
+        if (moveInput > 0 && !isFacingRight)
         {
             Flip();
         }
-        else if (moveHorizontalInput < 0 && isFacingRight)
+        else if (moveInput < 0 && isFacingRight)
         {
             Flip();
         }
     }
 
-    private void Flip()
-    {
-        var scaleTransform = transform;
-        var newScale = scaleTransform.localScale;
-
-        isFacingRight = !isFacingRight;
-        newScale.x *= -1;
-        scaleTransform.localScale = newScale;
-    }
-
-    private void Jump()
-    {
-        playerAnimationController.Jump();
-        rb.velocity = Vector2.up * jumpForce;
-    }
-
-    private void CheckRunCondition()
+    private void Run()
     {
         SetActiveDustFromRun();
 
         switch (isRunActive)
         {
-            case true when Input.GetKey(KeyCode.LeftShift) && isGrounded && !isShiftPressed:
+            case true when Input.GetKey(KeyCode.LeftShift):
                 isShiftPressed = true;
                 dustFromRun = Instantiate(runVfx, transform);
                 dustFromRun.SetActive(false);
@@ -177,11 +201,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CheckJumpCondition()
+    private void JumpState()
     {
-        if (!Input.GetKeyDown(KeyCode.Space)) return;
 
-        if (isGrounded || isClimbing)
+        if (isGrounded)
         {
             jumps = extraJumps;
         }
@@ -205,6 +228,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Flip()
+    {
+        var scaleTransform = transform;
+        var newScale = scaleTransform.localScale;
+
+        isFacingRight = !isFacingRight;
+        newScale.x *= -1;
+        scaleTransform.localScale = newScale;
+    }
+    
     private void SetActiveDustFromRun()
     {
         if (dustFromRun != null)
@@ -213,20 +246,28 @@ public class PlayerMovement : MonoBehaviour
                 playerAnimationController.GetSpeed() > 0.5f && playerAnimationController.GetGrounded());
         }
     }
-
+    
+    private void Jump()
+    {
+        playerAnimationController.Jump();
+        rb.velocity = Vector2.up * jumpForce;
+    }
+    
     private void MoveShadow()
     {
         var position = transform.position;
-
+        
         hit = Physics2D.Raycast(position, Vector2.down, shadowShowRange, LayerMask.GetMask(Layers.Ground));
-
-        isShadowEnabled = hit.collider != null;
+        
+        isShadowEnabled = hit.collider != null; 
 
         if (isShadowEnabled)
         {
             shadowTransform.position = hit.point;
         }
-
+        
         shadowTransform.gameObject.SetActive(isShadowEnabled);
     }
+
+
 }

@@ -9,6 +9,7 @@ public class AnimationFloatNames
 {
     public const string Speed = "Speed";
     public const string Velocity = "Velocity";
+    public const string ClimbingSpeed = "ClimbingSpeed";
 }
 
 public class AnimationBoolNames
@@ -16,4 +17,5 @@ public class AnimationBoolNames
     public const string IsRunning = "IsRunning";
     public const string IsGrounded = "IsGrounded";
     public const string IsDead = "IsDead";
+    public const string IsClimbing = "IsClimbing";
 }
