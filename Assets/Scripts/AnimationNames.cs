@@ -2,14 +2,20 @@ public class AnimationTriggerNames
 {
     public const string Jump = "Jump";
     public const string GetDamage = "GetDamage";
+    public const string Attack = "Attack";
+    public const string Throw = "Throw";
 }
-
 
 public class AnimationFloatNames
 {
     public const string Speed = "Speed";
     public const string Velocity = "Velocity";
     public const string ClimbingSpeed = "ClimbingSpeed";
+}
+
+public class AnimationIntNames
+{
+    public const string AttackType = "AttackType";
 }
 
 public class AnimationBoolNames

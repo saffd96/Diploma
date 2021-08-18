@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1173488543409407711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6449991111793650557}
+  m_Layer: 7
+  m_Name: StoneSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6449991111793650557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173488543409407711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4955594709239865563}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963225137869267991
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963225137869267991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4955594709239865563}
@@ -149,6 +179,7 @@ Transform:
   - {fileID: 4955594709635395765}
   - {fileID: 3160837874213951228}
   - {fileID: 792138301657510428}
+  - {fileID: 6449991111793650557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -164,17 +195,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6893768b328b3d240b9badc799e40f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
+  attackValue: 1
+  attackRate: 0.5
+  stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
+  stoneSpawner: {fileID: 6449991111793650557}
+  maxSpeed: 5
   isRunActive: 1
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
-  colliderDetector: {fileID: 792138301657510428}
-  colliderDetectRadius: 0.2
   legsPosition: {fileID: 4955594709635395765}
-  groundDetectRadius: 0.2
+  groundDetectRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  colliderDetectRadius: 0.1
+  attackRadius: 0.3
+  colliderDetector: {fileID: 792138301657510428}
   jumpForce: 7
   isMultipleJumpsActive: 1
   extraJumps: 1

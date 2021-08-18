@@ -1,21 +1,31 @@
-using System;
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PlayerAnimationController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : DamageableObject
 {
+    [Header("Player Settings")]
+    [SerializeField] private int attackValue;
+    [SerializeField] private float attackRate;
+    [SerializeField] private GameObject stonePrefab;
+    [SerializeField] private Transform stoneSpawner;
+    
     [Header("Move Settings")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private bool isRunActive;
     [SerializeField] private float runningSpeedMultiplier;
     [SerializeField] private GameObject runVfx;
-    [SerializeField] private Transform colliderDetector;
-    [SerializeField] private float colliderDetectRadius;
     [Space]
     [SerializeField] private Transform legsPosition;
     [SerializeField] private float groundDetectRadius;
     [SerializeField] private LayerMask whatIsGround;
+
+    [Header("Collider Settings")]
+    [SerializeField] private float colliderDetectRadius;
+    [SerializeField] private float attackRadius;
+    [SerializeField] private Transform colliderDetector;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
@@ -27,51 +37,42 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
 
-    // private StateMachine stateMachine;
-
     private RaycastHit2D hit;
     private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
 
     private Rigidbody2D rb;
+    
+    private GameObject stone;
 
     private float moveHorizontalInput;
     private float moveVerticalInput;
 
     private float speed;
+    private float attackTimer;
+    private float rangeAttackTimer;
 
     private int jumps;
 
     private bool isGrounded;
     private bool isFacingRight;
 
+    private bool isMeleeAttack;
+
     private bool isShiftPressed;
     private bool isShadowEnabled;
     private bool isClimbing;
     private bool isPushing;
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(legsPosition.position, groundDetectRadius);
+        Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(colliderDetector.position, colliderDetectRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(colliderDetector.position, attackRadius);
     }
-    //
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (other.collider.CompareTag(Tags.PushingObject))
-    //     {
-    //         CheckPushCondition();
-    //     }
-    // }
-    //
-    // private void OnCollisionExit2D(Collision2D other)
-    // {
-    //     if (other.gameObject.CompareTag(Tags.PushingObject))
-    //     {
-    //         CheckPushCondition();
-    //     }
-    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -111,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         CheckRunCondition();
         CheckPushCondition();
         MoveShadow();
+        Attack();
     }
 
     private void Move()
@@ -122,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(moveHorizontalInput * speed, rb.velocity.y);
 
-        if (!isGrounded&&!isClimbing)
+        if (!isGrounded && !isClimbing)
         {
             playerAnimationController.SetVelocity(rb.velocity.y);
         }
@@ -164,6 +166,68 @@ public class PlayerMovement : MonoBehaviour
     {
         playerAnimationController.Jump();
         rb.velocity = Vector2.up * jumpForce;
+    }
+
+    private void Attack()
+    {
+        attackTimer += Time.deltaTime;
+        rangeAttackTimer += Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            isMeleeAttack = true;
+        }
+        else if (Input.GetKey(KeyCode.Mouse1))
+        {
+            isMeleeAttack = false;
+        }
+        else
+        {
+            return;
+        }
+        
+        if (!isGrounded || isShiftPressed || isClimbing || isPushing) return;
+        
+        switch (isMeleeAttack)
+        {
+            case true when attackTimer > attackRate:
+                MeleeAttack();
+                attackTimer = 0;
+
+                break;
+            case false when rangeAttackTimer > attackRate && moveHorizontalInput == 0:
+                RangeAttack();
+                rangeAttackTimer = 0;
+
+                break;
+        }
+
+    }
+
+    private void MeleeAttack()
+    {
+        playerAnimationController.Attack();
+
+        if (moveHorizontalInput < 0.1)
+        {
+            playerAnimationController.SetAttackType(Random.Range(1, 3));
+        }
+
+        var damageableObjects =
+                Physics2D.OverlapCircleAll(colliderDetector.position, attackRadius, 
+                    LayerMask.GetMask(Layers.Enemy));
+
+        foreach (var enemy in damageableObjects)
+        {
+            enemy.GetComponent<DamageableObject>().ApplyDamage(attackValue);
+        }
+    }
+
+    private void RangeAttack()
+    {
+        playerAnimationController.Throw();
+
+        StartCoroutine(Throw());
     }
 
     private void CheckRunCondition()
@@ -235,7 +299,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckPushCondition()
     {
-        isPushing = Physics2D.OverlapCircle(colliderDetector.position, colliderDetectRadius, LayerMask.GetMask(Layers.InteractObjects));
+        isPushing = Physics2D.OverlapCircle(colliderDetector.position, colliderDetectRadius,
+            LayerMask.GetMask(Layers.InteractObjects));
+
         playerAnimationController.SetIsPushing(isPushing);
     }
 
@@ -262,5 +328,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         shadowTransform.gameObject.SetActive(isShadowEnabled);
+    }
+
+    public override void ApplyDamage(int amount)
+    {
+        playerAnimationController.GetDamage();
+        health -= amount;
+    }
+
+    private IEnumerator Throw()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        stone = Instantiate(stonePrefab, stoneSpawner.position, Quaternion.identity);
+        stone.GetComponent<Rigidbody2D>().AddForce(Vector2.right*transform.localScale * 1.5f, ForceMode2D.Impulse);
+        Destroy(stone, 3);
     }
 }
