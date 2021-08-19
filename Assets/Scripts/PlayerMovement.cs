@@ -11,6 +11,8 @@ public class PlayerMovement : DamageableObject
     [SerializeField] private float attackRate;
     [SerializeField] private GameObject stonePrefab;
     [SerializeField] private Transform stoneSpawner;
+    [SerializeField] private bool isRangeAttackEnabled;
+    
     
     [Header("Move Settings")]
     [SerializeField] private float maxSpeed;
@@ -186,7 +188,7 @@ public class PlayerMovement : DamageableObject
             return;
         }
         
-        if (!isGrounded || isShiftPressed || isClimbing || isPushing) return;
+        if (!isGrounded || isShiftPressed || isPushing || (isClimbing && moveVerticalInput > 0)) return;
         
         switch (isMeleeAttack)
         {
@@ -195,7 +197,7 @@ public class PlayerMovement : DamageableObject
                 attackTimer = 0;
 
                 break;
-            case false when rangeAttackTimer > attackRate && moveHorizontalInput == 0:
+            case false when rangeAttackTimer > attackRate && moveHorizontalInput == 0 && isRangeAttackEnabled:
                 RangeAttack();
                 rangeAttackTimer = 0;
 

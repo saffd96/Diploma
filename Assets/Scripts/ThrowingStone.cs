@@ -10,7 +10,11 @@ public class ThrowingStone : MonoBehaviour
     {
         if (!other.collider.IsTouchingLayers(LayerMask.GetMask(Layers.Enemy))) return;
 
-        other.gameObject.GetComponent<DamageableObject>().ApplyDamage(damage);
-        Destroy(gameObject);
+        if (other.gameObject.TryGetComponent(out DamageableObject damageableObject))
+        {
+            damageableObject.ApplyDamage(damage);
+            Destroy(gameObject);
+        }
+        
     }
 }
