@@ -181,13 +181,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8603441436906941036}
-  - component: {fileID: 8603441436906941037}
-  - component: {fileID: 8603441436906941034}
+  - component: {fileID: 4914342753142095888}
   - component: {fileID: 8603441436906941035}
   - component: {fileID: 8603441436906941032}
   - component: {fileID: 8603441436906941033}
   - component: {fileID: 8603441436906941014}
   - component: {fileID: 8603441436906941015}
+  - component: {fileID: 4572160981485709005}
   m_Layer: 7
   m_Name: OwletMonster
   m_TagString: Untagged
@@ -213,7 +213,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8603441436906941037
+--- !u!114 &4914342753142095888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,13 +222,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8603441436906941012}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6893768b328b3d240b9badc799e40f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 027da80baaaa4f3aa45771938b01f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 1
   attackRate: 0.5
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
   stoneSpawner: {fileID: 4714531689690902065}
+  isRangeAttackEnabled: 1
   maxSpeed: 5
   isRunActive: 1
   runningSpeedMultiplier: 1.5
@@ -238,8 +239,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  colliderDetectRadius: 0.1
-  attackRadius: 0.3
+  colliderDetectRadius: 0.15
+  attackRadius: 0.2
   colliderDetector: {fileID: 2249625887230077740}
   jumpForce: 7
   isMultipleJumpsActive: 1
@@ -247,18 +248,6 @@ MonoBehaviour:
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   shadowTransform: {fileID: 6690730198052474869}
   shadowShowRange: 3
---- !u!114 &8603441436906941034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8603441436906941012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f658590a92426ebeb3d80c0225bb21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &8603441436906941035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -392,3 +381,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.25}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &4572160981485709005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603441436906941012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927b4daca4d84405a61aeb92fb954015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

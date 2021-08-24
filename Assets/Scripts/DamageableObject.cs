@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DamageableObject : MonoBehaviour
 {
-    protected int health;
+    protected int Health;
 
     public virtual void ApplyDamage(int amount)
     {
-        health -= amount;
+        Health -= amount;
     }
 }

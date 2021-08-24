@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PlayerAnimationController))]
-public class PlayerMovement : DamageableObject
+public class SuperPlayer : DamageableObject
 {
     [Header("Player Settings")]
     [SerializeField] private int attackValue;
@@ -100,6 +101,12 @@ public class PlayerMovement : DamageableObject
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
+        Health = 3;
+    }
+
+    private void Start()
+    {
+        transform.position = GameHandler.StartPosition - Vector2.one*3;
     }
 
     private void FixedUpdate()
@@ -335,7 +342,7 @@ public class PlayerMovement : DamageableObject
     public override void ApplyDamage(int amount)
     {
         playerAnimationController.GetDamage();
-        health -= amount;
+        Health -= amount;
     }
 
     private IEnumerator Throw()
