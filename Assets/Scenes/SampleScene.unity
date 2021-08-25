@@ -788,6 +788,7 @@ MonoBehaviour:
   - {fileID: 1681557269}
   startTimeBtwSpawn: 0
   offsetAmount: 10
+  exitLvl: {fileID: 7278202269655877653, guid: 6af5da591a5c21046a19077d07dccbac, type: 3}
   LB: {fileID: 3135052078196273102, guid: 929e1f1c1bd06b046b88b2f30df71a47, type: 3}
   RB: {fileID: 4017485394492316489, guid: 95d8add070a31284782cb76b009e78d7, type: 3}
   LR: {fileID: 7104862045127473232, guid: 20e25158e8e20654088aabf1f766f453, type: 3}

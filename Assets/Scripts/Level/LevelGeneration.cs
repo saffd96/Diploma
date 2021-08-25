@@ -18,6 +18,8 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private Transform[] startingPositions;
     [SerializeField] private float startTimeBtwSpawn = 0.1f;
     [SerializeField] private float offsetAmount;
+    [SerializeField] private GameObject exitLvl;
+    
 
     [Header("Rooms")]
     [SerializeField] private GameObject LB;
@@ -62,8 +64,15 @@ public class LevelGeneration : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        
-        if (timeBtwSpawn <= 0 && !stopGeneration)
+
+        GenerateLvl();
+    }
+
+    private void GenerateLvl()
+    {
+        if (stopGeneration) return;
+
+        if (timeBtwSpawn <= 0)
         {
             MoveGenerator();
             timeBtwSpawn = startTimeBtwSpawn;
@@ -72,11 +81,6 @@ public class LevelGeneration : MonoBehaviour
         {
             timeBtwSpawn -= Time.deltaTime;
         }
-    }
-
-    private void GetDirection()
-    {
-        direction = (Direction)Random.Range(0, Enum.GetNames(typeof(Direction)).Length);
     }
 
     private void MoveGenerator()
@@ -142,9 +146,26 @@ public class LevelGeneration : MonoBehaviour
             }
             else // rich end of the level
             {
+                CreateExitLvl();
                 stopGeneration = true;
             }
         }
+    }
+
+    private void GetDirection()
+    {
+        direction = (Direction)Random.Range(0, Enum.GetNames(typeof(Direction)).Length);
+    }
+
+    private void CreateExitLvl()
+    {
+        var xExitPos = position.x + 3f;
+        var hit = Physics2D.Raycast(new Vector2(xExitPos, position.y), Vector2.down, maxY, LayerMask.GetMask(Layers.Ground));
+        var yExitPos = hit.point.y;
+        var exitPosition = new Vector2(xExitPos, yExitPos);
+        Debug.Log(position);
+        Debug.Log(exitPosition);
+        Instantiate(exitLvl, exitPosition, Quaternion.identity);
     }
 
     private GameObject CreateRoom(GameObject room)
@@ -153,6 +174,5 @@ public class LevelGeneration : MonoBehaviour
         instance.transform.parent = levelTransform;
 
         return instance;
-
     }
 }
