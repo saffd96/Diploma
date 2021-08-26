@@ -11,7 +11,12 @@ public class SpawnObject : MonoBehaviour
     {
         var objectIndex = Random.Range(0, objects.Length);
 
-        instance = Instantiate(objects[objectIndex], transform.position, Quaternion.identity);
+        if (objects.Length == 1)
+        {
+            objectIndex = 0;
+        }
+        
+        instance = Instantiate(objects[objectIndex], transform.position, transform.rotation);
         instance.transform.parent = transform;
     }
 }

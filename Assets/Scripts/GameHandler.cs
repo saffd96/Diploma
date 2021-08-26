@@ -4,12 +4,12 @@ public static class GameHandler
 {
     public static Vector2 StartPosition;
 
-    public static int lvlsCompleted = 0;
+    private static int levelsCompleted = 0;
 
-    public static int LvlsCompleted => lvlsCompleted;
+    public static int LevelsCompleted => levelsCompleted;
 
     public static void CompleteLvl()
     {
-        lvlsCompleted++;
+        levelsCompleted++;
     }
 }

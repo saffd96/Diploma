@@ -16,9 +16,9 @@ public class LevelGeneration : MonoBehaviour
     [Header("Level setup")]
     [SerializeField] private Transform levelTransform;
     [SerializeField] private Transform[] startingPositions;
-    [SerializeField] private float startTimeBtwSpawn = 0.1f;
     [SerializeField] private float offsetAmount;
     [SerializeField] private GameObject exitLvl;
+    [SerializeField] private GameObject enterLvl;
     
 
     [Header("Rooms")]
@@ -33,7 +33,6 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private float maxY;
     [SerializeField] private float maxX;
 
-    private float timeBtwSpawn;
 
     private int randStartingPositionIndex;
 
@@ -47,6 +46,8 @@ public class LevelGeneration : MonoBehaviour
     private GameObject instance;
     private GameObject tempRoom;
 
+    public bool StopGeneration => stopGeneration;
+    
     private void Awake()
     {
         position = transform.position;
@@ -55,7 +56,8 @@ public class LevelGeneration : MonoBehaviour
         CreateRoom(LR); //make starting room
         direction = Direction.Forward1;
         
-        GameHandler.StartPosition = position;
+        GameHandler.StartPosition = new Vector2(position.x-5, position.y - 4);
+        Instantiate(enterLvl, GameHandler.StartPosition, Quaternion.identity);
     }
 
     private void Update()
@@ -72,15 +74,7 @@ public class LevelGeneration : MonoBehaviour
     {
         if (stopGeneration) return;
 
-        if (timeBtwSpawn <= 0)
-        {
-            MoveGenerator();
-            timeBtwSpawn = startTimeBtwSpawn;
-        }
-        else
-        {
-            timeBtwSpawn -= Time.deltaTime;
-        }
+        MoveGenerator();
     }
 
     private void MoveGenerator()
@@ -159,12 +153,10 @@ public class LevelGeneration : MonoBehaviour
 
     private void CreateExitLvl()
     {
-        var xExitPos = position.x + 3f;
+        var xExitPos = position.x + 4.5f;
         var hit = Physics2D.Raycast(new Vector2(xExitPos, position.y), Vector2.down, maxY, LayerMask.GetMask(Layers.Ground));
         var yExitPos = hit.point.y;
         var exitPosition = new Vector2(xExitPos, yExitPos);
-        Debug.Log(position);
-        Debug.Log(exitPosition);
         Instantiate(exitLvl, exitPosition, Quaternion.identity);
     }
 

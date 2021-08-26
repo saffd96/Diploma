@@ -66,6 +66,7 @@ public class SuperPlayer : DamageableObject
     private bool isShadowEnabled;
     private bool isClimbing;
     private bool isPushing;
+    private float climbSpeed;
 
     private void OnDrawGizmosSelected()
     {
@@ -101,12 +102,13 @@ public class SuperPlayer : DamageableObject
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
+        climbSpeed = maxSpeed;
         Health = 3;
     }
 
     private void Start()
     {
-        transform.position = GameHandler.StartPosition - Vector2.one*3;
+        transform.position = GameHandler.StartPosition;
     }
 
     private void FixedUpdate()
@@ -156,7 +158,7 @@ public class SuperPlayer : DamageableObject
 
         if (isClimbing)
         {
-            rb.velocity = new Vector2(rb.velocity.x, moveVerticalInput * speed);
+            rb.velocity = new Vector2(rb.velocity.x, moveVerticalInput * climbSpeed);
             playerAnimationController.SetClimbingSpeed(Mathf.Abs(moveVerticalInput));
         }
     }
