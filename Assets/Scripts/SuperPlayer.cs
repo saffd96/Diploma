@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -13,8 +12,7 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private GameObject stonePrefab;
     [SerializeField] private Transform stoneSpawner;
     [SerializeField] private bool isRangeAttackEnabled;
-    
-    
+
     [Header("Move Settings")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private bool isRunActive;
@@ -45,7 +43,7 @@ public class SuperPlayer : DamageableObject
     private PlayerAnimationController playerAnimationController;
 
     private Rigidbody2D rb;
-    
+
     private GameObject stone;
 
     private float moveHorizontalInput;
@@ -94,8 +92,9 @@ public class SuperPlayer : DamageableObject
         CheckClimbCondition();
     }
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         playerAnimationController = GetComponent<PlayerAnimationController>();
         rb = GetComponent<Rigidbody2D>();
         isFacingRight = true;
@@ -103,7 +102,7 @@ public class SuperPlayer : DamageableObject
         jumps = extraJumps;
         speed = maxSpeed;
         climbSpeed = maxSpeed;
-        Health = 3;
+        MAXHealth = 3;
     }
 
     private void Start()
@@ -196,9 +195,9 @@ public class SuperPlayer : DamageableObject
         {
             return;
         }
-        
+
         if (!isGrounded || isShiftPressed || isPushing || (isClimbing && moveVerticalInput > 0)) return;
-        
+
         switch (isMeleeAttack)
         {
             case true when attackTimer > attackRate:
@@ -212,7 +211,6 @@ public class SuperPlayer : DamageableObject
 
                 break;
         }
-
     }
 
     private void MeleeAttack()
@@ -225,7 +223,7 @@ public class SuperPlayer : DamageableObject
         }
 
         var damageableObjects =
-                Physics2D.OverlapCircleAll(colliderDetector.position, attackRadius, 
+                Physics2D.OverlapCircleAll(colliderDetector.position, attackRadius,
                     LayerMask.GetMask(Layers.Enemy));
 
         foreach (var enemy in damageableObjects)
@@ -343,8 +341,9 @@ public class SuperPlayer : DamageableObject
 
     public override void ApplyDamage(int amount)
     {
+        base.ApplyDamage(amount);
+        CameraShake.Instance.ShakeCamera(7, 0.1f);
         playerAnimationController.GetDamage();
-        Health -= amount;
     }
 
     private IEnumerator Throw()
@@ -352,7 +351,15 @@ public class SuperPlayer : DamageableObject
         yield return new WaitForSeconds(0.2f);
 
         stone = Instantiate(stonePrefab, stoneSpawner.position, Quaternion.identity);
-        stone.GetComponent<Rigidbody2D>().AddForce(Vector2.right*transform.localScale * 1.5f, ForceMode2D.Impulse);
+        stone.GetComponent<Rigidbody2D>().AddForce(Vector2.right * transform.localScale * 1.5f, ForceMode2D.Impulse);
         Destroy(stone, 3);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        playerAnimationController.SetIsDead(true);
+
+        //add logic
     }
 }

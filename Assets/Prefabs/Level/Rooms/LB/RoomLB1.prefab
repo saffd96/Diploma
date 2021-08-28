@@ -213,7 +213,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (63)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -249,7 +249,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -350,7 +349,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (82)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -386,7 +385,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -434,7 +432,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (87)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -470,7 +468,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -667,7 +664,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (66)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -703,7 +700,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -751,7 +747,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (50)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -787,7 +783,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -933,7 +928,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (76)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -969,7 +964,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -1230,7 +1224,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (59)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1266,7 +1260,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -1314,7 +1307,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (58)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2027,7 +2020,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (60)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2160,7 +2153,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (70)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2196,7 +2189,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -2342,7 +2334,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (61)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2378,7 +2370,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -2479,7 +2470,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (46)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2612,7 +2603,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (42)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2696,7 +2687,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (51)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2732,7 +2723,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -2780,7 +2770,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (84)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2816,7 +2806,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -2864,7 +2853,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (43)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2948,7 +2937,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (75)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2984,7 +2973,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -3134,7 +3122,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (62)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3218,7 +3206,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (45)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3302,7 +3290,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (74)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3338,7 +3326,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -3435,7 +3422,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (55)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3471,7 +3458,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -3519,7 +3505,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (79)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3555,7 +3541,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -3603,7 +3588,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (67)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3900,7 +3885,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (83)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3936,7 +3921,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -3984,7 +3968,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (53)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4020,7 +4004,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -4121,7 +4104,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (69)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4254,7 +4237,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (85)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4290,7 +4273,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -4444,7 +4426,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (47)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4528,7 +4510,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (52)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4564,7 +4546,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -4612,7 +4593,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (77)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4648,7 +4629,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -4745,7 +4725,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (44)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4829,7 +4809,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (54)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4865,7 +4845,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -4962,7 +4941,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (68)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4998,7 +4977,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -5046,7 +5024,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (78)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5082,7 +5060,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -5187,7 +5164,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (86)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5223,7 +5200,6 @@ MonoBehaviour:
   - {fileID: 7482744482212458888, guid: 980bdd2f2d7df274e94c273b55dead94, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 7482744482212458888, guid: ff801c08b64685149a807e8298bde43d, type: 3}
-  - {fileID: 7482744482212458888, guid: f30da88c1aa097448b62219b8d6c0123, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
   - {fileID: 5356296641837168201, guid: c7c46b19591661147842cb652f4bace6, type: 3}
@@ -5320,7 +5296,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (71)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

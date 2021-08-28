@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7160803452919247060}
   - component: {fileID: 1864576476861742933}
   - component: {fileID: 3768024930269348237}
+  - component: {fileID: 6737723320379310526}
   m_Layer: 6
   m_Name: TileSpikes1
   m_TagString: DamageDealer
@@ -112,3 +113,15 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.5}
       - {x: 0.5, y: -0.5}
       - {x: 0.45833334, y: -0.2916667}
+--- !u!114 &6737723320379310526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482744482212458888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ded123f52484f4883e356088b9cfbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,7 +11,6 @@ public class Player : DamageableObject
     [SerializeField] private bool isMultipleJumpsActive;
     [SerializeField] private int extraJumps;
 
-
     public float MaxSpeed => maxSpeed;
     public float JumpForce => jumpForce;
     public bool IsRunActive => isRunActive;
@@ -23,8 +22,8 @@ public class Player : DamageableObject
     public PlayerAnimationController PlayerAnimationController { get; private set; }
     public float MoveHorizontalInput { get; private set; }
     public float MoveVerticalInput { get; private set; }
-    
-    private void Awake()
+
+    private new void Awake()
     {
         PlayerAnimationController = GetComponent<PlayerAnimationController>();
         Rb = GetComponent<Rigidbody2D>();
@@ -35,10 +34,10 @@ public class Player : DamageableObject
         MoveHorizontalInput = Input.GetAxis("Horizontal");
         MoveVerticalInput = Input.GetAxis("Vertical");
     }
-    
+
     public override void ApplyDamage(int amount)
     {
+        base.ApplyDamage(amount);
         PlayerAnimationController.GetDamage();
-        Health -= amount;
     }
 }
