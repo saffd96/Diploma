@@ -49,9 +49,10 @@ public class SuperPlayer : DamageableObject
     private float moveHorizontalInput;
     private float moveVerticalInput;
 
-    private float speed;
     private float attackTimer;
     private float rangeAttackTimer;
+    private float speed;
+    private float climbSpeed;
 
     private int jumps;
 
@@ -64,7 +65,7 @@ public class SuperPlayer : DamageableObject
     private bool isShadowEnabled;
     private bool isClimbing;
     private bool isPushing;
-    private float climbSpeed;
+    private bool isDead;
 
     private void OnDrawGizmosSelected()
     {
@@ -98,6 +99,7 @@ public class SuperPlayer : DamageableObject
         playerAnimationController = GetComponent<PlayerAnimationController>();
         rb = GetComponent<Rigidbody2D>();
         isFacingRight = true;
+        isDead = false;
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
@@ -112,12 +114,16 @@ public class SuperPlayer : DamageableObject
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         Move();
         Climb();
     }
 
     private void Update()
     {
+        if (isDead) return;
+
         CheckJumpCondition();
         CheckRunCondition();
         CheckPushCondition();
@@ -358,7 +364,9 @@ public class SuperPlayer : DamageableObject
     protected override void Die()
     {
         base.Die();
-        playerAnimationController.SetIsDead(true);
+        isDead = true;
+        playerAnimationController.SetIsDead(isDead);
+        rb.velocity = Vector2.zero;
 
         //add logic
     }

@@ -23,7 +23,7 @@ public class GameHandler : MonoBehaviour
         levelsCompleted++;
     }
 
-    private void PauseToggle()
+    public void PauseToggle()
     {
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
