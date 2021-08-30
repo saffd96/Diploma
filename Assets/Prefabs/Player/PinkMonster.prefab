@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027da80baaaa4f3aa45771938b01f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   attackValue: 1
   attackRate: 0.5
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
@@ -333,7 +334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.6}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!58 &4955594709239865556
 CircleCollider2D:
@@ -348,9 +349,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
+  m_Offset: {x: 0, y: -0.3}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.2
 --- !u!114 &570726023705837888
 MonoBehaviour:
   m_ObjectHideFlags: 0

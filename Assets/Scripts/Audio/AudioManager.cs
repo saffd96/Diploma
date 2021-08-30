@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     {
         LoadValues();
         bgmSource.loop = false;
+        SetMusicVolume(0.1f); // fix it!
     }
 
     private void Update()
