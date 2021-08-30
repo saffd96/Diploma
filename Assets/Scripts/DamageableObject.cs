@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class DamageableObject : MonoBehaviour
 {
-    [SerializeField] protected int MAXHealth;
+    [SerializeField] protected int maxHealth;
 
     private int currentHealth;
 
+    public int MAXHealth
+    {
+        get => maxHealth;
+        set => maxHealth = value;
+    }
+    public int CurrentHealth => currentHealth;
+
     protected void Awake()
     {
-        currentHealth = MAXHealth;
+        currentHealth = maxHealth;
     }
 
     public virtual void ApplyDamage(int amount)

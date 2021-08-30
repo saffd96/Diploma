@@ -104,7 +104,6 @@ public class SuperPlayer : DamageableObject
         jumps = extraJumps;
         speed = maxSpeed;
         climbSpeed = maxSpeed;
-        MAXHealth = 3;
     }
 
     private void Start()
