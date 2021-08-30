@@ -12,24 +12,27 @@ public class HealthManager : MonoBehaviour
     private int numberOfHearts;
     private int health;
 
+    private void OnEnable()
+    {
+        SuperPlayer.SuperPlayer_OnDamaged += UpdateHearts;
+    }
+
+    private void OnDisable()
+    {
+        SuperPlayer.SuperPlayer_OnDamaged -= UpdateHearts;
+    }
+
     private void Start()
     {
         player = FindObjectOfType<SuperPlayer>();
-        numberOfHearts = player.MAXHealth;
-        health  = player.CurrentHealth;
-        GenerateHearts();
+        UpdateHearts();
     }
 
-    private void Update()
+    private void UpdateHearts()
     {
         numberOfHearts = player.MAXHealth;
-        health  = player.CurrentHealth;
-        GenerateHearts();
-        
-    }
+        health = player.CurrentHealth;
 
-    private void GenerateHearts()
-    {
         if (health > numberOfHearts)
         {
             health = numberOfHearts;

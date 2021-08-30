@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -67,6 +68,8 @@ public class SuperPlayer : DamageableObject
     private bool isPushing;
     private bool isDead;
 
+    public static event Action SuperPlayer_OnDamaged;
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
@@ -347,6 +350,7 @@ public class SuperPlayer : DamageableObject
     public override void ApplyDamage(int amount)
     {
         base.ApplyDamage(amount);
+        SuperPlayer_OnDamaged?.Invoke();
         CameraShake.Instance.ShakeCamera(7, 0.1f);
         playerAnimationController.GetDamage();
     }
