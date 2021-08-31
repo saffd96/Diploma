@@ -34,10 +34,15 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(MusicType musicType)
     {
         if (bgmSource.isPlaying) return;
-
+        
         do
         {
             currentClip = audioSettings.GetRandomMusic(musicType);
+
+            if (currentClip == null)
+            {
+                return;
+            }
         }
 
         while (currentClip == bgmSource.clip);

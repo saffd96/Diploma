@@ -282,7 +282,7 @@ public class SuperPlayer : DamageableObject
 
         switch (isMultipleJumpsActive)
         {
-            case false:
+            case false when isGrounded:
                 Jump();
 
                 break;

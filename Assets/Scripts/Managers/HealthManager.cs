@@ -35,7 +35,7 @@ public class HealthManager : MonoBehaviour
         numberOfHearts = player.MAXHealth;
         health = player.CurrentHealth;
 
-        if (health<=10)
+        if (health<=hearts.Length)
         {
             heartsText.enabled = false;
             if (health > numberOfHearts)
