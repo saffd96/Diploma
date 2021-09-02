@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -5,9 +6,12 @@ public class MapView : MonoBehaviour
 {
     private Tweener tweenAnimation;
 
-    private void Start()
+    private void Awake()
     {
-       gameObject.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+           gameObject.SetActive(false);
+        }
     }
 
     public void Show()

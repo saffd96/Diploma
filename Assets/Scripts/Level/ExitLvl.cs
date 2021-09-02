@@ -8,6 +8,9 @@ public class ExitLvl : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
 
         GameHandler.CompleteLvl();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+        SceneManager.LoadScene(GameHandler.LevelsCompleted != GameHandler.NeedCastleScenesToPass
+                ? SceneNamesConstants.CastleLevel
+                : SceneNamesConstants.BossLevel);
     }
 }
