@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
     {
         if (IsBossDead)
         {
-            SceneLoadManager.LoadSceneAsync(SceneNamesConstants.EndScene);
+            SceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    private readonly float waitToLoad = 1f;
-
+    private float waitToLoad = 2f;
+    
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
@@ -14,14 +14,15 @@ public class SceneLoadManager : MonoBehaviour
         }
     }
 
-    public static void LoadSceneAsync(string sceneName)
+    public static void LoadScene(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     private IEnumerator WaitForLoading()
     {
         yield return new WaitForSeconds(waitToLoad);
-        LoadSceneAsync(SceneNamesConstants.CastleLevel);
+
+        SceneManager.LoadScene(SceneNamesConstants.CastleLevel);
     }
 }

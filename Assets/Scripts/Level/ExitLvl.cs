@@ -10,7 +10,7 @@ public class ExitLvl : MonoBehaviour
         GameHandler.CompleteLvl();
         
         SceneManager.LoadScene(GameHandler.LevelsCompleted != GameHandler.NeedCastleScenesToPass
-                ? SceneNamesConstants.CastleLevel
+                ? SceneNamesConstants.LoadingScene
                 : SceneNamesConstants.BossLevel);
     }
 }
