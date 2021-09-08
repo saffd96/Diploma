@@ -13,7 +13,7 @@ public class DamageableObject : MonoBehaviour
     }
     public int CurrentHealth => currentHealth;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         currentHealth = maxHealth;
     }

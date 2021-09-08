@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
-    
+    private static int levelsCompleted = 0;
+    private Boss boss;
     public static Vector2 StartPosition;
 
-    private static int levelsCompleted = 0;
     public static int NeedCastleScenesToPass { get; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
@@ -15,11 +16,16 @@ public class GameHandler : MonoBehaviour
 
     public static int LevelsCompleted => levelsCompleted;
 
+    private void Awake()
+    {
+        boss = FindObjectOfType<Boss>();
+    }
+
     private void Update()
     {
         CheckPauseToggle();
 
-        ChechMapToggle();
+        CheckMapToggle();
 
         CheckBossDead();
     }
@@ -41,8 +47,6 @@ public class GameHandler : MonoBehaviour
         IsMapActive = !IsMapActive;
         uiManager.MapToggle(IsMapActive);
     }
-    
-    
 
     private void CheckPauseToggle()
     {
@@ -52,7 +56,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    private void ChechMapToggle()
+    private void CheckMapToggle()
     {
         if (Input.GetKeyDown(KeyCode.M) && !IsPaused)
         {
@@ -62,6 +66,11 @@ public class GameHandler : MonoBehaviour
 
     private void CheckBossDead()
     {
+        if (boss == null)
+        {
+            return;
+        }
+        IsBossDead = boss.IsDead;
         if (IsBossDead)
         {
             SceneLoadManager.LoadScene(SceneNamesConstants.EndScene);

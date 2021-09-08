@@ -4,6 +4,7 @@ public class AnimationTriggerNames
     public const string GetDamage = "GetDamage";
     public const string Attack = "Attack";
     public const string Throw = "Throw";
+    public const string Spin = "Spin";
 }
 
 public class AnimationFloatNames
