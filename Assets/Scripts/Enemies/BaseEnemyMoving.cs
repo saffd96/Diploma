@@ -10,6 +10,11 @@ public class BaseEnemyMoving : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    public bool IsTargetSet
+    {
+        get => isTargetSet;
+        set => isTargetSet = value;
+    }
     public Vector2 Target { get; private set; }
 
     private void OnDrawGizmos()
@@ -20,6 +25,7 @@ public class BaseEnemyMoving : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
     }
 
     private void Update()
@@ -27,20 +33,32 @@ public class BaseEnemyMoving : MonoBehaviour
         Move();
     }
 
+    public void GetTarget()
+    {
+        if (isTargetSet) return;
+
+        if (targetSwitch)
+        {
+            Target = new Vector2(transform.position.x + 3, transform.position.y);
+        }
+        else
+        {
+            Target = new Vector2(transform.position.x - 3, transform.position.y);
+        }
+        Flip();
+        isTargetSet = true;
+    }
+
     private void Move()
     {
-        
         if (isFacingRight)
         {
-            
             rb.velocity = (Vector2.right * speed * Time.deltaTime).normalized;
         }
         else
         {
             rb.velocity = (Vector2.left * speed * Time.deltaTime).normalized;
         }
-        Debug.Log(rb.velocity);
-
     }
 
     private void Flip()
@@ -51,24 +69,6 @@ public class BaseEnemyMoving : MonoBehaviour
         isFacingRight = !isFacingRight;
         newScale.x *= -1;
         scaleTransform.localScale = newScale;
-    }
-
-    public void GetTarget()
-    {
-        if (isTargetSet) return;
-
-        if (targetSwitch)
-        {
-            Target = new Vector2(transform.position.x + 2, transform.position.y);
-            Flip();
-        }
-        else
-        {
-            Target = new Vector2(transform.position.x - 2, transform.position.y);
-            Flip();
-        }
-
         targetSwitch = !targetSwitch;
-        isTargetSet = true;
     }
 }

@@ -2028,11 +2028,6 @@ RectTransform:
   m_AnchoredPosition: {x: -35, y: 35}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
---- !u!4 &1145244611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4916635852798479750, guid: 3bbf917d1f020cd48941e1dd1cf5f63f, type: 3}
-  m_PrefabInstance: {fileID: 5329327903425841059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1149141726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2087,6 +2082,14 @@ PrefabInstance:
     - target: {fileID: 4955594709239865563, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994910800906067336, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
+      propertyPath: attackRadius
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994910800906067336, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
+      propertyPath: isMultipleJumpsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
@@ -4738,9 +4741,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5329327902068247035, guid: 3bbf917d1f020cd48941e1dd1cf5f63f, type: 3}
-      propertyPath: bottom
-      value: 
-      objectReference: {fileID: 1145244611}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bbf917d1f020cd48941e1dd1cf5f63f, type: 3}

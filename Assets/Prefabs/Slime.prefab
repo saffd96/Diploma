@@ -50,7 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  targetDetectionLenght: 0.1
+  targetDetectionValue: 0.1
+  bottom: {fileID: 4916635852798479750}
+  idleTime: 1.25
 --- !u!114 &7465987894692151875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +66,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  bottom: {fileID: 4916635852798479750}
 --- !u!61 &5329327902068247038
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -103,11 +104,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 8a68a976f0d491549962e427f4e91174, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

@@ -5,6 +5,8 @@ public class DamageableObject : MonoBehaviour
     [SerializeField] protected int maxHealth;
 
     private int currentHealth;
+    protected bool IsInvulnerable;
+
 
     public int MAXHealth
     {
@@ -20,6 +22,8 @@ public class DamageableObject : MonoBehaviour
 
     public virtual void ApplyDamage(int amount)
     {
+        if (IsInvulnerable) return;
+
         currentHealth -= amount;
 
         if (currentHealth <= 0)
@@ -31,5 +35,6 @@ public class DamageableObject : MonoBehaviour
 
     protected virtual void Die()
     {
+        Destroy(gameObject);
     }
 }

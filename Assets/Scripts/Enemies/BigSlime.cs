@@ -1,7 +1,4 @@
-namespace Enemies
+public class BigSlime : Slime
 {
-    public class BigSlime
-    {
         
-    }
 }
