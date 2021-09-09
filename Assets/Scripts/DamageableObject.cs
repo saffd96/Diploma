@@ -7,7 +7,6 @@ public class DamageableObject : MonoBehaviour
     private int currentHealth;
     protected bool IsInvulnerable;
 
-
     public int MAXHealth
     {
         get => maxHealth;

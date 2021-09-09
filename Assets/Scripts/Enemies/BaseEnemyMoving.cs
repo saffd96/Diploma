@@ -3,10 +3,16 @@ using UnityEngine;
 public class BaseEnemyMoving : MonoBehaviour
 {
     [SerializeField] private float speed;
+    
+    [SerializeField] private float leftOffset = 3;
+    [SerializeField] private float rightOffset = 3;
+    
+    [SerializeField]  private bool isFacingRight = true;
 
     private bool targetSwitch;
     private bool isTargetSet;
-    private bool isFacingRight = true;
+
+    private bool isFirstTime = true;
 
     private Rigidbody2D rb;
 
@@ -21,14 +27,14 @@ public class BaseEnemyMoving : MonoBehaviour
     {
         Gizmos.DrawSphere(Target, 0.2f);
     }
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }
@@ -37,27 +43,32 @@ public class BaseEnemyMoving : MonoBehaviour
     {
         if (isTargetSet) return;
 
+        
         if (targetSwitch)
         {
-            Target = new Vector2(transform.position.x + 3, transform.position.y);
+            Target = isFirstTime ? new Vector2(transform.position.x + rightOffset/2, transform.position.y) 
+                    : new Vector2(transform.position.x + rightOffset, transform.position.y);
         }
         else
         {
-            Target = new Vector2(transform.position.x - 3, transform.position.y);
+            Target = isFirstTime ? new Vector2(transform.position.x - leftOffset/2, transform.position.y) 
+                    : new Vector2(transform.position.x - leftOffset, transform.position.y);
         }
-        Flip();
+
+        isFirstTime = false;
         isTargetSet = true;
+        Flip();
     }
 
     private void Move()
     {
         if (isFacingRight)
         {
-            rb.velocity = (Vector2.right * speed * Time.deltaTime).normalized;
+            rb.velocity = (Vector2.right * Time.deltaTime).normalized * speed;
         }
         else
         {
-            rb.velocity = (Vector2.left * speed * Time.deltaTime).normalized;
+            rb.velocity = (Vector2.left * Time.deltaTime).normalized * speed;
         }
     }
 

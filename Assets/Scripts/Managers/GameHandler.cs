@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -12,7 +11,6 @@ public class GameHandler : MonoBehaviour
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
     private bool IsBossDead { get; set; }
-
 
     public static int LevelsCompleted => levelsCompleted;
 
@@ -70,7 +68,9 @@ public class GameHandler : MonoBehaviour
         {
             return;
         }
+
         IsBossDead = boss.IsDead;
+
         if (IsBossDead)
         {
             SceneLoadManager.LoadScene(SceneNamesConstants.EndScene);

@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BaseEnemyMoving))]
 public class Slime : BaseEnemy
@@ -9,24 +7,23 @@ public class Slime : BaseEnemy
     {
         Idle,
         Move,
-        Spin,
         Dead
     }
 
-    [SerializeField] private float targetDetectionValue = 0.1f;
-    [SerializeField] private Transform bottom;
-    [SerializeField] private float idleTime;
+    [SerializeField] protected float targetDetectionValue = 0.1f;
+    [SerializeField] protected Transform bottom;
+    [SerializeField] protected float idleTime;
 
-    private BaseEnemyMoving slimeMoving;
-    
-    private State currentState;
-    private Rigidbody2D rb;
-    
-    private float distance;
-    private float idleTimer;
-    
-    private bool isSpinEnded;
-    private bool isGrounded;
+    protected BaseEnemyMoving slimeMoving;
+
+    private State currentSlimeState;
+    protected Rigidbody2D rb;
+
+    protected float distance;
+    protected float idleTimer;
+
+    protected bool isGrounded;
+    public BaseEnemyMoving SlimeMoving => slimeMoving;
 
     protected override void Awake()
     {
@@ -37,21 +34,26 @@ public class Slime : BaseEnemy
 
     private void Update()
     {
-        if ((currentState != State.Dead)) CheckState();
+        if (currentSlimeState != State.Dead)
+        {
+            CheckState();
+        }
+
         animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
 
         animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(rb.velocity.x));
-        
+
         UpdateCurrentState();
     }
 
-    private void CheckState()
+    protected virtual void CheckState()
     {
         distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
-        isGrounded = Physics2D.OverlapCircle(bottom.position, 0.2f, LayerMask.GetMask(Layers.Ground));
+        isGrounded = Physics2D.OverlapCircle(bottom.position, targetDetectionValue, LayerMask.GetMask(Layers.Ground));
 
         Debug.Log(idleTimer);
-        if (!isGrounded|| (isGrounded && distance <= targetDetectionValue))
+
+        if (!isGrounded || (isGrounded && distance <= targetDetectionValue))
         {
             SetState(State.Idle);
         }
@@ -59,17 +61,12 @@ public class Slime : BaseEnemy
         {
             SetState(State.Move);
             idleTimer = idleTime;
-
         }
-        // else if (isGrounded && distance <= targetDetectionLenght)
-        // {
-        //     SetState(State.Idle);
-        // }
     }
 
-    private void UpdateCurrentState()
+    protected virtual void UpdateCurrentState()
     {
-        switch (currentState)
+        switch (currentSlimeState)
         {
             case State.Idle:
                 UpdateIdle();
@@ -79,31 +76,19 @@ public class Slime : BaseEnemy
                 UpdateMove();
 
                 break;
-            case State.Spin:
-                UpdateSpin();
-
-                break;
         }
     }
 
-    private void UpdateSpin()
-    {
-        if (isSpinEnded)
-        {
-            SetState(State.Move);
-        }
-    }
-
-    private void UpdateMove()
+    protected virtual void UpdateMove()
     {
     }
 
-    private void UpdateIdle()
+    protected virtual void UpdateIdle()
     {
         idleTimer -= Time.deltaTime;
-        
+
         if (idleTimer <= 0)
-        {              
+        {
             slimeMoving.GetTarget();
         }
     }
@@ -113,7 +98,7 @@ public class Slime : BaseEnemy
         switch (state)
         {
             case State.Idle:
-                
+
                 rb.velocity = Vector2.zero;
                 slimeMoving.enabled = false;
                 slimeMoving.IsTargetSet = false;
@@ -124,23 +109,14 @@ public class Slime : BaseEnemy
                 IsInvulnerable = false;
                 slimeMoving.GetTarget();
 
-
                 break;
             case State.Dead:
                 slimeMoving.enabled = false;
 
                 //add is dead trigger
                 break;
-            case State.Spin:
-                slimeMoving.enabled = false;
-                IsInvulnerable = true;
-                slimeMoving.IsTargetSet = false;
-                slimeMoving.GetTarget();
-
-                //add spin trigger
-                break;
         }
 
-        currentState = state;
+        currentSlimeState = state;
     }
 }
