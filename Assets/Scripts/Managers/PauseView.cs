@@ -9,14 +9,14 @@ public class PauseView : MonoBehaviour
     [SerializeField] private float fadeDuration;
     [SerializeField] private Button[] buttons;
 
-    // [Header("Settings")]
-    // [SerializeField] private float volumeMultiplier = 100f;
-    //
-    // [SerializeField] private Slider musicSlider;
-    // [SerializeField] private Slider sfxSlider;
-    //
-    // [SerializeField] private Text musicText;
-    // [SerializeField] private Text sfxText;
+    [Header("Settings")]
+    [SerializeField] private float volumeMultiplier = 100f;
+    
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    
+    [SerializeField] private Text musicText;
+    [SerializeField] private Text sfxText;
 
     private Tweener tweenAnimation;
 
@@ -27,18 +27,18 @@ public class PauseView : MonoBehaviour
 
     private void Update()
     {
-        // var musicValue = musicSlider.value / volumeMultiplier;
-        // AudioManager.Instance.SetMusicVolume(musicValue);
-        // musicText.text = $"{GetMusicVolume():0.0}";
-        //
-        // var sfxValue = sfxSlider.value / volumeMultiplier;
-        // AudioManager.Instance.SetSfxVolume(sfxValue);
-        // sfxText.text = $"{GetSfxVolume():0.0}";
+        var musicValue = musicSlider.value / volumeMultiplier;
+        AudioManager.Instance.SetMusicVolume(musicValue);
+        musicText.text = $"{GetMusicVolume():0.0}";
+        
+        var sfxValue = sfxSlider.value / volumeMultiplier;
+        AudioManager.Instance.SetSfxVolume(sfxValue);
+        sfxText.text = $"{GetSfxVolume():0.0}";
     }
 
     public void Show()
     {
-        //   SetVolume();
+        SetVolume();
 
         gameObject.SetActive(true);
 
@@ -68,25 +68,25 @@ public class PauseView : MonoBehaviour
         canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
     }
 
-    //
-    // private float GetSfxVolume()
-    // {
-    //     return AudioManager.Instance.SfxVolume * volumeMultiplier;
-    // }
-    //
-    // private float GetMusicVolume()
-    // {
-    //     return AudioManager.Instance.MusicVolume * volumeMultiplier;
-    // }
-    //
-    // private void SetVolume()
-    // {
-    //     musicSlider.minValue = 0;
-    //     musicSlider.maxValue = volumeMultiplier;
-    //     musicSlider.value = GetMusicVolume();
-    //
-    //     sfxSlider.minValue = 0;
-    //     sfxSlider.maxValue = volumeMultiplier;
-    //     sfxSlider.value = GetSfxVolume();
-    // }
+    
+    private float GetSfxVolume()
+    {
+        return AudioManager.Instance.SfxVolume * volumeMultiplier;
+    }
+    
+    private float GetMusicVolume()
+    {
+        return AudioManager.Instance.MusicVolume * volumeMultiplier;
+    }
+    
+    private void SetVolume()
+    {
+        musicSlider.minValue = 0;
+        musicSlider.maxValue = volumeMultiplier;
+        musicSlider.value = GetMusicVolume();
+    
+        sfxSlider.minValue = 0;
+        sfxSlider.maxValue = volumeMultiplier;
+        sfxSlider.value = GetSfxVolume();
+    }
 }

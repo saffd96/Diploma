@@ -15,7 +15,7 @@ MonoBehaviour:
   sfx:
   - Clip: {fileID: 0}
     SfxType: 0
-    Volume: 0
+    Volume: 1
   musics:
   - Clips:
     - {fileID: 8300000, guid: a6625f14e710dbc48bf1cdae4734a872, type: 3}

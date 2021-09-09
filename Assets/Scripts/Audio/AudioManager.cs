@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     private readonly List<GameAudioSource> sfxSources = new List<GameAudioSource>();
 
     public float MusicVolume => bgmSource.volume;
-    private float SfxVolume
+    public float SfxVolume
     {
         get => sfxSource.volume;
         set => sfxSource.volume = value;
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     {
         LoadValues();
         bgmSource.loop = false;
-        SetMusicVolume(0.1f); // fix it!
+        // SetMusicVolume(0.1f);  fix it!
     }
 
     private void Update()

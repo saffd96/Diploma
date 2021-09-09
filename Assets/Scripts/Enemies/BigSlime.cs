@@ -18,10 +18,6 @@ public class BigSlime : Slime
         distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
         isGrounded = Physics2D.OverlapCircle(bottom.position, 0.2f, LayerMask.GetMask(Layers.Ground));
 
-        Debug.Log(currentBigSlimeState);
-        Debug.Log(rb.velocity);
-        Debug.Log(IsInvulnerable);
-
         if (!isGrounded)
         {
             SetState(State.Idle);
