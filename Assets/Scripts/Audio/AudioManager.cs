@@ -23,7 +23,6 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         LoadValues();
         bgmSource.loop = false;
-        // SetMusicVolume(0.1f);  fix it!
     }
 
     private void Update()
@@ -34,7 +33,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public void PlayMusic(MusicType musicType)
     {
         if (bgmSource.isPlaying) return;
-        
+
         do
         {
             currentClip = audioSettings.GetRandomMusic(musicType);

@@ -16,14 +16,14 @@ public class Slime : BaseEnemy
 
     protected BaseEnemyMoving slimeMoving;
 
-    private State currentSlimeState;
+    private State currentState;
     protected Rigidbody2D rb;
 
     protected float distance;
-    protected float idleTimer;
+    private float idleTimer;
 
     protected bool isGrounded;
-    public BaseEnemyMoving SlimeMoving => slimeMoving;
+    protected BaseEnemyMoving SlimeMoving => slimeMoving;
 
     protected override void Awake()
     {
@@ -34,7 +34,7 @@ public class Slime : BaseEnemy
 
     private void Update()
     {
-        if (currentSlimeState != State.Dead)
+        if (currentState != State.Dead)
         {
             CheckState();
         }
@@ -50,9 +50,7 @@ public class Slime : BaseEnemy
     {
         distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
         isGrounded = Physics2D.OverlapCircle(bottom.position, targetDetectionValue, LayerMask.GetMask(Layers.Ground));
-
-        Debug.Log(idleTimer);
-
+        
         if (!isGrounded || (isGrounded && distance <= targetDetectionValue))
         {
             SetState(State.Idle);
@@ -66,7 +64,7 @@ public class Slime : BaseEnemy
 
     protected virtual void UpdateCurrentState()
     {
-        switch (currentSlimeState)
+        switch (currentState)
         {
             case State.Idle:
                 UpdateIdle();
@@ -117,6 +115,6 @@ public class Slime : BaseEnemy
                 break;
         }
 
-        currentSlimeState = state;
+        currentState = state;
     }
 }

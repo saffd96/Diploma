@@ -10,10 +10,6 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
 
-    private void Start()
-    {
-        pauseView.enabled = false;
-    }
 
     public void PauseToggle(bool isActive)
     {

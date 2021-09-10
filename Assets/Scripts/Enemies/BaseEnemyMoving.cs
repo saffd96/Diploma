@@ -10,17 +10,12 @@ public class BaseEnemyMoving : MonoBehaviour
     [SerializeField]  private bool isFacingRight = true;
 
     private bool targetSwitch;
-    private bool isTargetSet;
 
     private bool isFirstTime = true;
 
     private Rigidbody2D rb;
 
-    public bool IsTargetSet
-    {
-        get => isTargetSet;
-        set => isTargetSet = value;
-    }
+    public bool IsTargetSet { get; set; }
     public Vector2 Target { get; private set; }
 
     private void OnDrawGizmos()
@@ -41,7 +36,7 @@ public class BaseEnemyMoving : MonoBehaviour
 
     public void GetTarget()
     {
-        if (isTargetSet) return;
+        if (IsTargetSet) return;
 
         
         if (targetSwitch)
@@ -56,7 +51,7 @@ public class BaseEnemyMoving : MonoBehaviour
         }
 
         isFirstTime = false;
-        isTargetSet = true;
+        IsTargetSet = true;
         Flip();
     }
 

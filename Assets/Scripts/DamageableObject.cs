@@ -4,28 +4,27 @@ public class DamageableObject : MonoBehaviour
 {
     [SerializeField] protected int maxHealth;
 
-    private int currentHealth;
-    protected bool IsInvulnerable;
+    public bool IsInvulnerable { get; protected set; }
 
     public int MAXHealth
     {
         get => maxHealth;
         set => maxHealth = value;
     }
-    public int CurrentHealth => currentHealth;
+    public int CurrentHealth { get; private set; }
 
     protected virtual void Awake()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
     public virtual void ApplyDamage(int amount)
     {
         if (IsInvulnerable) return;
 
-        currentHealth -= amount;
+        CurrentHealth -= amount;
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Debug.Log("isDead");
             Die();
