@@ -658,6 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71c2e3cdeaf84642bab0e4322ed9dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!4 &1231802085
 Transform:
   m_ObjectHideFlags: 0

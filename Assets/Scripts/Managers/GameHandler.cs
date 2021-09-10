@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
+    [SerializeField] private SceneLoadManager sceneLoadManager;
+
     private static int levelsCompleted = 0;
     private Boss boss;
     public static Vector2 StartPosition;
@@ -13,6 +15,16 @@ public class GameHandler : MonoBehaviour
     private bool IsBossDead { get; set; }
 
     public static int LevelsCompleted => levelsCompleted;
+
+    private void OnEnable()
+    {
+        ExitLvl.OnExitLvlCollision += CompleteLvl;
+    }
+
+    private void OnDisable()
+    {
+        ExitLvl.OnExitLvlCollision -= CompleteLvl;
+    }
 
     private void Awake()
     {
@@ -28,9 +40,10 @@ public class GameHandler : MonoBehaviour
         CheckBossDead();
     }
 
-    public static void CompleteLvl()
+    public void CompleteLvl()
     {
         levelsCompleted++;
+        sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
     }
 
     public void PauseToggle()
@@ -73,7 +86,7 @@ public class GameHandler : MonoBehaviour
 
         if (IsBossDead)
         {
-            SceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
+            sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
         }
     }
 }

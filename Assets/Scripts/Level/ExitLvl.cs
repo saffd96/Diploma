@@ -1,16 +1,12 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ExitLvl : MonoBehaviour
 {
+    public static event Action OnExitLvlCollision;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-
-        GameHandler.CompleteLvl();
-        
-        SceneManager.LoadScene(GameHandler.LevelsCompleted != GameHandler.NeedCastleScenesToPass
-                ? SceneNamesConstants.LoadingScene
-                : SceneNamesConstants.BossLevel);
+        OnExitLvlCollision?.Invoke();
     }
 }

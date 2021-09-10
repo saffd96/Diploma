@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 6889210}
+  sceneLoadManager: {fileID: 101283386}
 --- !u!1 &694215606
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +848,11 @@ MonoBehaviour:
   buttons:
   - {fileID: 1542151879}
   - {fileID: 1989579955}
+  volumeMultiplier: 100
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  musicText: {fileID: 0}
+  sfxText: {fileID: 0}
 --- !u!1 &842169600
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,8 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b994114a4dbd69d4baa7771fd1fa1bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  speed: 0
+  maxHealth: 30
 --- !u!1 &914532909
 GameObject:
   m_ObjectHideFlags: 0
