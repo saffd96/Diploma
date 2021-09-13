@@ -1,4 +1,6 @@
 using System;
+using Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -11,12 +13,13 @@ public class LevelGeneration : MonoBehaviour
         Bottom,
         Forward
     }
-    
+
+    [SerializeField] private CinemachineVirtualCamera cinemachineCamera;
+
     [Header("Level setup")]
     [SerializeField] private Transform levelTransform;
     [SerializeField] private Transform[] startingPositions;
     [SerializeField] private float offsetAmount;
-    
 
     [Header("Rooms")]
     [SerializeField] private GameObject Enter;
@@ -32,7 +35,6 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private float maxY;
     [SerializeField] private float maxX;
 
-
     private int randStartingPositionIndex;
 
     private Vector2 position;
@@ -40,12 +42,12 @@ public class LevelGeneration : MonoBehaviour
 
     private Direction direction;
 
-    private bool stopGeneration;
-
     private GameObject instance;
     private GameObject tempRoom;
 
-    public bool StopGeneration => stopGeneration;
+    private GameObject player;
+
+    public bool StopGeneration { get; private set; }
     public Transform LevelTransform => levelTransform;
 
     private void Awake()
@@ -55,8 +57,15 @@ public class LevelGeneration : MonoBehaviour
         position = startingPositions[randStartingPositionIndex].position;
         CreateRoom(Enter); //make starting room
         direction = Direction.Forward;
-        
-        GameHandler.StartPosition = new Vector2(position.x-2, position.y - 2.5f);
+
+        GameHandler.StartPosition = new Vector2(position.x - 2, position.y - 2.5f);
+
+        if (GameHandler.player != null)
+        {
+            player = Instantiate(GameHandler.player, GameHandler.StartPosition, Quaternion.identity);
+        }
+
+        cinemachineCamera.Follow = player.transform;
     }
 
     private void Update()
@@ -71,7 +80,7 @@ public class LevelGeneration : MonoBehaviour
 
     private void GenerateLvl()
     {
-        if (stopGeneration) return;
+        if (StopGeneration) return;
 
         MoveGenerator();
     }
@@ -120,12 +129,12 @@ public class LevelGeneration : MonoBehaviour
                 position = newGeneratorPosition;
 
                 GetDirection();
-                
+
                 switch (direction)
                 {
                     case Direction.Bottom:
                         tempRoom = CreateRoom(LB);
-                        
+
                         break;
                     case Direction.Top:
                         tempRoom = CreateRoom(LT);
@@ -136,14 +145,13 @@ public class LevelGeneration : MonoBehaviour
 
                         break;
                 }
-                
             }
             else // rich end of the level
             {
                 newGeneratorPosition = new Vector2(position.x + offsetAmount, position.y);
                 position = newGeneratorPosition;
                 CreateRoom(Exit);
-                stopGeneration = true;
+                StopGeneration = true;
             }
         }
     }

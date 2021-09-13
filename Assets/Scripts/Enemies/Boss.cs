@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Boss : BaseEnemy
 {
-    private bool isDead;
-    public bool IsDead => isDead;
+    public bool IsDead { get; private set; }
+
     protected override void Die()
     {
-        base.Die();
-        isDead = true;
+        IsDead = true;
+       // base.Die();
     }
 }

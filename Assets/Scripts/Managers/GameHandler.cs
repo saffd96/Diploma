@@ -6,14 +6,18 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private SceneLoadManager sceneLoadManager;
 
     private static int levelsCompleted = 0;
-    private Boss boss;
+    
     public static Vector2 StartPosition;
+    public static GameObject player;
+
+    private Boss boss;
 
     public static int NeedCastleScenesToPass { get; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
-    private bool IsBossDead { get; set; }
 
+    private bool isBossDead;
+    
     public static int LevelsCompleted => levelsCompleted;
 
     private void OnEnable()
@@ -40,7 +44,7 @@ public class GameHandler : MonoBehaviour
         CheckBossDead();
     }
 
-    public void CompleteLvl()
+    private void CompleteLvl()
     {
         levelsCompleted++;
         sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
@@ -81,12 +85,15 @@ public class GameHandler : MonoBehaviour
         {
             return;
         }
-
-        IsBossDead = boss.IsDead;
-
-        if (IsBossDead)
+        
+        if (boss.IsDead)
         {
             sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
         }
+    }
+
+    public void SelectPlayer(GameObject selectedPlayer)
+    {
+        player = selectedPlayer;
     }
 }

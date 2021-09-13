@@ -7,7 +7,7 @@ public class SpawnObject : MonoBehaviour
 
     private GameObject instance;
 
-    private void Start()
+    private void Awake()
     {
         var objectIndex = Random.Range(0, objects.Length);
 

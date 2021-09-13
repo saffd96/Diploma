@@ -33,6 +33,6 @@ public class DamageableObject : MonoBehaviour
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+      //  Destroy(gameObject);
     }
 }

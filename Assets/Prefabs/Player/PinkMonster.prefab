@@ -278,13 +278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027da80baaaa4f3aa45771938b01f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 5
   attackValue: 1
   attackRate: 0.5
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
   stoneSpawner: {fileID: 6449991111793650557}
   isRangeAttackEnabled: 1
-  maxSpeed: 4
+  maxSpeed: 5
   isRunActive: 1
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
@@ -296,7 +296,7 @@ MonoBehaviour:
   colliderDetectRadius: 0.15
   attackRadius: 0.2
   colliderDetector: {fileID: 792138301657510428}
-  jumpForce: 8
+  jumpForce: 7
   isMultipleJumpsActive: 0
   extraJumps: 1
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}

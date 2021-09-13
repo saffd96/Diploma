@@ -16,7 +16,7 @@ public class BorderGeneration : MonoBehaviour
 
     private GameObject instance;
     
-    private void Start()
+    private void Awake()
     {
         for (var i = 0; i < x+1; i++)
         {

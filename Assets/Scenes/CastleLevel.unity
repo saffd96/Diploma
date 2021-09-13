@@ -889,11 +889,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGeneration: {fileID: 2107767514}
   block: {fileID: 4017485394492316489, guid: 346d70b03e03ce744984c0227ec8812e, type: 3}
---- !u!4 &510300699 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4955594709239865563, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
-  m_PrefabInstance: {fileID: 1149141726}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71c2e3cdeaf84642bab0e4322ed9dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!4 &542856149
 Transform:
   m_ObjectHideFlags: 0
@@ -2639,6 +2636,10 @@ PrefabInstance:
     - target: {fileID: 4955594709239865557, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
       propertyPath: m_Name
       value: PinkMonster
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955594709239865557, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4955594709239865563, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
       propertyPath: m_RootOrder
@@ -4878,7 +4879,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 510300699}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -5748,6 +5749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8102f60dd44833a4d5c38fdf7c340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCamera: {fileID: 1947532492}
   levelTransform: {fileID: 25531876}
   startingPositions:
   - {fileID: 996299925}

@@ -7,7 +7,6 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private Text progressText;
-    private float waitToLoad = 2f;
 
     private void Start()
     {
@@ -27,9 +26,9 @@ public class SceneLoadManager : MonoBehaviour
     private IEnumerator LoadAsynchronously(string sceneName)
     {
         var operation = SceneManager.LoadSceneAsync(sceneName);
-
+        
         while (!operation.isDone)
-        {         
+        {
             var progress = Mathf.Clamp01(operation.progress / 0.9f);
 
             if (slider != null)
