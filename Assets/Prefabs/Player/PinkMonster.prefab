@@ -283,9 +283,9 @@ MonoBehaviour:
   attackRate: 0.5
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
   stoneSpawner: {fileID: 6449991111793650557}
-  isRangeAttackEnabled: 1
+  isRangeAttackEnabled: 0
   maxSpeed: 5
-  isRunActive: 1
+  isRunActive: 0
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
   legsPosition: {fileID: 4955594709635395765}

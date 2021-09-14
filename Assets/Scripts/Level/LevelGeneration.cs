@@ -55,7 +55,7 @@ public class LevelGeneration : MonoBehaviour
         position = transform.position;
         randStartingPositionIndex = Random.Range(0, startingPositions.Length);
         position = startingPositions[randStartingPositionIndex].position;
-        CreateRoom(Enter); //make starting room
+        CreateRoom(Enter);
         direction = Direction.Forward;
 
         GameHandler.StartPosition = new Vector2(position.x - 2, position.y - 2.5f);

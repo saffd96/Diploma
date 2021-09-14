@@ -12,7 +12,7 @@ public class GameHandler : MonoBehaviour
 
     private Boss boss;
 
-    public static int NeedCastleScenesToPass { get; } = 1;
+    public static int NeedCastleScenesToPass { get; private set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
 
@@ -95,5 +95,10 @@ public class GameHandler : MonoBehaviour
     public void SelectPlayer(GameObject selectedPlayer)
     {
         player = selectedPlayer;
+    }
+
+    public void SetCastleLevel(int amount)
+    {
+        NeedCastleScenesToPass = amount;
     }
 }

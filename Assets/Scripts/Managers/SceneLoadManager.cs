@@ -12,7 +12,7 @@ public class SceneLoadManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
         {
-            LoadScene(GameHandler.LevelsCompleted == GameHandler.NeedCastleScenesToPass
+            LoadScene(GameHandler.LevelsCompleted >= GameHandler.NeedCastleScenesToPass
                     ? SceneNamesConstants.BossLevel
                     : SceneNamesConstants.CastleLevel);
         }

@@ -313,9 +313,9 @@ MonoBehaviour:
   attackRate: 0.5
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
   stoneSpawner: {fileID: 81181125529002187}
-  isRangeAttackEnabled: 1
+  isRangeAttackEnabled: 0
   maxSpeed: 6
-  isRunActive: 1
+  isRunActive: 0
   runningSpeedMultiplier: 1.5
   runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
   legsPosition: {fileID: 6502859442602330302}
@@ -327,7 +327,7 @@ MonoBehaviour:
   attackRadius: 0.2
   colliderDetector: {fileID: 603352202858267006}
   jumpForce: 6
-  isMultipleJumpsActive: 1
+  isMultipleJumpsActive: 0
   extraJumps: 1
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   shadowTransform: {fileID: 503101407943252531}
