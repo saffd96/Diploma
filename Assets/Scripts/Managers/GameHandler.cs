@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -5,10 +6,12 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private UiManager uiManager;
     [SerializeField] private SceneLoadManager sceneLoadManager;
 
+    public PowerUpManager PowerUpManager { get; private set; }
+
     private static int levelsCompleted = 0;
-    
+
     public static Vector2 StartPosition;
-    public static GameObject player;
+    public static GameObject Player;
 
     private Boss boss;
 
@@ -17,7 +20,7 @@ public class GameHandler : MonoBehaviour
     private bool IsMapActive { get; set; }
 
     private bool isBossDead;
-    
+
     public static int LevelsCompleted => levelsCompleted;
 
     private void OnEnable()
@@ -32,6 +35,7 @@ public class GameHandler : MonoBehaviour
 
     private void Awake()
     {
+        PowerUpManager = FindObjectOfType<PowerUpManager>();
         boss = FindObjectOfType<Boss>();
     }
 
@@ -85,7 +89,7 @@ public class GameHandler : MonoBehaviour
         {
             return;
         }
-        
+
         if (boss.IsDead)
         {
             sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
@@ -94,7 +98,7 @@ public class GameHandler : MonoBehaviour
 
     public void SelectPlayer(GameObject selectedPlayer)
     {
-        player = selectedPlayer;
+        Player = selectedPlayer;
     }
 
     public void SetCastleLevel(int amount)

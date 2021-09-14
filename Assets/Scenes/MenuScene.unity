@@ -2429,8 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71c2e3cdeaf84642bab0e4322ed9dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  progressText: {fileID: 0}
+  sceneLoadUi: {fileID: 0}
 --- !u!4 &1231802085
 Transform:
   m_ObjectHideFlags: 0
@@ -3331,7 +3330,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select number of levels until boss level
+  m_Text: Select number of levels until boss
 --- !u!222 &1703597570
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -16,12 +16,12 @@ public class HealthManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SuperPlayer.SuperPlayer_OnDamaged += UpdateHearts;
+        SuperPlayer.OnSuperPlayerHpChanged += UpdateHearts;
     }
 
     private void OnDisable()
     {
-        SuperPlayer.SuperPlayer_OnDamaged -= UpdateHearts;
+        SuperPlayer.OnSuperPlayerHpChanged -= UpdateHearts;
     }
 
     private void Start()

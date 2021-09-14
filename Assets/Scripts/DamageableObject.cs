@@ -11,7 +11,7 @@ public class DamageableObject : MonoBehaviour
         get => maxHealth;
         set => maxHealth = value;
     }
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth { get; protected set; }
 
     protected virtual void Awake()
     {

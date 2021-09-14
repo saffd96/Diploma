@@ -60,9 +60,9 @@ public class LevelGeneration : MonoBehaviour
 
         GameHandler.StartPosition = new Vector2(position.x - 2, position.y - 2.5f);
 
-        if (GameHandler.player != null)
+        if (GameHandler.Player != null)
         {
-            player = Instantiate(GameHandler.player, GameHandler.StartPosition, Quaternion.identity);
+            player = Instantiate(GameHandler.Player, GameHandler.StartPosition, Quaternion.identity);
         }
 
         cinemachineCamera.Follow = player.transform;

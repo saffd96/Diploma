@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
-    [SerializeField] private Text progressText;
+    [SerializeField] private SceneLoadUi sceneLoadUi;
 
     private void Start()
     {
@@ -26,19 +24,12 @@ public class SceneLoadManager : MonoBehaviour
     private IEnumerator LoadAsynchronously(string sceneName)
     {
         var operation = SceneManager.LoadSceneAsync(sceneName);
-        
+
         while (!operation.isDone)
         {
-            var progress = Mathf.Clamp01(operation.progress / 0.9f);
-
-            if (slider != null)
+            if (sceneLoadUi != null)
             {
-                slider.value = progress;
-            }
-
-            if (progressText != null)
-            {
-                progressText.text = progress * 100f + "%";
+                sceneLoadUi.UpdateProgress(operation);
             }
 
             yield return null;

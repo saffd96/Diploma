@@ -39,6 +39,7 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
 
+   
     private RaycastHit2D hit;
     private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
@@ -68,8 +69,8 @@ public class SuperPlayer : DamageableObject
     private bool isPushing;
     private bool isDead;
 
-    public static event Action SuperPlayer_OnDamaged;
-    
+    public static event Action OnSuperPlayerHpChanged;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
@@ -96,7 +97,7 @@ public class SuperPlayer : DamageableObject
         CheckClimbCondition();
     }
 
-    private new void Awake()
+    protected override void Awake()
     {
         base.Awake();
         playerAnimationController = GetComponent<PlayerAnimationController>();
@@ -131,6 +132,80 @@ public class SuperPlayer : DamageableObject
         CheckPushCondition();
         MoveShadow();
         Attack();
+    }
+
+    public override void ApplyDamage(int amount)
+    {
+        base.ApplyDamage(amount);
+        OnSuperPlayerHpChanged?.Invoke();
+        CameraShake.Instance.ShakeCamera(7, 0.1f);
+        playerAnimationController.GetDamage();
+    }
+
+    public void AddSpeed()
+    {
+        maxSpeed++;
+        speed = maxSpeed;
+    }
+
+    public void AddJumpForce()
+    {
+        jumpForce++;
+    }
+
+    public void AddAdditionalJumps()
+    {
+        ExtraJumps();
+    }
+
+    public void EnableRun()
+    {
+        RunningSpeedMultiplier();
+    }
+    public void AddRunningSpeedMultiplier()
+    {
+        RunningSpeedMultiplier();
+    }
+
+    public void AddAttackValue()
+    {
+        attackValue++;
+    }
+
+    public void AddMaxLives()
+    {
+        maxHealth++;
+        CurrentHealth++;
+        OnSuperPlayerHpChanged?.Invoke();
+    }
+
+    public void EnableExtraJumps()
+    {
+        ExtraJumps();
+    }
+
+    private void ExtraJumps()
+    {
+        if (isMultipleJumpsActive)
+        {
+            extraJumps++;
+        }
+        else
+        {
+            isMultipleJumpsActive = true;
+        }
+    }
+
+    private void RunningSpeedMultiplier()
+    {
+        if (isRunActive)
+        {
+            runningSpeedMultiplier += 0.25f;
+        }
+        else
+        {
+            isRunActive = true;
+        }
     }
 
     private void Move()
@@ -345,14 +420,6 @@ public class SuperPlayer : DamageableObject
         }
 
         shadowTransform.gameObject.SetActive(isShadowEnabled);
-    }
-
-    public override void ApplyDamage(int amount)
-    {
-        base.ApplyDamage(amount);
-        SuperPlayer_OnDamaged?.Invoke();
-        CameraShake.Instance.ShakeCamera(7, 0.1f);
-        playerAnimationController.GetDamage();
     }
 
     private IEnumerator Throw()
