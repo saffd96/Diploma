@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25246ba126d13dc4f9157e4c453cbe4e, type: 3}
-  m_Name: AddMaxSpeed
+  m_Name: EnableRangeAttack
   m_EditorClassIdentifier: 
-  PowerUpName: Super Speed
-  Description: Add +1 to movespeed.
-  Image: {fileID: 21300000, guid: d4f8439ddc262bf4eb47ab59ba766970, type: 3}
-  ActionWithPlayer: 2
+  PowerUpName: Throw Stone
+  Description: Enable Range attack (RMB). If it's enabled add +5 stones.
+  Image: {fileID: 21300000, guid: 423b38d328158d44895855cea8e60edf, type: 3}
+  ActionWithPlayer: 9

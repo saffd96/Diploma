@@ -7,12 +7,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25246ba126d13dc4f9157e4c453cbe4e, type: 3}
-  m_Name: AddMaxSpeed
+  m_Name: EnableExtraJumps
   m_EditorClassIdentifier: 
-  PowerUpName: Super Speed
-  Description: Add +1 to movespeed.
-  Image: {fileID: 21300000, guid: d4f8439ddc262bf4eb47ab59ba766970, type: 3}
-  ActionWithPlayer: 2
+  PowerUpName: Fly Jump
+  Description: Enable double jump. If it's enabled add's additional FlyJump.
+  Image: {fileID: 21300000, guid: e2a1c7995b95ecf4eafe2cfc58462dd6, type: 3}
+  ActionWithPlayer: 7

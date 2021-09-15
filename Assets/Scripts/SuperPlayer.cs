@@ -39,7 +39,6 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
 
-   
     private RaycastHit2D hit;
     private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
@@ -68,6 +67,9 @@ public class SuperPlayer : DamageableObject
     private bool isClimbing;
     private bool isPushing;
     private bool isDead;
+
+    private int stonesMax;
+    private int currentStones;
 
     public static event Action OnSuperPlayerHpChanged;
 
@@ -148,6 +150,28 @@ public class SuperPlayer : DamageableObject
         speed = maxSpeed;
     }
 
+    public void EnableRun()
+    {
+        RunningSpeedPowerUp();
+    }
+
+    public void AddRunningSpeedMultiplier()
+    {
+        RunningSpeedPowerUp();
+    }
+
+    private void RunningSpeedPowerUp()
+    {
+        if (isRunActive)
+        {
+            runningSpeedMultiplier += 0.25f;
+        }
+        else
+        {
+            isRunActive = true;
+        }
+    }
+
     public void AddJumpForce()
     {
         jumpForce++;
@@ -155,36 +179,15 @@ public class SuperPlayer : DamageableObject
 
     public void AddAdditionalJumps()
     {
-        ExtraJumps();
-    }
-
-    public void EnableRun()
-    {
-        RunningSpeedMultiplier();
-    }
-    public void AddRunningSpeedMultiplier()
-    {
-        RunningSpeedMultiplier();
-    }
-
-    public void AddAttackValue()
-    {
-        attackValue++;
-    }
-
-    public void AddMaxLives()
-    {
-        maxHealth++;
-        CurrentHealth++;
-        OnSuperPlayerHpChanged?.Invoke();
+        ExtraJumpsPowerUp();
     }
 
     public void EnableExtraJumps()
     {
-        ExtraJumps();
+        ExtraJumpsPowerUp();
     }
 
-    private void ExtraJumps()
+    private void ExtraJumpsPowerUp()
     {
         if (isMultipleJumpsActive)
         {
@@ -196,15 +199,58 @@ public class SuperPlayer : DamageableObject
         }
     }
 
-    private void RunningSpeedMultiplier()
+    public void AddAdditionalStones()
     {
-        if (isRunActive)
+        RangeAttackPowerUp();
+    }
+
+    public void EnableRangeAttack()
+    {
+        RangeAttackPowerUp();
+    }
+
+    private void RangeAttackPowerUp()
+    {
+        if (isRangeAttackEnabled)
         {
-            runningSpeedMultiplier += 0.25f;
+            stonesMax += 5;
+            currentStones += 5;
         }
         else
         {
-            isRunActive = true;
+            isRangeAttackEnabled = true;
+            stonesMax += 3;
+            currentStones = stonesMax;
+        }
+    }
+
+    public void AddAttackValue()
+    {
+        attackValue++;
+    }
+
+    public void AddMaxLives()
+    {
+        HpChangePowerUp();
+    }
+
+    public void FillHp()
+    {
+        HpChangePowerUp();
+    }
+
+    private void HpChangePowerUp()
+    {
+        if (CurrentHealth == maxHealth)
+        {
+            maxHealth++;
+            CurrentHealth++;
+            OnSuperPlayerHpChanged?.Invoke();
+        }
+        else
+        {
+            CurrentHealth = maxHealth;
+            OnSuperPlayerHpChanged?.Invoke();
         }
     }
 

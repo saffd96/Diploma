@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25246ba126d13dc4f9157e4c453cbe4e, type: 3}
-  m_Name: AddMaxSpeed
+  m_Name: AddJumpForce
   m_EditorClassIdentifier: 
-  PowerUpName: Super Speed
-  Description: Add +1 to movespeed.
-  Image: {fileID: 21300000, guid: d4f8439ddc262bf4eb47ab59ba766970, type: 3}
-  ActionWithPlayer: 2
+  PowerUpName: Mega feets
+  Description: Add +1 to Jump Force.
+  Image: {fileID: 21300000, guid: 3c7d37b6279826041be38fdb8d0fbcbf, type: 3}
+  ActionWithPlayer: 5

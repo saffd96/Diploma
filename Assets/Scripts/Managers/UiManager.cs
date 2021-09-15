@@ -1,15 +1,14 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private PauseView pauseView;
+    [SerializeField] private PowerUpManager powerUpView;
     [SerializeField] private MapView mapView;
 
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
-
 
     public void PauseToggle(bool isActive)
     {
@@ -22,7 +21,7 @@ public class UiManager : MonoBehaviour
             pauseView.Hide();
         }
     }
-    
+
     public void MapToggle(bool isActive)
     {
         if (isActive)
@@ -31,9 +30,14 @@ public class UiManager : MonoBehaviour
             mapView.Show();
         }
         else
-        {           
+        {
             mapUIImage.sprite = mapUISprites[1];
             mapView.Hide();
         }
+    }
+
+    public void PowerUpToggle(bool isActive)
+    {
+        powerUpView.Hide();
     }
 }

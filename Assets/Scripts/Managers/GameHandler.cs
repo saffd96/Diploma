@@ -1,12 +1,10 @@
-using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
     [SerializeField] private SceneLoadManager sceneLoadManager;
-
-    public PowerUpManager PowerUpManager { get; private set; }
 
     private static int levelsCompleted = 0;
 
@@ -15,12 +13,13 @@ public class GameHandler : MonoBehaviour
 
     private Boss boss;
 
+    private PowerUpManager PowerUpManager { get; set; }
     public static int NeedCastleScenesToPass { get; private set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
 
     private bool isBossDead;
-
+    public static bool IsPowerUpSelected { get; private set; }
     public static int LevelsCompleted => levelsCompleted;
 
     private void OnEnable()
@@ -35,6 +34,11 @@ public class GameHandler : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel)
+        {
+            Time.timeScale = 0f;
+        }
+
         PowerUpManager = FindObjectOfType<PowerUpManager>();
         boss = FindObjectOfType<Boss>();
     }
@@ -48,17 +52,34 @@ public class GameHandler : MonoBehaviour
         CheckBossDead();
     }
 
-    private void CompleteLvl()
-    {
-        levelsCompleted++;
-        sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
-    }
-
     public void PauseToggle()
     {
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
         uiManager.PauseToggle(IsPaused);
+    }
+
+    public void SelectPlayer(GameObject selectedPlayer)
+    {
+        Player = selectedPlayer;
+    }
+
+    public void SetCastleLevel(int amount)
+    {
+        NeedCastleScenesToPass = amount;
+    }
+
+    public void PowerUpPauseToggle()
+    {
+        IsPowerUpSelected = !IsPowerUpSelected;
+        Time.timeScale = !IsPowerUpSelected ? 0f : 1f;
+        uiManager.PowerUpToggle(IsPowerUpSelected);
+    }
+
+    private void CompleteLvl()
+    {
+        levelsCompleted++;
+        sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
     }
 
     private void MapToggle()
@@ -94,15 +115,5 @@ public class GameHandler : MonoBehaviour
         {
             sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
         }
-    }
-
-    public void SelectPlayer(GameObject selectedPlayer)
-    {
-        Player = selectedPlayer;
-    }
-
-    public void SetCastleLevel(int amount)
-    {
-        NeedCastleScenesToPass = amount;
     }
 }
