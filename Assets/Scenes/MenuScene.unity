@@ -2136,6 +2136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
   sceneLoadManager: {fileID: 0}
+  powerUpManager: {fileID: 0}
 --- !u!4 &841424427
 Transform:
   m_ObjectHideFlags: 0

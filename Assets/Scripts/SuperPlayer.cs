@@ -71,7 +71,10 @@ public class SuperPlayer : DamageableObject
     private int stonesMax;
     private int currentStones;
 
+    public int CurrentStones => currentStones;
+
     public static event Action OnSuperPlayerHpChanged;
+    public static event Action OnSuperPlayerStonesChanged;
 
     private void OnDrawGizmosSelected()
     {
@@ -129,6 +132,11 @@ public class SuperPlayer : DamageableObject
     {
         if (isDead) return;
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RangeAttackPowerUp();
+        }
+        
         CheckJumpCondition();
         CheckRunCondition();
         CheckPushCondition();
@@ -215,12 +223,14 @@ public class SuperPlayer : DamageableObject
         {
             stonesMax += 5;
             currentStones += 5;
+            OnSuperPlayerStonesChanged?.Invoke();
         }
         else
         {
             isRangeAttackEnabled = true;
             stonesMax += 3;
             currentStones = stonesMax;
+            OnSuperPlayerStonesChanged?.Invoke();
         }
     }
 
@@ -363,9 +373,13 @@ public class SuperPlayer : DamageableObject
 
     private void RangeAttack()
     {
-        playerAnimationController.Throw();
-
-        StartCoroutine(Throw());
+        if (currentStones>0)
+        {
+            StartCoroutine(Throw());
+            currentStones--;
+            playerAnimationController.Throw();
+            OnSuperPlayerStonesChanged?.Invoke();
+        }
     }
 
     private void CheckRunCondition()

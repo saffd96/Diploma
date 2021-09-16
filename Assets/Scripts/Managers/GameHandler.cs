@@ -5,6 +5,7 @@ public class GameHandler : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
     [SerializeField] private SceneLoadManager sceneLoadManager;
+    [SerializeField] private PowerUpManager powerUpManager;
 
     private static int levelsCompleted = 0;
 
@@ -13,7 +14,6 @@ public class GameHandler : MonoBehaviour
 
     private Boss boss;
 
-    private PowerUpManager PowerUpManager { get; set; }
     public static int NeedCastleScenesToPass { get; private set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
@@ -38,8 +38,14 @@ public class GameHandler : MonoBehaviour
         {
             Time.timeScale = 0f;
         }
+    }
 
-        PowerUpManager = FindObjectOfType<PowerUpManager>();
+    private void Start()
+    {
+        if (powerUpManager!=null)
+        {
+            powerUpManager.gameObject.SetActive(true);
+        }
         boss = FindObjectOfType<Boss>();
     }
 
