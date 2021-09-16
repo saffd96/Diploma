@@ -23,7 +23,13 @@ public class StoneView : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<SuperPlayer>();
-        canvasGroup.alpha = 0f;
+
+        UpdateStones();
+        
+        if (player.CurrentStones==0)
+        {
+            canvasGroup.alpha = 0f;
+        }
     }
 
     private void UpdateStones()

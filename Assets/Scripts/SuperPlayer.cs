@@ -71,10 +71,24 @@ public class SuperPlayer : DamageableObject
     private int stonesMax;
     private int currentStones;
 
-    public int CurrentStones => currentStones;
+    public int CurrentStones
+    {
+        get => currentStones;
+        set => currentStones = value;
+    }
 
     public static event Action OnSuperPlayerHpChanged;
     public static event Action OnSuperPlayerStonesChanged;
+
+    private void OnEnable()
+    {
+        ExitLvl.OnExitLvlCollision += SaveStats;
+    }
+
+    private void OnDisable()
+    {
+        ExitLvl.OnExitLvlCollision -= SaveStats;
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -107,12 +121,19 @@ public class SuperPlayer : DamageableObject
         base.Awake();
         playerAnimationController = GetComponent<PlayerAnimationController>();
         rb = GetComponent<Rigidbody2D>();
+
+        climbSpeed = maxSpeed;
+
+        if (GameHandler.LevelsCompleted > 0)
+        {
+            LoadStats();
+        }
+        
         isFacingRight = true;
         isDead = false;
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
-        climbSpeed = maxSpeed;
     }
 
     private void Start()
@@ -136,12 +157,44 @@ public class SuperPlayer : DamageableObject
         {
             RangeAttackPowerUp();
         }
-        
+
         CheckJumpCondition();
         CheckRunCondition();
         CheckPushCondition();
         MoveShadow();
         Attack();
+    }
+
+    private void SaveStats()
+    {
+        PlayerPrefs.SetInt(SaveLoadConstants.AttackValuePrefsKey, attackValue);
+        PlayerPrefs.SetInt(SaveLoadConstants.IsRangeAttackEnabledPrefsKey, isRangeAttackEnabled ? 1 : 0);
+        PlayerPrefs.SetFloat(SaveLoadConstants.MaxSpeedPrefsKey, maxSpeed);
+        PlayerPrefs.SetInt(SaveLoadConstants.IsRunActivePrefsKey, isRunActive ? 1 : 0);
+        PlayerPrefs.SetFloat(SaveLoadConstants.RunningSpeedMultiplierPrefsKey, runningSpeedMultiplier);
+        PlayerPrefs.SetFloat(SaveLoadConstants.JumpForcePrefsKey, jumpForce);
+        PlayerPrefs.SetInt(SaveLoadConstants.IsMultipleJumpsActivePrefsKey, isMultipleJumpsActive ? 1 : 0);
+        PlayerPrefs.SetInt(SaveLoadConstants.ExtraJumpsPrefsKey, extraJumps);
+        PlayerPrefs.SetInt(SaveLoadConstants.StonesMaxPrefsKey, stonesMax);
+        PlayerPrefs.SetInt(SaveLoadConstants.CurrentStonesPrefsKey, currentStones);
+        PlayerPrefs.SetInt(SaveLoadConstants.MaxHealthPrefsKey, maxHealth);
+        PlayerPrefs.SetInt(SaveLoadConstants.CurrentHealthPrefsKey, CurrentHealth);
+    }
+
+    private void LoadStats()
+    {
+        attackValue = PlayerPrefs.GetInt(SaveLoadConstants.AttackValuePrefsKey);
+        isRangeAttackEnabled = PlayerPrefs.GetInt(SaveLoadConstants.IsRangeAttackEnabledPrefsKey) == 1 ? true : false;
+        maxSpeed = PlayerPrefs.GetFloat(SaveLoadConstants.MaxSpeedPrefsKey);
+        isRunActive = PlayerPrefs.GetInt(SaveLoadConstants.IsRunActivePrefsKey) == 1 ? true : false;
+        runningSpeedMultiplier = PlayerPrefs.GetFloat(SaveLoadConstants.RunningSpeedMultiplierPrefsKey);
+        jumpForce = PlayerPrefs.GetFloat(SaveLoadConstants.JumpForcePrefsKey);
+        isMultipleJumpsActive = PlayerPrefs.GetInt(SaveLoadConstants.IsMultipleJumpsActivePrefsKey) == 1 ? true : false;
+        extraJumps = PlayerPrefs.GetInt(SaveLoadConstants.ExtraJumpsPrefsKey);
+        stonesMax = PlayerPrefs.GetInt(SaveLoadConstants.StonesMaxPrefsKey);
+        CurrentStones = PlayerPrefs.GetInt(SaveLoadConstants.CurrentStonesPrefsKey);
+        maxHealth = PlayerPrefs.GetInt(SaveLoadConstants.MaxHealthPrefsKey);
+        CurrentHealth = PlayerPrefs.GetInt(SaveLoadConstants.CurrentHealthPrefsKey);
     }
 
     public override void ApplyDamage(int amount)
@@ -373,7 +426,7 @@ public class SuperPlayer : DamageableObject
 
     private void RangeAttack()
     {
-        if (currentStones>0)
+        if (currentStones > 0)
         {
             StartCoroutine(Throw());
             currentStones--;
