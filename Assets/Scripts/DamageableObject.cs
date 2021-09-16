@@ -3,7 +3,7 @@ using UnityEngine;
 public class DamageableObject : MonoBehaviour
 {
     [SerializeField] protected int maxHealth;
-
+    
     public bool IsInvulnerable { get; protected set; }
 
     public int MAXHealth
@@ -15,7 +15,10 @@ public class DamageableObject : MonoBehaviour
 
     protected virtual void Awake()
     {
-        CurrentHealth = maxHealth;
+        if (GameHandler.LevelsCompleted == 0)
+        {
+            CurrentHealth = maxHealth;
+        }
     }
 
     public virtual void ApplyDamage(int amount)
@@ -33,6 +36,5 @@ public class DamageableObject : MonoBehaviour
 
     protected virtual void Die()
     {
-      //  Destroy(gameObject);
     }
 }

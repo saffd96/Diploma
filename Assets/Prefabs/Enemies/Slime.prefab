@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5329327902068247035}
   - component: {fileID: 7465987894692151875}
   - component: {fileID: 5329327902068247034}
-  - component: {fileID: 1239764601032979484}
+  - component: {fileID: 6746889420351677246}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  mapSprite: {fileID: 5329327902699134742}
   targetDetectionValue: 0.1
   bottom: {fileID: 4916635852798479750}
   idleTime: 1.25
@@ -68,6 +69,7 @@ MonoBehaviour:
   speed: 0.75
   leftOffset: 3
   rightOffset: 3
+  isFacingRight: 1
 --- !u!50 &5329327902068247034
 Rigidbody2D:
   serializedVersion: 4
@@ -89,8 +91,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &1239764601032979484
-CircleCollider2D:
+--- !u!70 &6746889420351677246
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,9 +104,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: 0.3}
-  serializedVersion: 2
-  m_Radius: 0.27
+  m_Offset: {x: 0.075, y: 0.3}
+  m_Size: {x: 0.5, y: 0.55}
+  m_Direction: 0
 --- !u!1 &5329327902699134736
 GameObject:
   m_ObjectHideFlags: 0

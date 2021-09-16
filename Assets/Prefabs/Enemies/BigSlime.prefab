@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 316105881209270184}
   - component: {fileID: 7483927037474323372}
   - component: {fileID: 5311196345061355541}
-  - component: {fileID: 9093020621020256319}
+  - component: {fileID: 5866683939154591541}
   m_Layer: 8
   m_Name: BigSlime
   m_TagString: Untagged
@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6dd9a930adf4cfdbcf7f6126a369484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2
+  mapSprite: {fileID: 5311196346442753785}
   targetDetectionValue: 0.15
   bottom: {fileID: 4934781702169425001}
   idleTime: 0
@@ -66,6 +67,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
+  leftOffset: 3
+  rightOffset: 3
+  isFacingRight: 1
 --- !u!50 &5311196345061355541
 Rigidbody2D:
   serializedVersion: 4
@@ -87,8 +91,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &9093020621020256319
-CircleCollider2D:
+--- !u!70 &5866683939154591541
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -100,9 +104,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: 0.55}
-  serializedVersion: 2
-  m_Radius: 0.55
+  m_Offset: {x: 0.15, y: 0.6}
+  m_Size: {x: 0.95, y: 1.1}
+  m_Direction: 0
 --- !u!1 &5311196346442753791
 GameObject:
   m_ObjectHideFlags: 0

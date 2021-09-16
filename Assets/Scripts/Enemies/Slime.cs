@@ -21,7 +21,8 @@ public class Slime : BaseEnemy
 
     protected float distance;
     private float idleTimer;
-
+    private Collider2D coll2D;
+    
     protected bool isGrounded;
     protected BaseEnemyMoving SlimeMoving => slimeMoving;
 
@@ -29,15 +30,17 @@ public class Slime : BaseEnemy
     {
         base.Awake();
         slimeMoving = GetComponent<BaseEnemyMoving>();
+        coll2D = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (currentState != State.Dead)
-        {
-            CheckState();
-        }
+        Debug.Log(currentState);
+        
+        if (currentState == State.Dead) return;
+
+        CheckState();
 
         animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
 
@@ -46,12 +49,19 @@ public class Slime : BaseEnemy
         UpdateCurrentState();
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        SetState(State.Dead);
+    }
+
     protected virtual void CheckState()
     {
         distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
         isGrounded = Physics2D.OverlapCircle(bottom.position, targetDetectionValue, LayerMask.GetMask(Layers.Ground));
+
         
-        if (!isGrounded || (isGrounded && distance <= targetDetectionValue))
+        if (!isGrounded || distance <= targetDetectionValue)
         {
             SetState(State.Idle);
         }
@@ -111,7 +121,9 @@ public class Slime : BaseEnemy
             case State.Dead:
                 slimeMoving.enabled = false;
 
-                //add is dead trigger
+                animator.SetBool(AnimationBoolNames.IsDead, true);
+                coll2D.enabled = false;
+                rb.Sleep();              
                 break;
         }
 

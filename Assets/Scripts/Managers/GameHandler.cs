@@ -80,7 +80,7 @@ public class GameHandler : MonoBehaviour
     {
         IsPowerUpSelected = !IsPowerUpSelected;
         Time.timeScale = !IsPowerUpSelected ? 0f : 1f;
-        uiManager.PowerUpToggle(IsPowerUpSelected);
+        uiManager.PowerUpHide();
     }
 
     private void CompleteLvl()

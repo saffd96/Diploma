@@ -1,8 +1,6 @@
 using System;
 using Cinemachine;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class LevelGeneration : MonoBehaviour
@@ -28,6 +26,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private GameObject LR;
     [SerializeField] private GameObject LT;
     [SerializeField] private GameObject RT;
+    [SerializeField] private GameObject Boss;
     [SerializeField] private GameObject Exit;
 
     [Header("Level border settings")]
@@ -35,7 +34,14 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private float maxY;
     [SerializeField] private float maxX;
 
+    [Header("BossLevel border settings")]
+    [SerializeField] private float bossLevelLenght;
+
     private int randStartingPositionIndex;
+
+    private float currentMinY;
+    private float currentMaxY;
+    private float currentMaxX;
 
     private Vector2 position;
     private Vector2 newGeneratorPosition;
@@ -47,15 +53,38 @@ public class LevelGeneration : MonoBehaviour
 
     private GameObject player;
 
+    private bool generateBossLvl;
+
     public bool StopGeneration { get; private set; }
     public Transform LevelTransform => levelTransform;
 
     private void Awake()
     {
+        if (GameHandler.LevelsCompleted >= GameHandler.NeedCastleScenesToPass)
+        {
+            generateBossLvl = true;
+        }
+
         position = transform.position;
-        randStartingPositionIndex = Random.Range(0, startingPositions.Length);
-        position = startingPositions[randStartingPositionIndex].position;
+
+        if (generateBossLvl)
+        {
+            position = startingPositions[1].position;
+
+            currentMinY = currentMaxY = position.y;
+            currentMaxX = bossLevelLenght;
+        }
+        else
+        {
+            currentMinY = minY;
+            currentMaxY = maxY;
+            currentMaxX = maxX;
+            randStartingPositionIndex = Random.Range(0, startingPositions.Length);
+            position = startingPositions[randStartingPositionIndex].position;
+        }
+
         CreateRoom(Enter);
+
         direction = Direction.Forward;
 
         GameHandler.StartPosition = new Vector2(position.x - 2, position.y - 2.5f);
@@ -70,11 +99,6 @@ public class LevelGeneration : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
         GenerateLvl();
     }
 
@@ -89,7 +113,7 @@ public class LevelGeneration : MonoBehaviour
     {
         if (direction == Direction.Top) //move top
         {
-            if (position.y < maxY)
+            if (position.y < currentMaxY)
             {
                 newGeneratorPosition = new Vector2(position.x, position.y + offsetAmount);
                 position = newGeneratorPosition;
@@ -106,7 +130,7 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (direction == Direction.Bottom) // move bottom
         {
-            if (position.y > minY)
+            if (position.y > currentMinY)
             {
                 newGeneratorPosition = new Vector2(position.x, position.y - offsetAmount);
                 position = newGeneratorPosition;
@@ -123,7 +147,7 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (direction == Direction.Forward) //move forward
         {
-            if (position.x < maxX - offsetAmount)
+            if (position.x < currentMaxX - offsetAmount)
             {
                 newGeneratorPosition = new Vector2(position.x + offsetAmount, position.y);
                 position = newGeneratorPosition;
@@ -150,7 +174,9 @@ public class LevelGeneration : MonoBehaviour
             {
                 newGeneratorPosition = new Vector2(position.x + offsetAmount, position.y);
                 position = newGeneratorPosition;
-                CreateRoom(Exit);
+
+                CreateRoom(!generateBossLvl ? Exit : Boss);
+                
                 StopGeneration = true;
             }
         }

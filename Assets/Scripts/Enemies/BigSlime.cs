@@ -17,7 +17,7 @@ public class BigSlime : Slime
     {
         distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
         isGrounded = Physics2D.OverlapCircle(bottom.position, 0.2f, LayerMask.GetMask(Layers.Ground));
-
+        
         if (!isGrounded)
         {
             SetState(State.Idle);
@@ -82,8 +82,6 @@ public class BigSlime : Slime
                 break;
             case State.Dead:
                 slimeMoving.enabled = false;
-
-                //add is dead trigger
                 break;
             case State.Spin:
                 if (!IsSpinEnded)

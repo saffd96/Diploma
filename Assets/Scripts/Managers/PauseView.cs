@@ -9,6 +9,8 @@ public class PauseView : MonoBehaviour
     [SerializeField] private float fadeDuration;
     [SerializeField] private Button[] buttons;
 
+    [Space]
+    [SerializeField] private Text levelsPassed;
     [Header("Settings")]
     [SerializeField] private float volumeMultiplier = 100f;
 
@@ -27,6 +29,8 @@ public class PauseView : MonoBehaviour
 
     private void Update()
     {
+        levelsPassed.text = "Levels passed: " + GameHandler.LevelsCompleted;
+        
         var musicValue = musicSlider.value / volumeMultiplier;
         AudioManager.Instance.SetMusicVolume(musicValue);
         musicText.text = $"{GetMusicVolume():0}";

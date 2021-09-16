@@ -6,7 +6,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private PauseView pauseView;
     [SerializeField] private PowerUpManager powerUpView;
     [SerializeField] private MapView mapView;
-
+    [Space]
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
 
@@ -36,7 +36,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public void PowerUpToggle(bool isActive)
+    public void PowerUpHide()
     {
         powerUpView.Hide();
     }
