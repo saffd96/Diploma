@@ -86,13 +86,13 @@ public class BigSlime : Slime
             case State.Spin:
                 if (!IsSpinEnded)
                 {
-                    animator.SetTrigger(AnimationTriggerNames.Spin);
+                    Animator.SetTrigger(AnimationTriggerNames.Spin);
                 }
 
                 slimeMoving.IsTargetSet = false;
                 slimeMoving.enabled = false;
                 IsInvulnerable = true;
-                rb.velocity = Vector2.zero;
+                rb2D.velocity = Vector2.zero;
 
                 if (IsSpinEnded)
                 {

@@ -1,22 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-
 public class BaseEnemy : DamageableObject
 {
    [SerializeField] private SpriteRenderer mapSprite;
-   
-   
-   protected Animator animator;
-   private Collider2D collider2D;
-   private Rigidbody2D rigidbody2D;
+
+   protected Collider2D coll2D;
+   protected Rigidbody2D rb2D;
 
    protected override void Awake()
    {
       base.Awake();
-      animator = GetComponentInChildren<Animator>();
-      collider2D = GetComponent<Collider2D>();
-      rigidbody2D = GetComponent<Rigidbody2D>();
+
+      coll2D = GetComponent<Collider2D>();
+
+      if (coll2D == null)
+      {
+         coll2D = GetComponentInChildren<Collider2D>();
+      }
+      
+      rb2D = GetComponent<Rigidbody2D>();
    }
 
    protected override void Die()

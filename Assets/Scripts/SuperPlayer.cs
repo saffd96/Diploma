@@ -69,13 +69,8 @@ public class SuperPlayer : DamageableObject
     private bool isDead;
 
     private int stonesMax;
-    private int currentStones;
 
-    public int CurrentStones
-    {
-        get => currentStones;
-        set => currentStones = value;
-    }
+    public int CurrentStones { get; private set; }
 
     public static event Action OnSuperPlayerHpChanged;
     public static event Action OnSuperPlayerStonesChanged;
@@ -99,23 +94,6 @@ public class SuperPlayer : DamageableObject
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(colliderDetector.position, attackRadius);
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.CompareTag(Tags.ClimbObject)) return;
-
-        isClimbing = true;
-        CheckClimbCondition();
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (!other.CompareTag(Tags.ClimbObject)) return;
-
-        isClimbing = false;
-        CheckClimbCondition();
-    }
-
     protected override void Awake()
     {
         base.Awake();
@@ -164,6 +142,25 @@ public class SuperPlayer : DamageableObject
         MoveShadow();
         Attack();
     }
+    
+    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag(Tags.ClimbObject)) return;
+
+        isClimbing = true;
+        CheckClimbCondition();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag(Tags.ClimbObject)) return;
+
+        isClimbing = false;
+        CheckClimbCondition();
+    }
+
 
     private void SaveStats()
     {
@@ -176,7 +173,7 @@ public class SuperPlayer : DamageableObject
         PlayerPrefs.SetInt(SaveLoadConstants.IsMultipleJumpsActivePrefsKey, isMultipleJumpsActive ? 1 : 0);
         PlayerPrefs.SetInt(SaveLoadConstants.ExtraJumpsPrefsKey, extraJumps);
         PlayerPrefs.SetInt(SaveLoadConstants.StonesMaxPrefsKey, stonesMax);
-        PlayerPrefs.SetInt(SaveLoadConstants.CurrentStonesPrefsKey, currentStones);
+        PlayerPrefs.SetInt(SaveLoadConstants.CurrentStonesPrefsKey, CurrentStones);
         PlayerPrefs.SetInt(SaveLoadConstants.MaxHealthPrefsKey, maxHealth);
         PlayerPrefs.SetInt(SaveLoadConstants.CurrentHealthPrefsKey, CurrentHealth);
     }
@@ -275,14 +272,14 @@ public class SuperPlayer : DamageableObject
         if (isRangeAttackEnabled)
         {
             stonesMax += 5;
-            currentStones += 5;
+            CurrentStones += 5;
             OnSuperPlayerStonesChanged?.Invoke();
         }
         else
         {
             isRangeAttackEnabled = true;
             stonesMax += 3;
-            currentStones = stonesMax;
+            CurrentStones = stonesMax;
             OnSuperPlayerStonesChanged?.Invoke();
         }
     }
@@ -426,10 +423,10 @@ public class SuperPlayer : DamageableObject
 
     private void RangeAttack()
     {
-        if (currentStones > 0)
+        if (CurrentStones > 0)
         {
             StartCoroutine(Throw());
-            currentStones--;
+            CurrentStones--;
             playerAnimationController.Throw();
             OnSuperPlayerStonesChanged?.Invoke();
         }

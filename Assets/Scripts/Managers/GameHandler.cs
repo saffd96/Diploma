@@ -23,11 +23,14 @@ public class GameHandler : MonoBehaviour
     private void OnEnable()
     {
         ExitLvl.OnExitLvlCollision += CompleteLvl;
+        Boss.OnBossDeath += OnBossDeath;
     }
 
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
+        Boss.OnBossDeath -= OnBossDeath;
+
     }
 
     private void Awake()
@@ -51,12 +54,9 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(LevelsCompleted);
         CheckPauseToggle();
 
         CheckMapToggle();
-
-        CheckBossDead();
     }
 
     public void PauseToggle()
@@ -110,17 +110,11 @@ public class GameHandler : MonoBehaviour
             MapToggle();
         }
     }
+    
 
-    private void CheckBossDead()
+    private void OnBossDeath()
     {
-        if (boss == null)
-        {
-            return;
-        }
-
-        if (boss.IsDead)
-        {
-            sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
-        }
+        //DoTweenShade after load scene;
+        sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
     }
 }

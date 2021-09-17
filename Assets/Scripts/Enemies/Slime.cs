@@ -17,11 +17,9 @@ public class Slime : BaseEnemy
     protected BaseEnemyMoving slimeMoving;
 
     private State currentState;
-    protected Rigidbody2D rb;
 
     protected float distance;
     private float idleTimer;
-    private Collider2D coll2D;
     
     protected bool isGrounded;
     protected BaseEnemyMoving SlimeMoving => slimeMoving;
@@ -30,21 +28,17 @@ public class Slime : BaseEnemy
     {
         base.Awake();
         slimeMoving = GetComponent<BaseEnemyMoving>();
-        coll2D = GetComponent<Collider2D>();
-        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        Debug.Log(currentState);
-        
         if (currentState == State.Dead) return;
 
         CheckState();
 
-        animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
+        Animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
 
-        animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(rb.velocity.x));
+        Animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(rb2D.velocity.x));
 
         UpdateCurrentState();
     }
@@ -107,7 +101,7 @@ public class Slime : BaseEnemy
         {
             case State.Idle:
 
-                rb.velocity = Vector2.zero;
+                rb2D.velocity = Vector2.zero;
                 slimeMoving.enabled = false;
                 slimeMoving.IsTargetSet = false;
 
@@ -121,9 +115,9 @@ public class Slime : BaseEnemy
             case State.Dead:
                 slimeMoving.enabled = false;
 
-                animator.SetBool(AnimationBoolNames.IsDead, true);
+                Animator.SetBool(AnimationBoolNames.IsDead, true);
                 coll2D.enabled = false;
-                rb.Sleep();              
+                rb2D.Sleep();              
                 break;
         }
 

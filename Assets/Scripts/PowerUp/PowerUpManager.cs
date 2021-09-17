@@ -64,67 +64,56 @@ public class PowerUpManager : MonoBehaviour
     public void AddMaxLives()
     {
         superPlayer.AddMaxLives();
-        Debug.Log("AddMaxLives");
     }
 
     public void FillHp()
     {
         superPlayer.FillHp();
-        Debug.Log("FillHp");
     }
 
     public void AddSpeed()
     {
         superPlayer.AddSpeed();
-        Debug.Log("AddMaxSpeed");
     }
 
     public void EnableRun()
     {
         superPlayer.EnableRun();
-        Debug.Log("EnableRun");
     }
 
     public void AddRunningSpeedMultiplier()
     {
         superPlayer.AddRunningSpeedMultiplier();
-        Debug.Log("AddRunningSpeedMultiplier");
     }
 
     public void AddJumpForce()
     {
         superPlayer.AddJumpForce();
-        Debug.Log("AddJumpForce");
     }
 
     public void AddAdditionalJump()
     {
         superPlayer.AddAdditionalJumps();
-        Debug.Log("AddAdditionalJumps");
     }
 
     public void EnableExtraJump()
     {
         superPlayer.EnableExtraJumps();
-        Debug.Log("EnableExtraJumps");
     }
 
     public void AddAttackValue()
     {
         superPlayer.AddAttackValue();
-        Debug.Log("AddAttackValue");
     }
 
     public void AddAdditionalStones()
     {
         superPlayer.AddAdditionalStones();
-        Debug.Log("AddAdditionalStones");
     }
 
     public void EnableRangeAttack()
     {
         superPlayer.EnableRangeAttack();
-        Debug.Log("EnableRangeAttack");
     }
 
     public void Hide()

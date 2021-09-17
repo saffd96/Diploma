@@ -5,6 +5,7 @@ public class AnimationTriggerNames
     public const string Attack = "Attack";
     public const string Throw = "Throw";
     public const string Spin = "Spin";
+    public const string Hurt = "Hurt";
 }
 
 public class AnimationFloatNames
@@ -26,4 +27,5 @@ public class AnimationBoolNames
     public const string IsDead = "IsDead";
     public const string IsClimbing = "IsClimbing";
     public const string IsPushing = "IsPushing";
+    public const string IsRageActive = "IsRageActive";
 }

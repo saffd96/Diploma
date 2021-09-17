@@ -136,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5963486956169298382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6502859443754222715}
@@ -322,8 +322,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  colliderDetectRadius: 0.15
-  attackRadius: 0.2
+  colliderDetectRadius: 0.25
+  attackRadius: 0.5
   colliderDetector: {fileID: 603352202858267006}
   jumpForce: 6
   isMultipleJumpsActive: 0

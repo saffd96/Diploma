@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class LevelGeneration : MonoBehaviour
 {
+    
     private enum Direction
     {
         Top,
@@ -18,6 +19,8 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private Transform levelTransform;
     [SerializeField] private Transform[] startingPositions;
     [SerializeField] private float offsetAmount;
+    [SerializeField]  private AstarPath astarPath;
+
 
     [Header("Rooms")]
     [SerializeField] private GameObject Enter;
@@ -178,6 +181,7 @@ public class LevelGeneration : MonoBehaviour
                 CreateRoom(!generateBossLvl ? Exit : Boss);
                 
                 StopGeneration = true;
+                astarPath.Scan();
             }
         }
     }
