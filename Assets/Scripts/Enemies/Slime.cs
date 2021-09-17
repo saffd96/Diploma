@@ -38,7 +38,7 @@ public class Slime : BaseEnemy
 
         Animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
 
-        Animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(rb2D.velocity.x));
+        Animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(Rb2D.velocity.x));
 
         UpdateCurrentState();
     }
@@ -101,7 +101,7 @@ public class Slime : BaseEnemy
         {
             case State.Idle:
 
-                rb2D.velocity = Vector2.zero;
+                Rb2D.velocity = Vector2.zero;
                 slimeMoving.enabled = false;
                 slimeMoving.IsTargetSet = false;
 
@@ -116,8 +116,8 @@ public class Slime : BaseEnemy
                 slimeMoving.enabled = false;
 
                 Animator.SetBool(AnimationBoolNames.IsDead, true);
-                coll2D.enabled = false;
-                rb2D.Sleep();              
+                Coll2D.enabled = false;
+                Rb2D.Sleep();              
                 break;
         }
 

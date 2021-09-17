@@ -92,7 +92,7 @@ public class BigSlime : Slime
                 slimeMoving.IsTargetSet = false;
                 slimeMoving.enabled = false;
                 IsInvulnerable = true;
-                rb2D.velocity = Vector2.zero;
+                Rb2D.velocity = Vector2.zero;
 
                 if (IsSpinEnded)
                 {

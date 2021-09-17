@@ -30,25 +30,25 @@ public class GameHandler : MonoBehaviour
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
         Boss.OnBossDeath -= OnBossDeath;
-
     }
 
     private void Awake()
     {
         IsPowerUpSelected = false;
+
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel)
         {
             Time.timeScale = 0f;
         }
-
     }
 
     private void Start()
     {
-        if (powerUpManager!=null)
+        if (powerUpManager != null)
         {
             powerUpManager.gameObject.SetActive(true);
         }
+
         boss = FindObjectOfType<Boss>();
     }
 
@@ -110,7 +110,6 @@ public class GameHandler : MonoBehaviour
             MapToggle();
         }
     }
-    
 
     private void OnBossDeath()
     {

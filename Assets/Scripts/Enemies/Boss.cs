@@ -29,6 +29,7 @@ public class Boss : BaseEnemy
 
     private bool isRageActive;
 
+    private float attackTimer;
     private float velocity;
     private float distance;
 
@@ -47,7 +48,7 @@ public class Boss : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        
+
         aiPath = GetComponent<AIPath>();
         aiPath.maxSpeed = speed;
         aiDestinationSetter = GetComponentInChildren<AIDestinationSetter>();
@@ -60,7 +61,7 @@ public class Boss : BaseEnemy
 
     private void Update()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         CalculateVariables();
 
@@ -80,7 +81,7 @@ public class Boss : BaseEnemy
             enemy.GetComponent<DamageableObject>().ApplyDamage(attackValue);
         }
     }
-    
+
     private void CalculateVariables()
     {
         velocity = aiPath.desiredVelocity.x;
@@ -102,7 +103,7 @@ public class Boss : BaseEnemy
             Attack();
         }
 
-        if (CurrentHealth == MAXHealth/2 && !isRageActive)
+        if (CurrentHealth == MAXHealth / 2 && !isRageActive)
         {
             ActivateRage();
         }
@@ -128,28 +129,20 @@ public class Boss : BaseEnemy
 
     private void Attack()
     {
-        if (!alreadyAttacked)
-        {
-            Animator.SetTrigger(AnimationTriggerNames.Attack);
-            alreadyAttacked = true;
+        attackTimer += Time.deltaTime;
 
-            DealDamage();
+        if (attackTimer < attackTime) return;
 
-            Invoke(nameof(ResetAttack), attackTime);
-        }
-    }
+        Animator.SetTrigger(AnimationTriggerNames.Attack);
+        alreadyAttacked = true;
 
-   
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
+        attackTimer = 0;
     }
 
     protected override void Die()
     {
         base.Die();
-        Animator.SetBool(AnimationBoolNames.IsDead, isDead);
+        Animator.SetBool(AnimationBoolNames.IsDead, IsDead);
         aiDestinationSetter.enabled = false;
         OnBossDeath?.Invoke();
     }
@@ -158,8 +151,8 @@ public class Boss : BaseEnemy
     {
         Animator.SetBool(AnimationBoolNames.IsRageActive, true);
         isRageActive = true;
-        speed += 0.5f;
+        speed = 4;
         aiPath.maxSpeed = speed;
-        attackTime /= 2f;
+        attackTime = 2;
     }
 }

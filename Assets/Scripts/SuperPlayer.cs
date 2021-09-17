@@ -66,7 +66,6 @@ public class SuperPlayer : DamageableObject
     private bool isShadowEnabled;
     private bool isClimbing;
     private bool isPushing;
-    private bool isDead;
 
     private int stonesMax;
 
@@ -94,6 +93,7 @@ public class SuperPlayer : DamageableObject
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(colliderDetector.position, attackRadius);
     }
+
     protected override void Awake()
     {
         base.Awake();
@@ -106,9 +106,9 @@ public class SuperPlayer : DamageableObject
         {
             LoadStats();
         }
-        
+
         isFacingRight = true;
-        isDead = false;
+        IsDead = false;
         isGrounded = false;
         jumps = extraJumps;
         speed = maxSpeed;
@@ -121,7 +121,7 @@ public class SuperPlayer : DamageableObject
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         Move();
         Climb();
@@ -129,7 +129,7 @@ public class SuperPlayer : DamageableObject
 
     private void Update()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -142,8 +142,6 @@ public class SuperPlayer : DamageableObject
         MoveShadow();
         Attack();
     }
-    
-    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -160,7 +158,6 @@ public class SuperPlayer : DamageableObject
         isClimbing = false;
         CheckClimbCondition();
     }
-
 
     private void SaveStats()
     {
@@ -544,8 +541,8 @@ public class SuperPlayer : DamageableObject
     protected override void Die()
     {
         base.Die();
-        isDead = true;
-        playerAnimationController.SetIsDead(isDead);
+        IsDead = true;
+        playerAnimationController.SetIsDead(IsDead);
         rb.velocity = Vector2.zero;
 
         //add logic
