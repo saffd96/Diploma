@@ -15,10 +15,7 @@ public class DamageableObject : MonoBehaviour
     {
         Animator = GetComponentInChildren<Animator>();
 
-        if (GameHandler.LevelsCompleted == 0)
-        {
-            CurrentHealth = maxHealth;
-        }
+        CurrentHealth = maxHealth;
     }
 
     public virtual void ApplyDamage(int amount)

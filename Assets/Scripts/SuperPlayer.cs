@@ -101,7 +101,7 @@ public class SuperPlayer : DamageableObject
         rb = GetComponent<Rigidbody2D>();
 
         climbSpeed = maxSpeed;
-
+        
         if (GameHandler.LevelsCompleted > 0)
         {
             LoadStats();

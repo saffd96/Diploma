@@ -21,9 +21,7 @@ public class Boss : BaseEnemy
     private AIDestinationSetter aiDestinationSetter;
 
     private Transform player;
-
-    private bool alreadyAttacked;
-
+    
     private bool playerInAttackRange;
     private bool playerInChaseRange;
 
@@ -34,6 +32,8 @@ public class Boss : BaseEnemy
     private float distance;
 
     public static event Action OnBossDeath;
+    public static event Action OnBossHpChanged;
+    public static event Action OnEnterChaseZone;
 
     private void OnDrawGizmos()
     {
@@ -123,6 +123,7 @@ public class Boss : BaseEnemy
 
     private void Chase()
     {
+        OnEnterChaseZone?.Invoke();
         aiDestinationSetter.target = player;
         Animator.ResetTrigger(AnimationTriggerNames.Attack);
     }
@@ -134,7 +135,6 @@ public class Boss : BaseEnemy
         if (attackTimer < attackTime) return;
 
         Animator.SetTrigger(AnimationTriggerNames.Attack);
-        alreadyAttacked = true;
 
         attackTimer = 0;
     }
@@ -151,8 +151,14 @@ public class Boss : BaseEnemy
     {
         Animator.SetBool(AnimationBoolNames.IsRageActive, true);
         isRageActive = true;
-        speed = 4;
+        speed++;
         aiPath.maxSpeed = speed;
-        attackTime = 2;
+        attackTime /= 2;
+    }
+
+    public override void ApplyDamage(int amount)
+    {
+        base.ApplyDamage(amount);
+        OnBossHpChanged?.Invoke();
     }
 }

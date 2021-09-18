@@ -167,13 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b994114a4dbd69d4baa7771fd1fa1bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 15
   mapSprite: {fileID: 7867553427967375008}
   attackValue: 1
   attackRange: 2
   attackRadius: 0.75
   chaseRange: 4
-  attackTime: 3
+  attackTime: 2
   attackPoint: {fileID: 1858560146603222129}
   speed: 3
 --- !u!114 &5722799581076707038
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.5
+  radius: 0.46
   height: 1
   repathRate: 0.5
   canSearch: 1
