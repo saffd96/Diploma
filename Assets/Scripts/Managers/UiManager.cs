@@ -6,10 +6,13 @@ public class UiManager : MonoBehaviour
     [SerializeField] private PauseView pauseView;
     [SerializeField] private PowerUpManager powerUpView;
     [SerializeField] private MapView mapView;
+    [SerializeField] private GameObject deathScreen;
+    
     [Space]
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
 
+    
     public void PauseToggle(bool isActive)
     {
         if (isActive)
@@ -40,4 +43,12 @@ public class UiManager : MonoBehaviour
     {
         powerUpView.Hide();
     }
+
+    public void ShowDeathScreen()
+    {
+        //DoTweenAnim
+        deathScreen.SetActive(true);
+    }
+    
+    
 }

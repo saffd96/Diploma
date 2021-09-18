@@ -73,6 +73,7 @@ public class SuperPlayer : DamageableObject
 
     public static event Action OnSuperPlayerHpChanged;
     public static event Action OnSuperPlayerStonesChanged;
+    public static event Action OnSuperPlayerDeath;
 
     private void OnEnable()
     {
@@ -545,6 +546,6 @@ public class SuperPlayer : DamageableObject
         playerAnimationController.SetIsDead(IsDead);
         rb.velocity = Vector2.zero;
 
-        //add logic
+        OnSuperPlayerDeath?.Invoke();
     }
 }

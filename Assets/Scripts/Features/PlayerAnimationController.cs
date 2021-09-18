@@ -6,7 +6,7 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator anim;
 
-    private int getDamageId;
+    private int hurtId;
     private int attackId;
     private int throwId;
     private int jumpId;
@@ -25,7 +25,7 @@ public class PlayerAnimationController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         jumpId = Animator.StringToHash(AnimationTriggerNames.Jump);
-        getDamageId = Animator.StringToHash(AnimationTriggerNames.GetDamage);
+        hurtId = Animator.StringToHash(AnimationTriggerNames.Hurt);
         attackId = Animator.StringToHash(AnimationTriggerNames.Attack);
         throwId = Animator.StringToHash(AnimationTriggerNames.Throw);
 
@@ -59,7 +59,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void GetDamage()
     {
-        anim.SetTrigger(getDamageId);
+        anim.SetTrigger(hurtId);
     }
 
     public void SetSpeed(float value)

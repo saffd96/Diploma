@@ -24,12 +24,14 @@ public class GameHandler : MonoBehaviour
     {
         ExitLvl.OnExitLvlCollision += CompleteLvl;
         Boss.OnBossDeath += OnBossDeath;
+        SuperPlayer.OnSuperPlayerDeath += OnPLayerDeath;
     }
 
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
         Boss.OnBossDeath -= OnBossDeath;
+        SuperPlayer.OnSuperPlayerDeath -= OnPLayerDeath;
     }
 
     private void Awake()
@@ -115,5 +117,10 @@ public class GameHandler : MonoBehaviour
     {
         //DoTweenShade after load scene;
         sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
+    }
+
+    private void OnPLayerDeath()
+    {
+        uiManager.ShowDeathScreen();
     }
 }
