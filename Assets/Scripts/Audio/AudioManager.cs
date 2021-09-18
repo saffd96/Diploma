@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
@@ -16,7 +18,17 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public float SfxVolume
     {
         get => sfxSource.volume;
-        set => sfxSource.volume = value;
+        private set => sfxSource.volume = value;
+    }
+
+    private void OnEnable()
+    {
+        SceneLoadManager.OnSceneCastleLoad += StopMusic;
+    }
+
+    private void OnDisable()
+    {
+        SceneLoadManager.OnSceneCastleLoad -= StopMusic;
     }
 
     private void Start()
@@ -25,9 +37,32 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         bgmSource.loop = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        PlayMusic(MusicType.Level);
+        if (SceneManager.GetActiveScene().name == SceneNamesConstants.MenuScene)
+        {
+            //   StopMusic();
+            Debug.Log("Menu");
+            PlayMusic(MusicType.Menu);
+        }
+        else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel&& !GameHandler.IsCastlePassed())
+        {
+            //   StopMusic();
+            Debug.Log("Level");
+
+            PlayMusic(MusicType.Level);
+        }
+        else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel && GameHandler.IsCastlePassed())
+        {
+            //   StopMusic();
+            Debug.Log("Boss");
+
+            PlayMusic(MusicType.Boss);
+        }
+        else if (SceneManager.GetActiveScene().name == SceneNamesConstants.EndScene)
+        {
+            StopMusic();
+        }
     }
 
     public void PlayMusic(MusicType musicType)
@@ -121,5 +156,10 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         audioSource.Setup(sfxInfo, SfxVolume);
         audioSource.PlayOneShot(sfxInfo);
+    }
+
+    private void StopMusic()
+    {
+        bgmSource.clip = null;
     }
 }

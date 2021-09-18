@@ -19,7 +19,12 @@ MonoBehaviour:
   musics:
   - Clips:
     - {fileID: 8300000, guid: a6625f14e710dbc48bf1cdae4734a872, type: 3}
+    - {fileID: 8300000, guid: 719cee7f64de8cd4b8a2017907b046b4, type: 3}
+    - {fileID: 8300000, guid: 9724d54a120250946b23d20ad1f530ee, type: 3}
     MusicType: 2
   - Clips:
     - {fileID: 8300000, guid: 921a26d80a49067458b764eecd784a81, type: 3}
     MusicType: 1
+  - Clips:
+    - {fileID: 8300000, guid: 1e086c0e382815c47ac7cae4f707844f, type: 3}
+    MusicType: 3

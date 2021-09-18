@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,11 +7,22 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private SceneLoadUi sceneLoadUi;
 
+    public static event Action OnSceneCastleLoad;
+
+    private bool castleLoaded;
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
         {
+            OnSceneCastleLoad?.Invoke();
+
             LoadScene(SceneNamesConstants.CastleLevel);
+
+            if (GameHandler.IsCastlePassed())
+            {
+                OnSceneCastleLoad?.Invoke();
+            }
         }
     }
 

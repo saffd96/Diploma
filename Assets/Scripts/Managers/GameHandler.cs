@@ -56,6 +56,8 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(IsCastlePassed());
+        
         CheckPauseToggle();
 
         CheckMapToggle();
@@ -122,5 +124,10 @@ public class GameHandler : MonoBehaviour
     private void OnPLayerDeath()
     {
         uiManager.ShowDeathScreen();
+    }
+
+    public static bool IsCastlePassed()
+    {
+        return LevelsCompleted == NeedCastleScenesToPass;
     }
 }
