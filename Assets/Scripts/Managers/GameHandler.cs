@@ -56,8 +56,6 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(IsCastlePassed());
-        
         CheckPauseToggle();
 
         CheckMapToggle();

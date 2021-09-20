@@ -10,6 +10,5 @@ public class ExitLvl : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
 
         OnExitLvlCollision?.Invoke();
-
     }
 }

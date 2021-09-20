@@ -41,22 +41,14 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.MenuScene)
         {
-            //   StopMusic();
-            Debug.Log("Menu");
             PlayMusic(MusicType.Menu);
         }
         else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel&& !GameHandler.IsCastlePassed())
         {
-            //   StopMusic();
-            Debug.Log("Level");
-
             PlayMusic(MusicType.Level);
         }
         else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel && GameHandler.IsCastlePassed())
         {
-            //   StopMusic();
-            Debug.Log("Boss");
-
             PlayMusic(MusicType.Boss);
         }
         else if (SceneManager.GetActiveScene().name == SceneNamesConstants.EndScene)
@@ -65,7 +57,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
     }
 
-    public void PlayMusic(MusicType musicType)
+    private void PlayMusic(MusicType musicType)
     {
         if (bgmSource.isPlaying) return;
 

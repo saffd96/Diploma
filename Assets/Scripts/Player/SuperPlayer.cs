@@ -13,6 +13,8 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private GameObject stonePrefab;
     [SerializeField] private Transform stoneSpawner;
     [SerializeField] private bool isRangeAttackEnabled;
+    [SerializeField] private GameObject shield;
+    
 
     [Header("Move Settings")]
     [SerializeField] private float maxSpeed;
@@ -39,35 +41,33 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
 
-    private RaycastHit2D hit;
-    private GameObject dustFromRun;
     private PlayerAnimationController playerAnimationController;
+    
+    private RaycastHit2D hit;
 
     private Rigidbody2D rb;
 
     private GameObject stone;
+    private GameObject dustFromRun;
 
     private float moveHorizontalInput;
     private float moveVerticalInput;
-
     private float attackTimer;
     private float rangeAttackTimer;
     private float speed;
     private float climbSpeed;
 
     private int jumps;
+    private int stonesMax;
 
     private bool isGrounded;
     private bool isFacingRight;
-
     private bool isMeleeAttack;
-
     private bool isShiftPressed;
     private bool isShadowEnabled;
     private bool isClimbing;
     private bool isPushing;
-
-    private int stonesMax;
+    private bool isShieldEnabled;
 
     public int CurrentStones { get; private set; }
 
@@ -137,6 +137,8 @@ public class SuperPlayer : DamageableObject
             RangeAttackPowerUp();
         }
 
+        CheckShield();
+
         CheckJumpCondition();
         CheckRunCondition();
         CheckPushCondition();
@@ -191,9 +193,19 @@ public class SuperPlayer : DamageableObject
         maxHealth = PlayerPrefs.GetInt(SaveLoadConstants.MaxHealthPrefsKey);
         CurrentHealth = PlayerPrefs.GetInt(SaveLoadConstants.CurrentHealthPrefsKey);
     }
-
+    
+    private void CheckShield()
+    {
+        shield.SetActive(isShieldEnabled);
+    }
+    
     public override void ApplyDamage(int amount)
     {
+        if (isShieldEnabled)
+        {
+            isShieldEnabled = false;
+            return;
+        }
         base.ApplyDamage(amount);
         OnSuperPlayerHpChanged?.Invoke();
         CameraShake.Instance.ShakeCamera(7, 0.1f);
@@ -547,5 +559,10 @@ public class SuperPlayer : DamageableObject
         rb.velocity = Vector2.zero;
 
         OnSuperPlayerDeath?.Invoke();
+    }
+
+    public void AddShield()
+    {
+        isShieldEnabled = true;
     }
 }
