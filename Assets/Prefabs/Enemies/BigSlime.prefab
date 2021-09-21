@@ -55,12 +55,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   mapSprite: {fileID: 5311196346442753785}
-  TargetDetectionValue: 0.4
+  TargetDetectionValue: 0.5
   Bottom: {fileID: 4934781702169425001}
   idleTime: 0
   speed: 1
   TargetPrefab: {fileID: 8411267262039352375}
-  IsSpinEnded: 0
+  isAnimationStarted: 0
+  isAnimationEnded: 0
 --- !u!114 &-5098752694010811887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +313,6 @@ GameObject:
   - component: {fileID: 7111750329176132902}
   - component: {fileID: 7471300495849571255}
   - component: {fileID: 822168224385750993}
-  - component: {fileID: 6510620718213104047}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -404,18 +404,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6510620718213104047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8065538568875642528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06be1587740f04842bc30dca052ca1ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8411267262039352375
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ public class BigSlime : Slime
 
     protected override void CheckDistance()
     {
-        Debug.Log(isAnimationStarted);
         Distance = Vector3.Distance(transform.position, CurrentTargetPosition.position);
 
         if (Distance <= TargetDetectionValue)
@@ -27,16 +26,6 @@ public class BigSlime : Slime
             }
         }
     }
-    
-    // protected override void ChangeTarget()
-    // {
-    //     if (IsSpinEnded)
-    //     {
-    //         AIDestinationSetter.target = CurrentTargetPosition = CurrentTargetPosition == target1 ? target2 : target1;
-    //         IsInvulnerable = false;
-    //         IsSpinEnded = false;
-    //     }
-    // }
 
     private IEnumerator AnimationTime()
     {

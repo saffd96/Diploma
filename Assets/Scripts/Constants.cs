@@ -13,6 +13,7 @@ public class SaveLoadConstants
     public const string RunningSpeedMultiplierPrefsKey = "RunningSpeedMultiplier";
     public const string JumpForcePrefsKey = "JumpForce";
     public const string IsMultipleJumpsActivePrefsKey = "IsMultipleJumpsActive";
+    public const string IsShieldActivePrefsKey = "IsShieldActivePrefsKey";
     public const string ExtraJumpsPrefsKey = "ExtraJumps";
     public const string StonesMaxPrefsKey = "StonesMax";
     public const string CurrentStonesPrefsKey = "CurrentStones";
@@ -29,7 +30,6 @@ public class AnimationConstants
 public class SceneNamesConstants
 {
     public const string EndScene = "EndScene";
-    public const string BossLevel = "BossLevel";
     public const string LoadingScene = "LoadingScene";
     public const string MenuScene = "MenuScene";
     public const string CastleLevel = "CastleLevel";

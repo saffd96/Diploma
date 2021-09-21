@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UiSelectCharacter : MonoBehaviour
 {
-    [SerializeField] private Button[] startButtons;
+    [SerializeField] private GameObject[] startThings;
     [SerializeField] private GameObject[] characterSelectionElements;
 
     private bool toggle = true;
@@ -21,15 +21,16 @@ public class UiSelectCharacter : MonoBehaviour
 
     private void Toggle()
     {
-        foreach (var button in startButtons)
+        foreach (var thing in startThings)
         {
-            button.gameObject.SetActive(toggle);
+            thing.SetActive(toggle);
         }
 
         foreach (var button in characterSelectionElements)
         {
             button.SetActive(!toggle);
         }
+
         toggle = !toggle;
     }
 }

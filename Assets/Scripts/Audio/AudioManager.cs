@@ -11,6 +11,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     [SerializeField] private AudioSettings audioSettings;
 
     private AudioClip currentClip;
+    private MusicType currentMysicType;
 
     private readonly List<GameAudioSource> sfxSources = new List<GameAudioSource>();
 
@@ -37,19 +38,36 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         bgmSource.loop = false;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        Debug.Log(currentMysicType);
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.MenuScene)
         {
+            if (currentMysicType != MusicType.Menu && currentMysicType!=MusicType.None)
+            {
+                StopMusic();
+            }
+
             PlayMusic(MusicType.Menu);
+            currentMysicType = MusicType.Menu;
         }
-        else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel&& !GameHandler.IsCastlePassed())
+        else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel && !GameHandler.IsCastlePassed())
         {
+            if (currentMysicType != MusicType.Level)
+            {
+                StopMusic();
+            }
             PlayMusic(MusicType.Level);
+            currentMysicType = MusicType.Level;
         }
         else if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel && GameHandler.IsCastlePassed())
         {
+            if (currentMysicType != MusicType.Boss)
+            {
+                StopMusic();
+            }
             PlayMusic(MusicType.Boss);
+            currentMysicType = MusicType.Boss;
         }
         else if (SceneManager.GetActiveScene().name == SceneNamesConstants.EndScene)
         {
@@ -118,7 +136,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         PlayerPrefs.SetFloat(MusicConstants.SfxPrefsKey, volume);
     }
 
-    private void LoadValues()
+    public void LoadValues()
     {
         var musicValue = PlayerPrefs.GetFloat(MusicConstants.MusicPrefsKey);
         bgmSource.volume = musicValue;

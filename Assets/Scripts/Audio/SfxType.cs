@@ -1,15 +1,16 @@
 public enum SfxType
 {
     None = 0,
-    PLayerDeath = 1,
+    PlayerDeath = 1,
     BossDeath = 2,
     Jump = 3,
     PlayerHit = 4,
     Throw = 5,
-    PlayerAttack = 6,
-    BossAttack = 7,
-    SlimeDeath = 8,
-    BossHit  = 9,
-    ShieldActive = 10,
-    ShieldUnActive = 11,
+    BossAttack = 6,
+    SlimeDeath = 7,
+    BossHit  = 8,
+    ShieldActive = 9,
+    ShieldUnActive = 10,
+    BossRage = 11,
+    SlimeHurt = 12
 }

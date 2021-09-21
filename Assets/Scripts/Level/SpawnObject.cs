@@ -16,7 +16,7 @@ public class SpawnObject : MonoBehaviour
             objectIndex = 0;
         }
 
-        instance = Instantiate(objects[objectIndex], transform.position, transform.rotation);
+        instance = Instantiate(objects[objectIndex], transform.position, Quaternion.identity);
         instance.transform.parent = transform;
     }
 }

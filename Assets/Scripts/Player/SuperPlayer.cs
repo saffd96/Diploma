@@ -134,6 +134,7 @@ public class SuperPlayer : DamageableObject
     {
         if (IsDead) return;
 
+        //TODO не зыбать удалить
         if (Input.GetKeyDown(KeyCode.E))
         {
             RangeAttackPowerUp();
@@ -173,6 +174,7 @@ public class SuperPlayer : DamageableObject
         PlayerPrefs.SetFloat(SaveLoadConstants.RunningSpeedMultiplierPrefsKey, runningSpeedMultiplier);
         PlayerPrefs.SetFloat(SaveLoadConstants.JumpForcePrefsKey, jumpForce);
         PlayerPrefs.SetInt(SaveLoadConstants.IsMultipleJumpsActivePrefsKey, isMultipleJumpsActive ? 1 : 0);
+        PlayerPrefs.SetInt(SaveLoadConstants.IsShieldActivePrefsKey, isShieldEnabled ? 1 : 0);
         PlayerPrefs.SetInt(SaveLoadConstants.ExtraJumpsPrefsKey, extraJumps);
         PlayerPrefs.SetInt(SaveLoadConstants.StonesMaxPrefsKey, stonesMax);
         PlayerPrefs.SetInt(SaveLoadConstants.CurrentStonesPrefsKey, CurrentStones);
@@ -189,6 +191,7 @@ public class SuperPlayer : DamageableObject
         runningSpeedMultiplier = PlayerPrefs.GetFloat(SaveLoadConstants.RunningSpeedMultiplierPrefsKey);
         jumpForce = PlayerPrefs.GetFloat(SaveLoadConstants.JumpForcePrefsKey);
         isMultipleJumpsActive = PlayerPrefs.GetInt(SaveLoadConstants.IsMultipleJumpsActivePrefsKey) == 1 ? true : false;
+        isShieldEnabled = PlayerPrefs.GetInt(SaveLoadConstants.IsShieldActivePrefsKey) == 1 ? true : false;
         extraJumps = PlayerPrefs.GetInt(SaveLoadConstants.ExtraJumpsPrefsKey);
         stonesMax = PlayerPrefs.GetInt(SaveLoadConstants.StonesMaxPrefsKey);
         CurrentStones = PlayerPrefs.GetInt(SaveLoadConstants.CurrentStonesPrefsKey);
@@ -205,10 +208,12 @@ public class SuperPlayer : DamageableObject
     {
         if (isShieldEnabled)
         {
+            AudioManager.Instance.PLaySfx(SfxType.ShieldUnActive);
             isShieldEnabled = false;
             return;
         }
         base.ApplyDamage(amount);
+        AudioManager.Instance.PLaySfx(SfxType.PlayerHit);
         OnSuperPlayerHpChanged?.Invoke();
         CameraShake.Instance.ShakeCamera(7, 0.1f);
         playerAnimationController.GetDamage();
@@ -379,7 +384,9 @@ public class SuperPlayer : DamageableObject
     private void Jump()
     {
         playerAnimationController.Jump();
+
         rb.velocity = Vector2.up * jumpForce;
+        AudioManager.Instance.PLaySfx(SfxType.Jump);
     }
 
     private void Attack()
@@ -551,6 +558,8 @@ public class SuperPlayer : DamageableObject
     {
         yield return new WaitForSeconds(0.2f);
 
+        AudioManager.Instance.PLaySfx(SfxType.Throw);
+
         stone = Instantiate(stonePrefab, stoneSpawner.position, Quaternion.identity);
         stone.GetComponent<Rigidbody2D>().AddForce(Vector2.right * transform.localScale * 1.5f, ForceMode2D.Impulse);
         Destroy(stone, 3);
@@ -563,12 +572,17 @@ public class SuperPlayer : DamageableObject
         playerAnimationController.SetIsDead(IsDead);
         rb.velocity = Vector2.zero;
 
+        AudioManager.Instance.PLaySfx(SfxType.PlayerDeath);
+
         OnSuperPlayerDeath?.Invoke();
+        Destroy(gameObject);
     }
 
     public void AddShield()
     {
         isShieldEnabled = true;
+        AudioManager.Instance.PLaySfx(SfxType.ShieldActive);
+
     }
 
     private  IEnumerator InvulnerablePlayer()

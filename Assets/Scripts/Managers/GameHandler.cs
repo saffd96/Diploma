@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +12,12 @@ public class GameHandler : MonoBehaviour
 
     private Boss boss;
 
-    public static int NeedCastleScenesToPass { get; private set; } = 1;
+    private static int NeedCastleScenesToPass { get; set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
 
     private bool isBossDead;
-    public static bool IsPowerUpSelected { get; private set; }
+    private static bool IsPowerUpSelected { get; set; }
     public static int LevelsCompleted { get; private set; }
 
     private void OnEnable()
@@ -38,7 +37,7 @@ public class GameHandler : MonoBehaviour
     private void Awake()
     {
         IsPowerUpSelected = false;
-
+        
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel)
         {
             Time.timeScale = 0f;
@@ -57,8 +56,6 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-
-        
         CheckPauseToggle();
 
         CheckMapToggle();
@@ -91,7 +88,7 @@ public class GameHandler : MonoBehaviour
     private void CompleteLvl()
     {
         LevelsCompleted++;
-        
+
         sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
     }
 
@@ -103,7 +100,7 @@ public class GameHandler : MonoBehaviour
 
     private void CheckPauseToggle()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && uiManager != null)
         {
             PauseToggle();
         }
@@ -125,6 +122,7 @@ public class GameHandler : MonoBehaviour
 
     private void OnPLayerDeath()
     {
+        LevelsCompleted = 0;
         uiManager.ShowDeathScreen();
     }
 

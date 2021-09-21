@@ -16,6 +16,42 @@ MonoBehaviour:
   - Clip: {fileID: 0}
     SfxType: 0
     Volume: 1
+  - Clip: {fileID: 8300000, guid: eb21c94bf9ee1414c85094ccd050f93a, type: 3}
+    SfxType: 1
+    Volume: 0.8
+  - Clip: {fileID: 8300000, guid: efa8bb4aa92874244899f10043e0568c, type: 3}
+    SfxType: 2
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: 72735b8bf60b9c54395bca62f8069ccb, type: 3}
+    SfxType: 3
+    Volume: 0.8
+  - Clip: {fileID: 8300000, guid: 6c2c246e30eddd943ab0285b22208c42, type: 3}
+    SfxType: 4
+    Volume: 0.8
+  - Clip: {fileID: 8300000, guid: 17175a690bbb2cf4db76c1665e8e1c3a, type: 3}
+    SfxType: 5
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: 8033a20fb9a54c54095331d788ed1836, type: 3}
+    SfxType: 6
+    Volume: 0.8
+  - Clip: {fileID: 8300000, guid: b7c7b95066bb2f74f92fd947de5eafc6, type: 3}
+    SfxType: 7
+    Volume: 0.8
+  - Clip: {fileID: 8300000, guid: 1d13dc899c4f38d4098ba78af107c092, type: 3}
+    SfxType: 8
+    Volume: 0.5
+  - Clip: {fileID: 8300000, guid: 2c9ed7cf5bcbca749b9e36c73b4338c6, type: 3}
+    SfxType: 9
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: d55bb56f57ecf954eacd06519520a751, type: 3}
+    SfxType: 10
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: c97766359a2c1ec49ac52bf33621bb40, type: 3}
+    SfxType: 11
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: cefb2fd1b96b439459dcb88fae719979, type: 3}
+    SfxType: 12
+    Volume: 1
   musics:
   - Clips:
     - {fileID: 8300000, guid: a6625f14e710dbc48bf1cdae4734a872, type: 3}

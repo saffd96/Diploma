@@ -61,8 +61,8 @@ public class Boss : BaseEnemy
 
     private void Update()
     {
-        if (IsDead) return;
-
+        if (IsDead|| player ==null) return;
+        
         CalculateVariables();
 
         Flip();
@@ -136,6 +136,7 @@ public class Boss : BaseEnemy
 
         Animator.SetTrigger(AnimationTriggerNames.Attack);
 
+        AudioManager.Instance.PLaySfx(SfxType.BossAttack);
         attackTimer = 0;
     }
 
@@ -144,6 +145,7 @@ public class Boss : BaseEnemy
         base.Die();
         Animator.SetBool(AnimationBoolNames.IsDead, IsDead);
         aiDestinationSetter.enabled = false;
+        AudioManager.Instance.PLaySfx(SfxType.BossDeath);
         OnBossDeath?.Invoke();
     }
 
@@ -151,6 +153,7 @@ public class Boss : BaseEnemy
     {
         Animator.SetBool(AnimationBoolNames.IsRageActive, true);
         isRageActive = true;
+        AudioManager.Instance.PLaySfx(SfxType.BossRage);
         speed = 8;
         aiPath.maxSpeed = speed;
         attackTime /= 2;
@@ -159,6 +162,7 @@ public class Boss : BaseEnemy
     public override void ApplyDamage(int amount)
     {
         base.ApplyDamage(amount);
+        AudioManager.Instance.PLaySfx(SfxType.BossHit);
         OnBossHpChanged?.Invoke();
     }
 }

@@ -50,8 +50,8 @@ public class Slime : BaseEnemy
 
     private void CreateTargets()
     {
-        target1 = Instantiate(TargetPrefab, transform.position + 1.5f * Vector3.left, Quaternion.identity).transform;
-        target2 = Instantiate(TargetPrefab, transform.position + 1.5f * Vector3.right, Quaternion.identity).transform;
+        target1 = Instantiate(TargetPrefab, transform.position + Vector3.left, Quaternion.identity).transform;
+        target2 = Instantiate(TargetPrefab, transform.position + Vector3.right, Quaternion.identity).transform;
     }
     
     private void CheckFlip()
@@ -76,9 +76,20 @@ public class Slime : BaseEnemy
         }
     }
 
+    public override void ApplyDamage(int amount)
+    {
+        base.ApplyDamage(amount);
+
+        if (CurrentHealth >= 1)
+        {
+            AudioManager.Instance.PLaySfx(SfxType.SlimeHurt);
+        }
+    }
+
     protected override void Die()
     {
         base.Die();
+        AudioManager.Instance.PLaySfx(SfxType.SlimeDeath);
         Coll2D.enabled = false;
         Rb2D.Sleep();
         IsDead = true;
