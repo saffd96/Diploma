@@ -151,7 +151,7 @@ public class Boss : BaseEnemy
     {
         Animator.SetBool(AnimationBoolNames.IsRageActive, true);
         isRageActive = true;
-        speed++;
+        speed = 8;
         aiPath.maxSpeed = speed;
         attackTime /= 2;
     }

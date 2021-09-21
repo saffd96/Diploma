@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LevelDoor : MonoBehaviour
@@ -5,9 +6,9 @@ public class LevelDoor : MonoBehaviour
     [SerializeField] private Transform exit;
 
     [SerializeField] private GameObject buttonSprite;
-    
 
-    private SuperPlayer player;
+    private GameObject player;
+    private bool isEnter;
 
     private void OnDrawGizmos()
     {
@@ -24,15 +25,17 @@ public class LevelDoor : MonoBehaviour
     {
         if (IsPLayerEnter(other))
         {
+            player = other.gameObject;
+            isEnter = true;
             ShowButtonSprite();
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (isEnter && Input.GetKeyDown(KeyCode.W))
         {
-            other.transform.position = exit.position;
+            player.transform.position = exit.position;
         }
     }
 
@@ -40,6 +43,8 @@ public class LevelDoor : MonoBehaviour
     {
         if (IsPLayerEnter(other))
         {
+            isEnter = false;
+            player = null;
             HideButtonSprite();
         }
     }

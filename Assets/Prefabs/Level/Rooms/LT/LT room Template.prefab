@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects:
-  - {fileID: 4017485394492316489, guid: cc5b1964bd4e0b447a8ae8648ec9b601, type: 3}
   - {fileID: 4017485394492316489, guid: 2c9ec2a9e90d8b64189a9cdf9238a85a, type: 3}
   - {fileID: 4017485394492316489, guid: 5570a22445d15094d9028bc6d8505c4d, type: 3}
   - {fileID: 4017485394492316489, guid: 956afa272310e184387c9030259654dd, type: 3}
+  - {fileID: 4017485394492316489, guid: cc5b1964bd4e0b447a8ae8648ec9b601, type: 3}
 --- !u!61 &3598019100960251692
 BoxCollider2D:
   m_ObjectHideFlags: 0

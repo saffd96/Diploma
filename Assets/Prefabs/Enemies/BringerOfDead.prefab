@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 713547349
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -750047184722822154, guid: 1914d95466e3d4341a618c35a56d5f82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -171,11 +171,11 @@ MonoBehaviour:
   mapSprite: {fileID: 7867553427967375008}
   attackValue: 1
   attackRange: 2
-  attackRadius: 0.75
-  chaseRange: 4
+  attackRadius: 0.85
+  chaseRange: 20
   attackTime: 2
   attackPoint: {fileID: 1858560146603222129}
-  speed: 3
+  speed: 5
 --- !u!114 &5722799581076707038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 5
   gravity: {x: 0, y: -9.81, z: 0}
   groundMask:
     serializedVersion: 2
@@ -269,7 +269,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.46
 --- !u!50 &5342602306823145447
 Rigidbody2D:
   serializedVersion: 4
@@ -281,11 +281,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.7853982
+  m_UseAutoMass: 0
+  m_Mass: 30
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 40
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

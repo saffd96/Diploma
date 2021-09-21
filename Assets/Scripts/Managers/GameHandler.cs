@@ -56,6 +56,8 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+
+        
         CheckPauseToggle();
 
         CheckMapToggle();
@@ -87,8 +89,9 @@ public class GameHandler : MonoBehaviour
 
     private void CompleteLvl()
     {
-        sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
         LevelsCompleted++;
+        
+        sceneLoadManager.LoadScene(SceneNamesConstants.LoadingScene);
     }
 
     private void MapToggle()
@@ -126,6 +129,6 @@ public class GameHandler : MonoBehaviour
 
     public static bool IsCastlePassed()
     {
-        return LevelsCompleted == NeedCastleScenesToPass;
+        return LevelsCompleted >= NeedCastleScenesToPass;
     }
 }

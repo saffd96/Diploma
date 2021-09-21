@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public class LevelGeneration : MonoBehaviour
 {
-    
     private enum Direction
     {
         Top,
@@ -19,8 +18,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private Transform levelTransform;
     [SerializeField] private Transform[] startingPositions;
     [SerializeField] private float offsetAmount;
-    [SerializeField]  private AstarPath astarPath;
-
+    [SerializeField] private AstarPath astarPath;
 
     [Header("Rooms")]
     [SerializeField] private GameObject Enter;
@@ -30,6 +28,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private GameObject LT;
     [SerializeField] private GameObject RT;
     [SerializeField] private GameObject Boss;
+    [SerializeField] private GameObject BossFightRoom;
     [SerializeField] private GameObject Exit;
 
     [Header("Level border settings")]
@@ -63,7 +62,17 @@ public class LevelGeneration : MonoBehaviour
 
     private void Awake()
     {
-        if (GameHandler.LevelsCompleted >= GameHandler.NeedCastleScenesToPass)
+        Init();
+    }
+    
+    private void Update()
+    {
+        GenerateLvl();
+    }
+
+    private void Init()
+    {
+        if (GameHandler.IsCastlePassed())
         {
             generateBossLvl = true;
         }
@@ -100,11 +109,6 @@ public class LevelGeneration : MonoBehaviour
         cinemachineCamera.Follow = player.transform;
     }
 
-    private void Update()
-    {
-        GenerateLvl();
-    }
-
     private void GenerateLvl()
     {
         if (StopGeneration) return;
@@ -139,6 +143,7 @@ public class LevelGeneration : MonoBehaviour
                 position = newGeneratorPosition;
 
                 tempRoom = CreateRoom(RT);
+
                 direction = Direction.Forward;
             }
             else //rich lower border of the level. move forward;
@@ -155,6 +160,14 @@ public class LevelGeneration : MonoBehaviour
                 newGeneratorPosition = new Vector2(position.x + offsetAmount, position.y);
                 position = newGeneratorPosition;
 
+
+                if (generateBossLvl)
+                {
+                    direction = Direction.Forward;
+                    tempRoom = CreateRoom(BossFightRoom);
+                    return;
+                }
+                
                 GetDirection();
 
                 switch (direction)
@@ -179,7 +192,7 @@ public class LevelGeneration : MonoBehaviour
                 position = newGeneratorPosition;
 
                 CreateRoom(!generateBossLvl ? Exit : Boss);
-                
+
                 StopGeneration = true;
                 astarPath.Scan();
             }
@@ -198,4 +211,5 @@ public class LevelGeneration : MonoBehaviour
 
         return instance;
     }
+
 }

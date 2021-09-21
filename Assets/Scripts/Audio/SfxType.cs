@@ -11,5 +11,5 @@ public enum SfxType
     SlimeDeath = 8,
     BossHit  = 9,
     ShieldActive = 10,
-    ShieldUnactive = 11,
+    ShieldUnActive = 11,
 }
