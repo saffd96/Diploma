@@ -1,126 +1,100 @@
+using Pathfinding;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(BaseEnemyMoving))]
 public class Slime : BaseEnemy
 {
-    private enum State
-    {
-        Idle,
-        Move,
-        Dead
-    }
-
-    [SerializeField] protected float targetDetectionValue = 0.1f;
-    [SerializeField] protected Transform bottom;
-    [SerializeField] protected float idleTime;
-
-    protected BaseEnemyMoving slimeMoving;
-
-    private State currentState;
-
-    protected float distance;
-    private float idleTimer;
+    [SerializeField] protected float TargetDetectionValue = 0.1f;
+    [SerializeField] protected Transform Bottom;
+    [SerializeField] private float idleTime;
+    [SerializeField] private float speed;
+    [SerializeField] protected GameObject TargetPrefab;
     
-    protected bool isGrounded;
-    protected BaseEnemyMoving SlimeMoving => slimeMoving;
+    protected Transform target1;
+    protected Transform target2;
+    
+    protected Transform CurrentTargetPosition;
+    protected AIDestinationSetter AIDestinationSetter;
+    protected float Distance;
+
+    private AIPath aiPath;
+    private float idleTimer;
+
+    private bool isGrounded;
 
     protected override void Awake()
     {
         base.Awake();
-        slimeMoving = GetComponent<BaseEnemyMoving>();
-    }
+        aiPath = GetComponent<AIPath>();
+        aiPath.maxSpeed = speed;
+        AIDestinationSetter = GetComponent<AIDestinationSetter>();
+        CreateTargets();
 
+        var targetIndex = Random.Range(1, 3);
+
+        AIDestinationSetter.target = CurrentTargetPosition = targetIndex == 1 ? target1 : target2;
+    }
+    
     private void Update()
     {
-        if (currentState == State.Dead) return;
+        if (IsDead) return;
 
-        CheckState();
+        isGrounded = Physics2D.OverlapCircle(Bottom.position, 0.2f, LayerMask.GetMask(Layers.Ground));
 
         Animator.SetBool(AnimationBoolNames.IsGrounded, isGrounded);
+        Animator.SetFloat(AnimationFloatNames.Velocity, aiPath.desiredVelocity.magnitude);
 
-        Animator.SetFloat(AnimationFloatNames.Velocity, Mathf.Abs(Rb2D.velocity.x));
+        CheckDistance();
+        CheckFlip();
+    }
 
-        UpdateCurrentState();
+    private void CreateTargets()
+    {
+        target1 = Instantiate(TargetPrefab, transform.position + 1.5f * Vector3.left, Quaternion.identity).transform;
+        target2 = Instantiate(TargetPrefab, transform.position + 1.5f * Vector3.right, Quaternion.identity).transform;
+    }
+    
+    private void CheckFlip()
+    {
+        if (transform.position.x < CurrentTargetPosition.transform.position.x)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (transform.position.x > CurrentTargetPosition.transform.position.x)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+    }
+
+    protected virtual void CheckDistance()
+    {
+        Distance = Vector3.Distance(transform.position, CurrentTargetPosition.position);
+
+        if (Distance <= TargetDetectionValue)
+        {
+            ChangeTarget();
+        }
     }
 
     protected override void Die()
     {
         base.Die();
-        SetState(State.Dead);
+        Coll2D.enabled = false;
+        Rb2D.Sleep();
+        IsDead = true;
+        AIDestinationSetter.target = null;
+        Animator.SetBool(AnimationBoolNames.IsDead, IsDead);
+        aiPath.enabled = false;
     }
 
-    protected virtual void CheckState()
-    {
-        distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
-        isGrounded = Physics2D.OverlapCircle(bottom.position, targetDetectionValue, LayerMask.GetMask(Layers.Ground));
-
-        
-        if (!isGrounded || distance <= targetDetectionValue)
-        {
-            SetState(State.Idle);
-        }
-        else if (isGrounded && distance > targetDetectionValue && idleTimer <= 0)
-        {
-            SetState(State.Move);
-            idleTimer = idleTime;
-        }
-    }
-
-    protected virtual void UpdateCurrentState()
-    {
-        switch (currentState)
-        {
-            case State.Idle:
-                UpdateIdle();
-
-                break;
-            case State.Move:
-                UpdateMove();
-
-                break;
-        }
-    }
-
-    protected virtual void UpdateMove()
-    {
-    }
-
-    protected virtual void UpdateIdle()
+    protected virtual void ChangeTarget()
     {
         idleTimer -= Time.deltaTime;
 
         if (idleTimer <= 0)
         {
-            slimeMoving.GetTarget();
+            AIDestinationSetter.target = CurrentTargetPosition = CurrentTargetPosition == target1 ? target2 : target1;
+            idleTimer = idleTime;
         }
-    }
-
-    private void SetState(State state)
-    {
-        switch (state)
-        {
-            case State.Idle:
-
-                Rb2D.velocity = Vector2.zero;
-                slimeMoving.enabled = false;
-                slimeMoving.IsTargetSet = false;
-
-                break;
-            case State.Move:
-                slimeMoving.enabled = isGrounded;
-                IsInvulnerable = false;
-                slimeMoving.GetTarget();
-
-                break;
-            case State.Dead:
-                slimeMoving.enabled = false;
-
-                Animator.SetBool(AnimationBoolNames.IsDead, true);
-                Coll2D.enabled = false;
-                Rb2D.Sleep();              
-                break;
-        }
-
-        currentState = state;
     }
 }

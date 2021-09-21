@@ -14,6 +14,8 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private Transform stoneSpawner;
     [SerializeField] private bool isRangeAttackEnabled;
     [SerializeField] private GameObject shield;
+    [SerializeField] private float invulnerableTime = 1f;
+    
     
 
     [Header("Move Settings")]
@@ -210,6 +212,9 @@ public class SuperPlayer : DamageableObject
         OnSuperPlayerHpChanged?.Invoke();
         CameraShake.Instance.ShakeCamera(7, 0.1f);
         playerAnimationController.GetDamage();
+
+        IsInvulnerable = true;
+        StartCoroutine(nameof(InvulnerablePlayer));
     }
 
     public void AddSpeed()
@@ -564,5 +569,12 @@ public class SuperPlayer : DamageableObject
     public void AddShield()
     {
         isShieldEnabled = true;
+    }
+
+    private  IEnumerator InvulnerablePlayer()
+    {
+        yield return new WaitForSeconds(invulnerableTime);
+
+        IsInvulnerable = false;
     }
 }

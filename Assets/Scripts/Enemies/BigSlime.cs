@@ -1,107 +1,51 @@
+using System.Collections;
 using UnityEngine;
 
 public class BigSlime : Slime
 {
-    private enum State
-    {
-        Idle,
-        Move,
-        Spin,
-        Dead
-    }
+    public bool isAnimationStarted;
+    public bool isAnimationEnded;
 
-    private State currentBigSlimeState;
-    public bool IsSpinEnded { get; set; }
-
-    protected override void CheckState()
+    protected override void CheckDistance()
     {
-        distance = Mathf.Abs(transform.position.x - slimeMoving.Target.x);
-        isGrounded = Physics2D.OverlapCircle(bottom.position, 0.2f, LayerMask.GetMask(Layers.Ground));
-        
-        if (!isGrounded)
+        Debug.Log(isAnimationStarted);
+        Distance = Vector3.Distance(transform.position, CurrentTargetPosition.position);
+
+        if (Distance <= TargetDetectionValue)
         {
-            SetState(State.Idle);
-        }
-        else if (isGrounded && distance > targetDetectionValue)
-        {
-            SetState(State.Move);
-        }
-        else if (isGrounded && distance <= targetDetectionValue)
-        {
-            SetState(State.Spin);
-        }
-    }
-
-    protected override void UpdateCurrentState()
-    {
-        switch (currentBigSlimeState)
-        {
-            case State.Idle:
-                UpdateIdle();
-
-                break;
-            case State.Move:
-                UpdateMove();
-
-                break;
-            case State.Spin:
-                UpdateSpin();
-
-                break;
-        }
-    }
-
-    private void UpdateSpin()
-    {
-    }
-
-    protected override void UpdateMove()
-    {
-    }
-
-    protected override void UpdateIdle()
-    {
-    }
-
-    private void SetState(State state)
-    {
-        switch (state)
-        {
-            case State.Idle:
-                slimeMoving.enabled = isGrounded;
-                slimeMoving.IsTargetSet = false;
-                IsSpinEnded = false;
-
-                break;
-            case State.Move:
-                IsSpinEnded = false;
-                slimeMoving.enabled = true;
-                IsInvulnerable = false;
-                slimeMoving.GetTarget();
-
-                break;
-            case State.Dead:
-                slimeMoving.enabled = false;
-                break;
-            case State.Spin:
-                if (!IsSpinEnded)
-                {
-                    Animator.SetTrigger(AnimationTriggerNames.Spin);
-                }
-
-                slimeMoving.IsTargetSet = false;
-                slimeMoving.enabled = false;
+            if (!isAnimationStarted)
+            {
+                StartCoroutine(AnimationTime());
+                
                 IsInvulnerable = true;
-                Rb2D.velocity = Vector2.zero;
+                isAnimationStarted = true;
+            }
 
-                if (IsSpinEnded)
-                {
-                    SlimeMoving.GetTarget();
-                }
-
-                break;
+            if (isAnimationEnded)
+            {
+                isAnimationStarted = false;
+            }
         }
-
-        currentBigSlimeState = state;
     }
+    
+    // protected override void ChangeTarget()
+    // {
+    //     if (IsSpinEnded)
+    //     {
+    //         AIDestinationSetter.target = CurrentTargetPosition = CurrentTargetPosition == target1 ? target2 : target1;
+    //         IsInvulnerable = false;
+    //         IsSpinEnded = false;
+    //     }
+    // }
+
+    private IEnumerator AnimationTime()
+    {
+        Animator.SetTrigger(AnimationTriggerNames.Spin);
+        yield return new WaitForSeconds(1);
+        
+        AIDestinationSetter.target = CurrentTargetPosition = CurrentTargetPosition == target1 ? target2 : target1;
+        IsInvulnerable = false;
+        isAnimationStarted = false;
+    }
+
 }

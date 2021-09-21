@@ -397,6 +397,7 @@ MonoBehaviour:
   stoneSpawner: {fileID: 4714531689690902065}
   isRangeAttackEnabled: 0
   shield: {fileID: 6431640119497892499}
+  invulnerableTime: 1
   maxSpeed: 4
   isRunActive: 0
   runningSpeedMultiplier: 1.5
@@ -409,12 +410,12 @@ MonoBehaviour:
   colliderDetectRadius: 0.25
   attackRadius: 0.5
   colliderDetector: {fileID: 2249625887230077740}
-  jumpForce: 8
+  jumpForce: 9
   isMultipleJumpsActive: 0
   extraJumps: 1
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   shadowTransform: {fileID: 6690730198052474869}
-  shadowShowRange: 3
+  shadowShowRange: 1
 --- !u!212 &8603441436906941035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -501,7 +502,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: 8579e88959d269a478f687b894f6d73d, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0

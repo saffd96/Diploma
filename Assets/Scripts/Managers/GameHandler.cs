@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -130,5 +131,10 @@ public class GameHandler : MonoBehaviour
     public static bool IsCastlePassed()
     {
         return LevelsCompleted >= NeedCastleScenesToPass;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
