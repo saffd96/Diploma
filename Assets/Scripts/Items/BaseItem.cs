@@ -7,6 +7,7 @@ public abstract class BaseItem : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out SuperPlayer player)) return;
         
         ApplyEffect(player);
+        AudioManager.Instance.PLaySfx(SfxType.PickUp);
         Destroy(gameObject);
     }
 

@@ -15,7 +15,9 @@ public class SuperPlayer : DamageableObject
     [SerializeField] private bool isRangeAttackEnabled;
     [SerializeField] private GameObject shield;
     [SerializeField] private float invulnerableTime = 1f;
-    
+    [SerializeField] private GameObject invulnerableItemShield;
+    [SerializeField] private bool isInvulnerableItem;
+    [SerializeField] private float invulnerableItemTime = 10f;
     
 
     [Header("Move Settings")]
@@ -202,14 +204,18 @@ public class SuperPlayer : DamageableObject
     private void CheckShield()
     {
         shield.SetActive(isShieldEnabled);
+        invulnerableItemShield.SetActive(isInvulnerableItem);
     }
     
     public override void ApplyDamage(int amount)
     {
-        if (isShieldEnabled)
+        if (isShieldEnabled || isInvulnerableItem)
         {
-            AudioManager.Instance.PLaySfx(SfxType.ShieldUnActive);
-            isShieldEnabled = false;
+            if (isShieldEnabled)
+            {
+                AudioManager.Instance.PLaySfx(SfxType.ShieldUnActive);
+                isShieldEnabled = false;
+            }
             return;
         }
         base.ApplyDamage(amount);
@@ -219,7 +225,7 @@ public class SuperPlayer : DamageableObject
         playerAnimationController.GetDamage();
 
         IsInvulnerable = true;
-        StartCoroutine(nameof(InvulnerablePlayer));
+        StartCoroutine(InvulnerablePlayer(invulnerableTime));
     }
 
     public void AddSpeed()
@@ -578,17 +584,37 @@ public class SuperPlayer : DamageableObject
         Destroy(gameObject);
     }
 
-    public void AddShield()
+    public void AddShieldItem()
     {
         isShieldEnabled = true;
         AudioManager.Instance.PLaySfx(SfxType.ShieldActive);
+    }
+    public void AddStonesItem()
+    {
+        CurrentStones += Random.Range(1, 3);
+        OnSuperPlayerStonesChanged?.Invoke();
+    }
+    public void PotionItem()
+    {
+        CurrentHealth++;
 
+        if (CurrentHealth>MAXHealth)
+        {
+            CurrentHealth = MAXHealth;
+        }
+        OnSuperPlayerHpChanged?.Invoke();
+    }
+    public void InvulnerableItem()
+    {
+        StartCoroutine(InvulnerablePlayer(invulnerableItemTime));
+        isInvulnerableItem = true;
     }
 
-    private  IEnumerator InvulnerablePlayer()
+    private  IEnumerator InvulnerablePlayer(float time)
     {
-        yield return new WaitForSeconds(invulnerableTime);
+        yield return new WaitForSeconds(time);
 
         IsInvulnerable = false;
+        isInvulnerableItem = false;
     }
 }

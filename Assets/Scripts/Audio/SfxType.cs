@@ -12,5 +12,6 @@ public enum SfxType
     ShieldActive = 9,
     ShieldUnActive = 10,
     BossRage = 11,
-    SlimeHurt = 12
+    SlimeHurt = 12,
+    PickUp = 13
 }

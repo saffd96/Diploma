@@ -40,7 +40,6 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     private void Update()
     {
-        Debug.Log(currentMysicType);
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.MenuScene)
         {
             if (currentMysicType != MusicType.Menu && currentMysicType!=MusicType.None)

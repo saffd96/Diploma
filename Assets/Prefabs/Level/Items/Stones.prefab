@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4111920046850994682}
   - component: {fileID: 4963343730012790254}
   - component: {fileID: 4111920046850994680}
-  - component: {fileID: 4111920046850994681}
+  - component: {fileID: 7857919208014060459}
   m_Layer: 13
-  m_Name: Shield
+  m_Name: Stones
   m_TagString: Bonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4111920046850994686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.65, y: 21.59, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 713547349
   m_SortingLayer: 1
-  m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 43fb8031f000e614bbe5089b254c687d, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: af86585f643c8364bb11090bfc3d77ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.1891971
 --- !u!50 &4111920046850994680
 Rigidbody2D:
   serializedVersion: 4
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4111920046850994681
+--- !u!114 &7857919208014060459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +131,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111920046850994686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024a75ed04274cc19d95114153005e76, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e7e85918ff3409f8ab7b148d959fed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
