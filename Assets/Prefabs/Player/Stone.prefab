@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40916147298159542}
+  - component: {fileID: 7000360611355634361}
   - component: {fileID: 40916147298159544}
   - component: {fileID: 40916147298159545}
-  - component: {fileID: 7000360611355634361}
   - component: {fileID: 7899228333711764018}
   m_Layer: 12
   m_Name: Stone
@@ -35,6 +35,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7000360611355634361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40916147298159540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6723016a994096a32e8b1860a78126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &40916147298159544
 Rigidbody2D:
   serializedVersion: 4
@@ -72,18 +84,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.125
---- !u!114 &7000360611355634361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40916147298159540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de6723016a994096a32e8b1860a78126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!96 &7899228333711764018
 TrailRenderer:
   serializedVersion: 2

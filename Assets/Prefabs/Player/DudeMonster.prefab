@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384067234520909661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6502859443754222715}
@@ -476,6 +476,7 @@ MonoBehaviour:
   maxHealth: 5
   attackValue: 1
   attackRate: 0.5
+  throwForce: 10
   stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
   stoneSpawner: {fileID: 81181125529002187}
   isRangeAttackEnabled: 0
@@ -502,6 +503,9 @@ MonoBehaviour:
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
   shadowTransform: {fileID: 503101407943252531}
   shadowShowRange: 1
+  trajectoryPointPrefab: {fileID: 8890989479973115199, guid: 43a746558b9d7f54f851d7d25f3298e2, type: 3}
+  trajectoryPoints: []
+  numberOfPoints: 30
 --- !u!212 &6502859443754222694
 SpriteRenderer:
   m_ObjectHideFlags: 0
