@@ -237,16 +237,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 4, y: -1, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 21
-      m_TileSpriteIndex: 21
-      m_TileMatrixIndex: 5
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -4, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -391,7 +381,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 0912d5ee473d00148a471d26dcf104b2, type: 2}
-  - m_RefCount: 15
+  - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: 0fa979a722e9f384080e92af665104c1, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -436,7 +426,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 21300214, guid: cf57b3e7835b02e4493371d9bc259b1b, type: 3}
-  - m_RefCount: 15
+  - m_RefCount: 14
     m_Data: {fileID: 21300216, guid: cf57b3e7835b02e4493371d9bc259b1b, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 0
@@ -477,21 +467,21 @@ Tilemap:
       e33: 6.8e-43
   - m_RefCount: 0
     m_Data:
-      e00: -1.6794319e+16
-      e01: 3e-45
+      e00: 4.8196e-26
+      e01: 6e-45
       e02: -8.745043e+15
       e03: 0
-      e10: 2.27e-43
-      e11: 1e-45
+      e10: 1.96e-43
+      e11: 0
       e12: 4.5905e-41
       e13: 0
-      e20: 1.17081e-39
+      e20: 1.26815e-40
       e21: 0
-      e22: -1.6794301e+16
+      e22: 4.819595e-26
       e23: 0
       e30: 0
       e31: 7.34684e-40
-      e32: 2.27e-43
+      e32: 1.96e-43
       e33: 1
   - m_RefCount: 4
     m_Data:
@@ -529,7 +519,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 11
+  - m_RefCount: 10
     m_Data:
       e00: -1
       e01: 0
@@ -550,7 +540,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 0, g: 0, b: 0, a: 0}
-  - m_RefCount: 19
+  - m_RefCount: 18
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1

@@ -15,6 +15,10 @@ public class Boss : BaseEnemy
 
     [Header("Speed")]
     [SerializeField] private float speed;
+    
+    [Header("Vfx")]
+    [SerializeField] private GameObject bossAttackVfx;
+    
 
     private AIPath aiPath;
 
@@ -72,10 +76,17 @@ public class Boss : BaseEnemy
 
     public void DealDamage()
     {
+        AudioManager.Instance.PLaySfx(SfxType.BossAttack);
+        
+        if (bossAttackVfx != null)
+        {
+            Instantiate(bossAttackVfx, attackPoint.position, Quaternion.identity, transform);
+        }
+
         var damageableObjects =
                 Physics2D.OverlapCircleAll(attackPoint.position, attackRadius,
                     LayerMask.GetMask(Layers.Player));
-
+        
         foreach (var enemy in damageableObjects)
         {
             enemy.GetComponent<DamageableObject>().ApplyDamage(attackValue);
@@ -136,7 +147,6 @@ public class Boss : BaseEnemy
 
         Animator.SetTrigger(AnimationTriggerNames.Attack);
 
-        AudioManager.Instance.PLaySfx(SfxType.BossAttack);
         attackTimer = 0;
     }
 

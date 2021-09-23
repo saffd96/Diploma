@@ -5,8 +5,6 @@ public class SpawnObject : MonoBehaviour
 {
     [SerializeField] private GameObject[] objects;
 
-    private GameObject instance;
-
     private void Awake()
     {
         var objectIndex = Random.Range(0, objects.Length);
@@ -16,7 +14,6 @@ public class SpawnObject : MonoBehaviour
             objectIndex = 0;
         }
 
-      /*  instance = */Instantiate(objects[objectIndex], transform.position, Quaternion.identity, transform);
-      //  instance.transform.parent = transform;
+        Instantiate(objects[objectIndex], transform.position, Quaternion.identity, transform);
     }
 }

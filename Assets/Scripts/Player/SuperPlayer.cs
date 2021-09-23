@@ -9,12 +9,14 @@ public class SuperPlayer : DamageableObject
 {
     [Header("Player Settings")]
     [SerializeField] private int attackValue;
+    [SerializeField] private GameObject attackVfx;
     [SerializeField] private float attackRate;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private GameObject stonePrefab;
     [SerializeField] private Transform stoneSpawner;
     [SerializeField] private bool isRangeAttackEnabled;
     [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject unableShieldVfx;
     [SerializeField] private float invulnerableTime = 1f;
     [SerializeField] private GameObject invulnerableItemShield;
     [SerializeField] private bool isInvulnerableItem;
@@ -44,12 +46,11 @@ public class SuperPlayer : DamageableObject
     [Header("Shadow Settings")]
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
-    
+
     [Header("Other Settings")]
     [SerializeField] private GameObject trajectoryPointPrefab;
     [SerializeField] private GameObject[] trajectoryPoints;
     [SerializeField] private int numberOfPoints = 20;
-    
 
     private PlayerAnimationController playerAnimationController;
 
@@ -81,7 +82,7 @@ public class SuperPlayer : DamageableObject
     private bool isShieldEnabled;
 
     private Vector2 directionVector;
-    
+
     public int CurrentStones { get; private set; }
 
     public static event Action OnSuperPlayerHpChanged;
@@ -132,9 +133,10 @@ public class SuperPlayer : DamageableObject
     {
         CreateTrajectoryPoints();
     }
-    
+
     private void FixedUpdate()
     {
+        Debug.Log(speed);
         if (IsDead) return;
 
         Move();
@@ -161,7 +163,6 @@ public class SuperPlayer : DamageableObject
         CheckPushCondition();
         MoveShadow();
         Attack();
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -226,6 +227,11 @@ public class SuperPlayer : DamageableObject
         {
             if (isShieldEnabled)
             {
+                if (unableShieldVfx != null)
+                {
+                    Instantiate(unableShieldVfx, transform.position, Quaternion.identity, transform);
+                }
+
                 AudioManager.Instance.PLaySfx(SfxType.ShieldUnActive);
                 isShieldEnabled = false;
             }
@@ -233,13 +239,14 @@ public class SuperPlayer : DamageableObject
             return;
         }
 
+
         base.ApplyDamage(amount);
+        IsInvulnerable = true;
         AudioManager.Instance.PLaySfx(SfxType.PlayerHit);
         OnSuperPlayerHpChanged?.Invoke();
         CameraShake.Instance.ShakeCamera(7, 0.1f);
         playerAnimationController.GetDamage();
 
-        IsInvulnerable = true;
         StartCoroutine(InvulnerablePlayer(invulnerableTime));
     }
 
@@ -320,7 +327,6 @@ public class SuperPlayer : DamageableObject
         {
             isRangeAttackEnabled = true;
             stonesMax += 3;
-            CurrentStones = stonesMax;
             OnSuperPlayerStonesChanged?.Invoke();
         }
     }
@@ -345,7 +351,7 @@ public class SuperPlayer : DamageableObject
         if (CurrentHealth == maxHealth)
         {
             maxHealth++;
-            CurrentHealth++;
+            CurrentHealth = maxHealth;
             OnSuperPlayerHpChanged?.Invoke();
         }
         else
@@ -454,6 +460,11 @@ public class SuperPlayer : DamageableObject
         if (moveHorizontalInput < 0.1)
         {
             playerAnimationController.SetAttackType(Random.Range(1, 3));
+        }
+
+        if (attackVfx != null)
+        {
+            Instantiate(attackVfx, colliderDetector.position, Quaternion.identity);
         }
 
         var damageableObjects =
@@ -582,7 +593,7 @@ public class SuperPlayer : DamageableObject
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         directionVector = (mousePosition - stoneSpawner.position).normalized;
-        
+
         return mousePosition;
     }
 
@@ -591,7 +602,7 @@ public class SuperPlayer : DamageableObject
         yield return new WaitForSeconds(0.2f);
 
         AudioManager.Instance.PLaySfx(SfxType.Throw);
-        
+
         stone = Instantiate(stonePrefab, stoneSpawner.position, Quaternion.identity);
 
         stone.GetComponent<Rigidbody2D>().velocity = directionVector * throwForce;
@@ -602,19 +613,19 @@ public class SuperPlayer : DamageableObject
     {
         return (Vector2)stoneSpawner.position + (directionVector * throwForce * t) + 0.5f * Physics2D.gravity * (t * t);
     }
-    
+
     private void CreateTrajectoryPoints()
     {
         transform.position = GameHandler.StartPosition;
-        
+
         trajectoryPoints = new GameObject[numberOfPoints];
 
         for (int i = 0; i < numberOfPoints; i++)
         {
-            trajectoryPoints[i] = Instantiate(trajectoryPointPrefab, stoneSpawner.position, Quaternion.identity);
+            trajectoryPoints[i] =
+                    Instantiate(trajectoryPointPrefab, stoneSpawner.position, Quaternion.identity, transform);
         }
     }
-    
 
     private void UpDateTrajectoryPoints()
     {
@@ -626,14 +637,13 @@ public class SuperPlayer : DamageableObject
         {
             isCtrlPressed = false;
         }
-        
+
         for (var i = 0; i < trajectoryPoints.Length; i++)
         {
             trajectoryPoints[i].transform.position = GetTrajectoryPointPosition(i * 0.025f);
             trajectoryPoints[i].SetActive(isCtrlPressed);
         }
     }
-
 
     protected override void Die()
     {
@@ -683,6 +693,7 @@ public class SuperPlayer : DamageableObject
         yield return new WaitForSeconds(time);
 
         IsInvulnerable = false;
+
         isInvulnerableItem = false;
     }
 }

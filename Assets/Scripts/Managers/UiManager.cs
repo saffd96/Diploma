@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,18 @@ public class UiManager : MonoBehaviour
     [SerializeField] private PowerUpManager powerUpView;
     [SerializeField] private MapView mapView;
     [SerializeField] private GameObject deathScreen;
-    
+    [SerializeField] private StoneView stoneView;
+
     [Space]
+    [SerializeField] private GameObject rangeAttackImage;
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
 
-    
+    private void Update()
+    {
+        rangeAttackImage.SetActive(stoneView.CanvasGroup.alpha >= 1);
+    }
+
     public void PauseToggle(bool isActive)
     {
         if (isActive)
@@ -49,6 +56,4 @@ public class UiManager : MonoBehaviour
         //DoTweenAnim
         deathScreen.SetActive(true);
     }
-    
-    
 }

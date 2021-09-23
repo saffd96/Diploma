@@ -5,8 +5,9 @@ public class StoneView : MonoBehaviour
 {
     [SerializeField] private Text stonesText;
     [SerializeField] private CanvasGroup canvasGroup;
-    
-    
+
+    public CanvasGroup CanvasGroup => canvasGroup;
+
     private SuperPlayer player;
     private int stones;
 

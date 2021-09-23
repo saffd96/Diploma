@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +8,15 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
     [SerializeField] private Text heartsText;
-    
+    [SerializeField] private Image bloodOnScreen;
+
     [Header("Boss")]
     [SerializeField] private GameObject bossHp;
-
 
     [SerializeField] private Slider slider;
     private SuperPlayer player;
     private Boss boss;
-    
+
     private int numberOfHearts;
     private int health;
 
@@ -45,24 +44,27 @@ public class HealthManager : MonoBehaviour
 
     private void SetupBossHp()
     {
-            slider = bossHp.GetComponentInChildren<Slider>();
-            boss = FindObjectOfType<Boss>();
-            bossHp.SetActive(true);
+        slider = bossHp.GetComponentInChildren<Slider>();
+        boss = FindObjectOfType<Boss>();
+        bossHp.SetActive(true);
 
-            if (slider == null) return;
+        if (slider == null) return;
 
-            slider.maxValue = boss.MAXHealth;
-            UpdateBossHp();
+        slider.maxValue = boss.MAXHealth;
+        UpdateBossHp();
     }
-    
+
     private void UpdateHearts()
     {
         numberOfHearts = player.MAXHealth;
         health = player.CurrentHealth;
 
-        if (health<=hearts.Length)
+        bloodOnScreen.enabled = health == 1;
+
+        if (health <= hearts.Length)
         {
             heartsText.enabled = false;
+
             if (health > numberOfHearts)
             {
                 health = numberOfHearts;
@@ -80,6 +82,7 @@ public class HealthManager : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
+
             hearts[0].sprite = fullHeart;
             heartsText.enabled = true;
             heartsText.text = $"x{health.ToString()}";
@@ -90,5 +93,4 @@ public class HealthManager : MonoBehaviour
     {
         slider.value = boss.CurrentHealth;
     }
-    
 }

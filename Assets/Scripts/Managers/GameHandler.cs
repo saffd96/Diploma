@@ -37,7 +37,7 @@ public class GameHandler : MonoBehaviour
     private void Awake()
     {
         IsPowerUpSelected = false;
-        
+
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.CastleLevel)
         {
             Time.timeScale = 0f;

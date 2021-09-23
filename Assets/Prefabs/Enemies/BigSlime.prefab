@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
+  deathVfx: {fileID: 3550858979299621483, guid: a0d4a87b6c8e3414591ebeae39ee910f, type: 3}
+  hitVfx: {fileID: 0}
   mapSprite: {fileID: 5311196346442753785}
   TargetDetectionValue: 0.5
   Bottom: {fileID: 4934781702169425001}

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 15
+  deathVfx: {fileID: 6467128748930585580, guid: bea2516a7558587418360e9dcbd35e5f, type: 3}
   mapSprite: {fileID: 7867553427967375008}
   attackValue: 1
   attackRange: 2
@@ -176,6 +177,7 @@ MonoBehaviour:
   attackTime: 1.5
   attackPoint: {fileID: 1858560146603222129}
   speed: 5
+  bossAttackVfx: {fileID: 5626455948894564505, guid: 7e2038c87e59e844e818da619c49fde9, type: 3}
 --- !u!114 &5722799581076707038
 MonoBehaviour:
   m_ObjectHideFlags: 0
