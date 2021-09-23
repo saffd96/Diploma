@@ -154,9 +154,14 @@ public class Boss : BaseEnemy
     {
         base.Die();
         Animator.SetBool(AnimationBoolNames.IsDead, IsDead);
-        aiDestinationSetter.enabled = false;
+        aiDestinationSetter.target = null;
         AudioManager.Instance.PLaySfx(SfxType.BossDeath);
+        
+        Coll2D.enabled = false;
+        Rb2D.Sleep();
+        aiPath.enabled = false;
         OnBossDeath?.Invoke();
+
     }
 
     private void ActivateRage()

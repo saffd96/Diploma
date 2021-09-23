@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AddAdditionalStones
   m_EditorClassIdentifier: 
   PowerUpName: Add Stones
-  Description: +5 stones. If range attack is disable - set it able with 3 stones.
+  Description: +5 stones. If range attack is disable - set it able with 1 stone.
   Image: {fileID: 21300000, guid: a4b234137a7a72a4e994fb81544daf3c, type: 3}
   ActionWithPlayer: 10

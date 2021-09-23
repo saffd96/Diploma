@@ -7,6 +7,16 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private SceneLoadUi sceneLoadUi;
 
+    private void OnEnable()
+    {
+        BossExitLvl.OnBossExitDoorCollision += LoadEndScene;
+    }
+
+    private void OnDisable()
+    {
+        BossExitLvl.OnBossExitDoorCollision -= LoadEndScene;
+    }
+
     public static event Action OnSceneCastleLoad;
     
     private void Start()
@@ -41,4 +51,10 @@ public class SceneLoadManager : MonoBehaviour
             yield return null;
         }
     }
+
+    private void LoadEndScene()
+    {
+        LoadScene(SceneNamesConstants.EndScene);
+    }
+
 }

@@ -26,14 +26,12 @@ public class GameHandler : MonoBehaviour
     private void OnEnable()
     {
         ExitLvl.OnExitLvlCollision += CompleteLvl;
-        Boss.OnBossDeath += OnBossDeath;
         SuperPlayer.OnSuperPlayerDeath += OnPLayerDeath;
     }
 
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
-        Boss.OnBossDeath -= OnBossDeath;
         SuperPlayer.OnSuperPlayerDeath -= OnPLayerDeath;
     }
 
@@ -86,7 +84,6 @@ public class GameHandler : MonoBehaviour
 
     public void PowerUpPauseToggle()
     {
-        Debug.Log(this);
         IsPowerUpSelected = !IsPowerUpSelected;
         Time.timeScale = !IsPowerUpSelected ? 0f : 1f;
         uiManager.PowerUpHide();
@@ -147,12 +144,6 @@ public class GameHandler : MonoBehaviour
         {
             MapToggle();
         }
-    }
-
-    private void OnBossDeath()
-    {
-        //DoTweenShade after load scene;
-        sceneLoadManager.LoadScene(SceneNamesConstants.EndScene);
     }
 
     private void OnPLayerDeath()

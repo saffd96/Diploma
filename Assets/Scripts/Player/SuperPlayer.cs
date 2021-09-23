@@ -325,8 +325,8 @@ public class SuperPlayer : DamageableObject
         else
         {
             isRangeAttackEnabled = true;
-            stonesMax += 3;
-            CurrentStones += 3;
+            stonesMax += 1;
+            CurrentStones += 1;
 
             OnSuperPlayerStonesChanged?.Invoke();
         }
