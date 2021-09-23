@@ -238,7 +238,6 @@ public class SuperPlayer : DamageableObject
             return;
         }
 
-
         base.ApplyDamage(amount);
         IsInvulnerable = true;
         AudioManager.Instance.PLaySfx(SfxType.PlayerHit);
@@ -424,7 +423,6 @@ public class SuperPlayer : DamageableObject
         attackTimer += Time.deltaTime;
         rangeAttackTimer += Time.deltaTime;
 
-        
         if (Input.GetKey(KeyCode.Mouse0))
         {
             isMeleeAttack = true;
@@ -465,7 +463,7 @@ public class SuperPlayer : DamageableObject
         }
 
         AudioManager.Instance.PLaySfx(SfxType.PlayerAttack);
-        
+
         if (attackVfx != null)
         {
             Instantiate(attackVfx, colliderDetector.position, Quaternion.identity);
@@ -637,7 +635,6 @@ public class SuperPlayer : DamageableObject
         {
             isCtrlPressed = true;
             AudioManager.Instance.PlayButtonOnClickSfx();
-
         }
         else if (Input.GetKeyUp(KeyCode.LeftControl))
         {

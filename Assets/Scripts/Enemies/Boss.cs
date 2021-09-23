@@ -15,17 +15,16 @@ public class Boss : BaseEnemy
 
     [Header("Speed")]
     [SerializeField] private float speed;
-    
+
     [Header("Vfx")]
     [SerializeField] private GameObject bossAttackVfx;
-    
 
     private AIPath aiPath;
 
     private AIDestinationSetter aiDestinationSetter;
 
     private Transform player;
-    
+
     private bool playerInAttackRange;
     private bool playerInChaseRange;
 
@@ -65,8 +64,8 @@ public class Boss : BaseEnemy
 
     private void Update()
     {
-        if (IsDead|| player ==null) return;
-        
+        if (IsDead || player == null) return;
+
         CalculateVariables();
 
         Flip();
@@ -77,7 +76,7 @@ public class Boss : BaseEnemy
     public void DealDamage()
     {
         AudioManager.Instance.PLaySfx(SfxType.BossAttack);
-        
+
         if (bossAttackVfx != null)
         {
             Instantiate(bossAttackVfx, attackPoint.position, Quaternion.identity, transform);
@@ -86,7 +85,7 @@ public class Boss : BaseEnemy
         var damageableObjects =
                 Physics2D.OverlapCircleAll(attackPoint.position, attackRadius,
                     LayerMask.GetMask(Layers.Player));
-        
+
         foreach (var enemy in damageableObjects)
         {
             enemy.GetComponent<DamageableObject>().ApplyDamage(attackValue);
@@ -156,12 +155,11 @@ public class Boss : BaseEnemy
         Animator.SetBool(AnimationBoolNames.IsDead, IsDead);
         aiDestinationSetter.target = null;
         AudioManager.Instance.PLaySfx(SfxType.BossDeath);
-        
+
         Coll2D.enabled = false;
         Rb2D.Sleep();
         aiPath.enabled = false;
         OnBossDeath?.Invoke();
-
     }
 
     private void ActivateRage()

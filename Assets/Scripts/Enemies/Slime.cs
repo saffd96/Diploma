@@ -9,10 +9,10 @@ public class Slime : BaseEnemy
     [SerializeField] private float idleTime;
     [SerializeField] private float speed;
     [SerializeField] protected GameObject TargetPrefab;
-    
+
     protected Transform target1;
     protected Transform target2;
-    
+
     protected Transform CurrentTargetPosition;
     protected AIDestinationSetter AIDestinationSetter;
     protected float Distance;
@@ -34,7 +34,7 @@ public class Slime : BaseEnemy
 
         AIDestinationSetter.target = CurrentTargetPosition = targetIndex == 1 ? target1 : target2;
     }
-    
+
     private void Update()
     {
         if (IsDead) return;
@@ -53,7 +53,7 @@ public class Slime : BaseEnemy
         target1 = Instantiate(TargetPrefab, transform.position + Vector3.left, Quaternion.identity).transform;
         target2 = Instantiate(TargetPrefab, transform.position + Vector3.right, Quaternion.identity).transform;
     }
-    
+
     private void CheckFlip()
     {
         if (transform.position.x < CurrentTargetPosition.transform.position.x)

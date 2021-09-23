@@ -15,7 +15,7 @@ public class BigSlime : Slime
             if (!isAnimationStarted)
             {
                 StartCoroutine(AnimationTime());
-                
+
                 IsInvulnerable = true;
                 isAnimationStarted = true;
             }
@@ -30,11 +30,11 @@ public class BigSlime : Slime
     private IEnumerator AnimationTime()
     {
         Animator.SetTrigger(AnimationTriggerNames.Spin);
+
         yield return new WaitForSeconds(1);
-        
+
         AIDestinationSetter.target = CurrentTargetPosition = CurrentTargetPosition == target1 ? target2 : target1;
         IsInvulnerable = false;
         isAnimationStarted = false;
     }
-
 }

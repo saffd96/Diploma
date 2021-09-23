@@ -24,14 +24,14 @@ public class BaseEnemy : DamageableObject
     protected override void Die()
     {
         base.Die();
-        
+
         TryGetComponent(out DamageDealer script);
 
-        if (script !=null)
+        if (script != null)
         {
             script.enabled = false;
         }
-        
+
         mapSprite.enabled = false;
     }
 }

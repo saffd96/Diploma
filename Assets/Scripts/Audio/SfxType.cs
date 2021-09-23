@@ -8,7 +8,7 @@ public enum SfxType
     Throw = 5,
     BossAttack = 6,
     SlimeDeath = 7,
-    BossHit  = 8,
+    BossHit = 8,
     ShieldActive = 9,
     ShieldUnActive = 10,
     BossRage = 11,

@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class UiSelectCharacter : MonoBehaviour
 {
-    [SerializeField] private GameObject[] startThings;
-    [SerializeField] private GameObject[] characterSelectionElements;
-    
+    [SerializeField] private AnimatedObject[] startThings;
+    [SerializeField] private AnimatedObject[] characterSelectionElements;
+
     private bool toggle = true;
 
     private void Awake()
@@ -22,12 +21,26 @@ public class UiSelectCharacter : MonoBehaviour
     {
         foreach (var thing in startThings)
         {
-            thing.SetActive(toggle);
+            if (toggle)
+            {
+                thing.PlayAnimation();
+            }
+            else
+            {
+                thing.PlayReverseAnimation();
+            }
         }
 
         foreach (var button in characterSelectionElements)
         {
-            button.SetActive(!toggle);
+            if (!toggle)
+            {
+                button.PlayAnimation();
+            }
+            else
+            {
+                button.PlayReverseAnimation();
+            }
         }
 
         toggle = !toggle;

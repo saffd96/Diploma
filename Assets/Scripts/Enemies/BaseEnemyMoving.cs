@@ -3,11 +3,11 @@ using UnityEngine;
 public class BaseEnemyMoving : MonoBehaviour
 {
     [SerializeField] private float speed;
-    
+
     [SerializeField] private float leftOffset = 3;
     [SerializeField] private float rightOffset = 3;
-    
-    [SerializeField]  private bool isFacingRight = true;
+
+    [SerializeField] private bool isFacingRight = true;
 
     private bool targetSwitch;
 
@@ -38,15 +38,16 @@ public class BaseEnemyMoving : MonoBehaviour
     {
         if (IsTargetSet) return;
 
-        
         if (targetSwitch)
         {
-            Target = isFirstTime ? new Vector2(transform.position.x + rightOffset/2, transform.position.y) 
+            Target = isFirstTime
+                    ? new Vector2(transform.position.x + rightOffset / 2, transform.position.y)
                     : new Vector2(transform.position.x + rightOffset, transform.position.y);
         }
         else
         {
-            Target = isFirstTime ? new Vector2(transform.position.x - leftOffset/2, transform.position.y) 
+            Target = isFirstTime
+                    ? new Vector2(transform.position.x - leftOffset / 2, transform.position.y)
                     : new Vector2(transform.position.x - leftOffset, transform.position.y);
         }
 

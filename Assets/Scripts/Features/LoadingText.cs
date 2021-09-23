@@ -29,9 +29,9 @@ public class LoadingText : MonoBehaviour
             {
                 dotCount = 0;
             }
+
             timer = 0;
         }
-
     }
 
     private void ChangeLoadingText()

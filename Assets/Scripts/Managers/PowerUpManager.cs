@@ -33,6 +33,7 @@ public class PowerUpManager : MonoBehaviour
             powerUpPanels.Add(panel);
 
             panel.FillPanel(SelectPowerUp());
+            panel.PlayAnimation();
         }
     }
 

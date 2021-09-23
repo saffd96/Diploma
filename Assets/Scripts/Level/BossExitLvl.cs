@@ -6,10 +6,9 @@ public class BossExitLvl : MonoBehaviour
     [SerializeField] private Sprite sprite;
     private SpriteRenderer spriteRenderer;
     private bool isExitEnabled;
-    
+
     public static event Action OnBossExitDoorCollision;
-    
-    
+
     private void OnEnable()
     {
         Boss.OnBossDeath += ChangeSprite;

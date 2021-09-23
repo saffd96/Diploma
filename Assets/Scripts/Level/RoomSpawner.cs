@@ -11,11 +11,10 @@ public class RoomSpawner : MonoBehaviour
 
         var roomDetection = Physics2D.OverlapCircle(transform.position, 1, LayerMask.GetMask(Layers.Room));
 
-        if (roomDetection==null)
+        if (roomDetection == null)
         {
-            Instantiate(block, transform.position, Quaternion.identity, levelGeneration.LevelTransform );
+            Instantiate(block, transform.position, Quaternion.identity, levelGeneration.LevelTransform);
             Destroy(gameObject);
         }
-
     }
 }

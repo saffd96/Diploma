@@ -8,6 +8,7 @@ public class VfxAnimationController : MonoBehaviour
     private void Awake()
     {
         clipLifeTime = anim.length;
+
         if (!anim.isLooping)
         {
             Destroy(gameObject, clipLifeTime);

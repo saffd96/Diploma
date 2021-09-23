@@ -5,7 +5,6 @@ public class DamageableObject : MonoBehaviour
     [SerializeField] protected int maxHealth;
     [SerializeField] private GameObject deathVfx;
     [SerializeField] private GameObject hitVfx;
-    
 
     protected bool IsDead;
     protected Animator Animator;
@@ -29,8 +28,9 @@ public class DamageableObject : MonoBehaviour
 
         if (hitVfx != null)
         {
-            Instantiate(hitVfx, transform.position, Quaternion.identity,transform);
+            Instantiate(hitVfx, transform.position, Quaternion.identity, transform);
         }
+
         CurrentHealth -= amount;
 
         if (CurrentHealth <= 0)

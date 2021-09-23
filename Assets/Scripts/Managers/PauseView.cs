@@ -1,12 +1,11 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseView : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private float fadeDuration;
+    [SerializeField] private AnimatedObject[] animatedObjects;
+
     [SerializeField] private Button[] buttons;
 
     [Space]
@@ -20,17 +19,10 @@ public class PauseView : MonoBehaviour
     [SerializeField] private Text musicText;
     [SerializeField] private Text sfxText;
 
-    private Tweener tweenAnimation;
-
-    private void Start()
-    {
-        canvasGroup.alpha = 0;
-    }
-
     private void Update()
     {
         levelsPassed.text = "Levels passed: " + GameHandler.LevelsCompleted;
-        
+
         var musicValue = musicSlider.value / volumeMultiplier;
         AudioManager.Instance.SetMusicVolume(musicValue);
         musicText.text = $"{GetMusicVolume():0}";
@@ -45,6 +37,11 @@ public class PauseView : MonoBehaviour
         SetVolume();
         gameObject.SetActive(true);
 
+        foreach (var animatedObject in animatedObjects)
+        {
+            animatedObject.PlayAnimation();
+        }
+
         foreach (var button in buttons)
         {
             if (!button.enabled)
@@ -52,13 +49,15 @@ public class PauseView : MonoBehaviour
                 button.enabled = true;
             }
         }
-
-        tweenAnimation?.Kill();
-        canvasGroup.DOFade(1, fadeDuration).SetUpdate(true);
     }
 
     public void Hide()
     {
+        foreach (var animatedObject in animatedObjects)
+        {
+            animatedObject.PlayReverseAnimation();
+        }
+
         foreach (var button in buttons)
         {
             if (button.enabled)
@@ -66,9 +65,6 @@ public class PauseView : MonoBehaviour
                 button.enabled = false;
             }
         }
-
-        tweenAnimation?.Kill();
-        canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
     }
 
     private float GetSfxVolume()

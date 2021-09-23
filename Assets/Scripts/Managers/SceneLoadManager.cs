@@ -6,19 +6,24 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private SceneLoadUi sceneLoadUi;
+    [SerializeField] private AnimatedPanel panel;
+
+    private string nextSceneName;
 
     private void OnEnable()
     {
         BossExitLvl.OnBossExitDoorCollision += LoadEndScene;
+        panel.OnCompleteAnimation += LoadSceneAfterAnimation;
     }
 
     private void OnDisable()
     {
         BossExitLvl.OnBossExitDoorCollision -= LoadEndScene;
+        panel.OnCompleteAnimation -= LoadSceneAfterAnimation;
     }
 
     public static event Action OnSceneCastleLoad;
-    
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
@@ -32,24 +37,22 @@ public class SceneLoadManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName)
+    private void FixedUpdate()
     {
-        StartCoroutine(LoadAsynchronously(sceneName));
+        if (sceneLoadUi != null)
+        {
+            sceneLoadUi.UpdateProgress();
+        }
     }
 
-    private IEnumerator LoadAsynchronously(string sceneName)
+    public void LoadScene(string sceneName)
     {
-        var operation = SceneManager.LoadSceneAsync(sceneName);
+        StartCoroutine(SceneLoadDelay(sceneName));
+    }
 
-        while (!operation.isDone)
-        {
-            if (sceneLoadUi != null)
-            {
-                sceneLoadUi.UpdateProgress(operation);
-            }
-
-            yield return null;
-        }
+    private void LoadSceneAfterAnimation()
+    {
+        SceneManager.LoadScene(nextSceneName);
     }
 
     private void LoadEndScene()
@@ -57,4 +60,24 @@ public class SceneLoadManager : MonoBehaviour
         LoadScene(SceneNamesConstants.EndScene);
     }
 
+    private IEnumerator SceneLoadDelay(string sceneName)
+    {
+        if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
+        {
+            yield return new WaitForSeconds(2f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0);
+        }
+
+        if (sceneLoadUi != null)
+        {
+            sceneLoadUi.SetProgress();
+        }
+
+        panel.PlayAnimation();
+
+        nextSceneName = sceneName;
+    }
 }

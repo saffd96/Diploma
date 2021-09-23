@@ -1,4 +1,4 @@
-public class Potion: BaseItem
+public class Potion : BaseItem
 {
     protected override void ApplyEffect(SuperPlayer player)
     {

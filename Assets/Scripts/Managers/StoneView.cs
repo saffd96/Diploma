@@ -26,8 +26,8 @@ public class StoneView : MonoBehaviour
         player = FindObjectOfType<SuperPlayer>();
 
         UpdateStones();
-        
-        if (player.CurrentStones==0)
+
+        if (player.CurrentStones == 0)
         {
             canvasGroup.alpha = 0f;
         }
@@ -41,6 +41,7 @@ public class StoneView : MonoBehaviour
         {
             canvasGroup.alpha = 1f;
         }
+
         stonesText.text = $"x{stones.ToString()}";
     }
 }

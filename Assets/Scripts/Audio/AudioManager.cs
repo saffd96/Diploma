@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,7 +41,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.MenuScene)
         {
-            if (currentMysicType != MusicType.Menu && currentMysicType!=MusicType.None)
+            if (currentMysicType != MusicType.Menu && currentMysicType != MusicType.None)
             {
                 StopMusic();
             }
@@ -56,6 +55,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             {
                 StopMusic();
             }
+
             PlayMusic(MusicType.Level);
             currentMysicType = MusicType.Level;
         }
@@ -65,6 +65,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             {
                 StopMusic();
             }
+
             PlayMusic(MusicType.Boss);
             currentMysicType = MusicType.Boss;
         }
@@ -115,7 +116,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public void PlayButtonOnClickSfx()
     {
         PLaySfx(SfxType.ButtonClick);
-    } 
+    }
+
     public void PlayButtonOnHoverSfx()
     {
         PLaySfx(SfxType.ButtonHover);

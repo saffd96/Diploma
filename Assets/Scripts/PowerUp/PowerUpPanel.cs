@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,8 +12,10 @@ public class PowerUpPanel : MonoBehaviour
 
     [SerializeField] private Button button;
 
+    [SerializeField] private AnimatedElement animatedElement;
+    [SerializeField] private AnimatedPanel animatedPanel;
+
     private EventTrigger eventTrigger;
-    
 
     private PowerUp.Action actionWithPlayer;
 
@@ -27,11 +28,17 @@ public class PowerUpPanel : MonoBehaviour
         eventTrigger.triggers.Add(entry);
     }
 
+    public void PlayAnimation()
+    {
+        animatedPanel.PlayAnimation();
+        animatedElement.PlayAnimation();
+    }
+
     public void FillPanel(PowerUp powerUp)
     {
         var powerUpManager = FindObjectOfType<PowerUpManager>();
         var gameHandler = FindObjectOfType<GameHandler>();
-        
+
         powerUpName.text = powerUp.PowerUpName;
         description.text = powerUp.Description;
         buttonText.text = "Select " + powerUp.PowerUpName;
@@ -95,5 +102,4 @@ public class PowerUpPanel : MonoBehaviour
     {
         AudioManager.Instance.PlayButtonOnHoverSfx();
     }
-    
 }

@@ -10,7 +10,7 @@ public class VolumeSettingsMenu : MonoBehaviour
 
     [SerializeField] private Text musicText;
     [SerializeField] private Text sfxText;
-    
+
     private float musicValue, sfxValue;
 
     private void Start()
@@ -34,7 +34,7 @@ public class VolumeSettingsMenu : MonoBehaviour
     {
         musicValue = musicSlider.value / volumeMultiplier;
         sfxValue = sfxSlider.value / volumeMultiplier;
-        
+
         AudioManager.Instance.SetMusicVolume(musicValue);
         AudioManager.Instance.SetSfxVolume(sfxValue);
 
@@ -48,7 +48,7 @@ public class VolumeSettingsMenu : MonoBehaviour
 
         sfxSlider.value = GetSfxVolume();
     }
-    
+
     private float GetSfxVolume()
     {
         return AudioManager.Instance.SfxVolume * volumeMultiplier;

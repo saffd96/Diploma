@@ -8,7 +8,6 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private SceneLoadManager sceneLoadManager;
     [SerializeField] private PowerUpManager powerUpManager;
     [SerializeField] private GameObject onClickVfx;
-    
 
     public static Vector2 StartPosition;
     public static GameObject Player;
@@ -88,7 +87,7 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = !IsPowerUpSelected ? 0f : 1f;
         uiManager.PowerUpHide();
     }
-    
+
     public static bool IsCastlePassed()
     {
         return LevelsCompleted >= NeedCastleScenesToPass;
@@ -102,11 +101,12 @@ public class GameHandler : MonoBehaviour
             Instantiate(onClickVfx, mousePos, quaternion.identity, transform);
         }
     }
-    
+
     public void CreateOnHoverSound()
     {
         AudioManager.Instance.PlayButtonOnHoverSfx();
-    } 
+    }
+
     public void CreateOnUpSound()
     {
         AudioManager.Instance.PlayButtonOnClickSfx();
@@ -151,6 +151,4 @@ public class GameHandler : MonoBehaviour
         LevelsCompleted = 0;
         uiManager.ShowDeathScreen();
     }
-
-    
 }

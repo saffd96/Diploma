@@ -6,18 +6,36 @@ public class SceneLoadUi : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Text progressText;
 
-    public void UpdateProgress(AsyncOperation operation)
-    {
-        var progress = Mathf.Clamp01(operation.progress / 0.9f);
+    private float currentProgress;
 
+    public void UpdateProgress()
+    {
         if (slider != null)
         {
-            slider.value = progress;
+            if (slider.value >= 0.9f)
+            {
+                return;
+            }
+
+            slider.value = currentProgress += Random.Range(0f, 0.025f);
         }
 
         if (progressText != null)
         {
-            progressText.text = progress * 100f + "%";
+            progressText.text = slider.value * 100f + "%";
+        }
+    }
+
+    public void SetProgress()
+    {
+        if (slider != null)
+        {
+            slider.value = 1f;
+        }
+
+        if (progressText != null)
+        {
+            progressText.text = slider.value * 100f + "%";
         }
     }
 }

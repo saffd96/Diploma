@@ -64,7 +64,7 @@ public class LevelGeneration : MonoBehaviour
     {
         Init();
     }
-    
+
     private void Update()
     {
         GenerateLvl();
@@ -160,14 +160,14 @@ public class LevelGeneration : MonoBehaviour
                 newGeneratorPosition = new Vector2(position.x + offsetAmount, position.y);
                 position = newGeneratorPosition;
 
-
                 if (generateBossLvl)
                 {
                     direction = Direction.Forward;
                     tempRoom = CreateRoom(BossFightRoom);
+
                     return;
                 }
-                
+
                 GetDirection();
 
                 switch (direction)
@@ -211,5 +211,4 @@ public class LevelGeneration : MonoBehaviour
 
         return instance;
     }
-
 }
