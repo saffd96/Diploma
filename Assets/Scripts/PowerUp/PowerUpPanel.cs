@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PowerUpPanel : MonoBehaviour
@@ -11,13 +13,25 @@ public class PowerUpPanel : MonoBehaviour
 
     [SerializeField] private Button button;
 
+    private EventTrigger eventTrigger;
+    
+
     private PowerUp.Action actionWithPlayer;
+
+    private void Start()
+    {
+        eventTrigger = GetComponentInChildren<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
+        entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data); });
+        eventTrigger.triggers.Add(entry);
+    }
 
     public void FillPanel(PowerUp powerUp)
     {
         var powerUpManager = FindObjectOfType<PowerUpManager>();
         var gameHandler = FindObjectOfType<GameHandler>();
-
+        
         powerUpName.text = powerUp.PowerUpName;
         description.text = powerUp.Description;
         buttonText.text = "Select " + powerUp.PowerUpName;
@@ -73,5 +87,13 @@ public class PowerUpPanel : MonoBehaviour
         }
 
         button.onClick.AddListener(gameHandler.PowerUpPauseToggle);
+        button.onClick.AddListener(gameHandler.CreateOnClickVfx);
+        button.onClick.AddListener(AudioManager.Instance.PlayButtonOnClickSfx);
     }
+
+    private void OnPointerDownDelegate(PointerEventData data)
+    {
+        AudioManager.Instance.PlayButtonOnHoverSfx();
+    }
+    
 }

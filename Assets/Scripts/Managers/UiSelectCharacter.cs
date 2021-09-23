@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UiSelectCharacter : MonoBehaviour
 {
     [SerializeField] private GameObject[] startThings;
     [SerializeField] private GameObject[] characterSelectionElements;
-
+    
     private bool toggle = true;
 
     private void Awake()

@@ -112,6 +112,15 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
     }
 
+    public void PlayButtonOnClickSfx()
+    {
+        PLaySfx(SfxType.ButtonClick);
+    } 
+    public void PlayButtonOnHoverSfx()
+    {
+        PLaySfx(SfxType.ButtonHover);
+    }
+
     private AudioClip GetAudioClip(SfxType sfxType)
     {
         return audioSettings.GetAudioClip(sfxType);

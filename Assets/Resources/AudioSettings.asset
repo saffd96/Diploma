@@ -55,6 +55,15 @@ MonoBehaviour:
   - Clip: {fileID: 8300000, guid: 0f093045fb69e794b8ed8ba31bfa2ad1, type: 3}
     SfxType: 13
     Volume: 1
+  - Clip: {fileID: 8300000, guid: c4bdd438e39bb014193bc72dc8cdcdc3, type: 3}
+    SfxType: 14
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: f03fa0d7d04af1546b1cfff8d80f8df6, type: 3}
+    SfxType: 15
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: 5517dbabfaa271144a34f6f6ffc0c705, type: 3}
+    SfxType: 16
+    Volume: 1
   musics:
   - Clips:
     - {fileID: 8300000, guid: a6625f14e710dbc48bf1cdae4734a872, type: 3}

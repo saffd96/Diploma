@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 15
   deathVfx: {fileID: 6467128748930585580, guid: bea2516a7558587418360e9dcbd35e5f, type: 3}
+  hitVfx: {fileID: 0}
   mapSprite: {fileID: 7867553427967375008}
   attackValue: 1
   attackRange: 2
@@ -284,7 +285,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 30
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 40

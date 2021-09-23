@@ -16,12 +16,14 @@ public class MapView : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+        AudioManager.Instance.PlayButtonOnClickSfx();
         tweenAnimation?.Kill();
         canvasGroup.DOFade(1, fadeDuration).SetUpdate(true);
     }
 
     public void Hide()
     {
+        AudioManager.Instance.PlayButtonOnClickSfx();
         tweenAnimation?.Kill();
         canvasGroup.DOFade(0, fadeDuration).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
     }

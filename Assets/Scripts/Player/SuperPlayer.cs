@@ -136,7 +136,6 @@ public class SuperPlayer : DamageableObject
 
     private void FixedUpdate()
     {
-        Debug.Log(speed);
         if (IsDead) return;
 
         Move();
@@ -327,6 +326,8 @@ public class SuperPlayer : DamageableObject
         {
             isRangeAttackEnabled = true;
             stonesMax += 3;
+            CurrentStones += 3;
+
             OnSuperPlayerStonesChanged?.Invoke();
         }
     }
@@ -423,6 +424,7 @@ public class SuperPlayer : DamageableObject
         attackTimer += Time.deltaTime;
         rangeAttackTimer += Time.deltaTime;
 
+        
         if (Input.GetKey(KeyCode.Mouse0))
         {
             isMeleeAttack = true;
@@ -462,6 +464,8 @@ public class SuperPlayer : DamageableObject
             playerAnimationController.SetAttackType(Random.Range(1, 3));
         }
 
+        AudioManager.Instance.PLaySfx(SfxType.PlayerAttack);
+        
         if (attackVfx != null)
         {
             Instantiate(attackVfx, colliderDetector.position, Quaternion.identity);
@@ -632,10 +636,13 @@ public class SuperPlayer : DamageableObject
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCtrlPressed = true;
+            AudioManager.Instance.PlayButtonOnClickSfx();
+
         }
         else if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             isCtrlPressed = false;
+            AudioManager.Instance.PlayButtonOnClickSfx();
         }
 
         for (var i = 0; i < trajectoryPoints.Length; i++)

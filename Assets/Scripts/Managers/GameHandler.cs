@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private UiManager uiManager;
     [SerializeField] private SceneLoadManager sceneLoadManager;
     [SerializeField] private PowerUpManager powerUpManager;
+    [SerializeField] private GameObject onClickVfx;
+    
 
     public static Vector2 StartPosition;
     public static GameObject Player;
@@ -63,9 +66,12 @@ public class GameHandler : MonoBehaviour
 
     public void PauseToggle()
     {
-        IsPaused = !IsPaused;
-        Time.timeScale = IsPaused ? 0f : 1f;
-        uiManager.PauseToggle(IsPaused);
+        if (IsPowerUpSelected)
+        {
+            IsPaused = !IsPaused;
+            Time.timeScale = IsPaused ? 0f : 1f;
+            uiManager.PauseToggle(IsPaused);
+        }
     }
 
     public void SelectPlayer(GameObject selectedPlayer)
@@ -80,9 +86,38 @@ public class GameHandler : MonoBehaviour
 
     public void PowerUpPauseToggle()
     {
+        Debug.Log(this);
         IsPowerUpSelected = !IsPowerUpSelected;
         Time.timeScale = !IsPowerUpSelected ? 0f : 1f;
         uiManager.PowerUpHide();
+    }
+    
+    public static bool IsCastlePassed()
+    {
+        return LevelsCompleted >= NeedCastleScenesToPass;
+    }
+
+    public void CreateOnClickVfx()
+    {
+        if (onClickVfx != null)
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Instantiate(onClickVfx, mousePos, quaternion.identity, transform);
+        }
+    }
+    
+    public void CreateOnHoverSound()
+    {
+        AudioManager.Instance.PlayButtonOnHoverSfx();
+    } 
+    public void CreateOnUpSound()
+    {
+        AudioManager.Instance.PlayButtonOnClickSfx();
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private void CompleteLvl()
@@ -126,13 +161,5 @@ public class GameHandler : MonoBehaviour
         uiManager.ShowDeathScreen();
     }
 
-    public static bool IsCastlePassed()
-    {
-        return LevelsCompleted >= NeedCastleScenesToPass;
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
+    
 }

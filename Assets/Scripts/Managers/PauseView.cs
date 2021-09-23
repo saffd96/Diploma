@@ -43,7 +43,6 @@ public class PauseView : MonoBehaviour
     public void Show()
     {
         SetVolume();
-
         gameObject.SetActive(true);
 
         foreach (var button in buttons)
