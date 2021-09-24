@@ -8,13 +8,15 @@ public class AnimatedPanel : AnimatedObject
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float baseAlpha = 1;
     [SerializeField] private float targetAlpha = 0;
+    [SerializeField] private bool startAlphaOne;
+    
 
     public event Action OnCompleteAnimation;
     public event Action OnCompleteReverseAnimation;
 
     private void Awake()
     {
-        canvasGroup.alpha = 0;
+        canvasGroup.alpha = startAlphaOne ? 1 : 0;
     }
 
     public override void PlayAnimation()
