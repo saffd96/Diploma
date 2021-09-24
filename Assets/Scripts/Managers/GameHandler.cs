@@ -9,11 +9,10 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private PowerUpManager powerUpManager;
     [SerializeField] private GameObject onClickVfx;
     [SerializeField] private AnimatedPanel exitPanel;
-    
 
     public static Vector2 StartPosition;
     public static GameObject Player;
-    
+
     private static int NeedCastleScenesToPass { get; set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
@@ -25,8 +24,12 @@ public class GameHandler : MonoBehaviour
         ExitLvl.OnExitLvlCollision += CompleteLvl;
         SuperPlayer.OnSuperPlayerDeath += OnPLayerDeath;
         BossExitLvl.OnBossExitDoorCollision += ResetGame;
-        exitPanel.OnCompleteAnimation += ExitGame;
-        exitPanel.OnCompleteReverseAnimation += DisableExitPanel;
+
+        if (exitPanel != null)
+        {
+            exitPanel.OnCompleteAnimation += ExitGame;
+            exitPanel.OnCompleteReverseAnimation += DisableExitPanel;
+        }
     }
 
     private void OnDisable()
@@ -34,10 +37,14 @@ public class GameHandler : MonoBehaviour
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
         SuperPlayer.OnSuperPlayerDeath -= OnPLayerDeath;
         BossExitLvl.OnBossExitDoorCollision -= ResetGame;
-        exitPanel.OnCompleteAnimation -= ExitGame;
-        exitPanel.OnCompleteReverseAnimation -= DisableExitPanel;
 
+        if (exitPanel != null)
+        {
+            exitPanel.OnCompleteAnimation -= ExitGame;
+            exitPanel.OnCompleteReverseAnimation -= DisableExitPanel;
+        }
     }
+
     private void Awake()
     {
         IsPowerUpSelected = false;
@@ -50,8 +57,12 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
-        exitPanel.gameObject.SetActive(true);
-        exitPanel.PlayReverseAnimation();
+        if (exitPanel != null)
+        {
+            exitPanel.gameObject.SetActive(true);
+            exitPanel.PlayReverseAnimation();
+        }
+
         if (powerUpManager != null)
         {
             powerUpManager.gameObject.SetActive(true);
@@ -116,7 +127,6 @@ public class GameHandler : MonoBehaviour
         AudioManager.Instance.PlayButtonOnClickSfx();
     }
 
-    
     private void ResetGame()
     {
         LevelsCompleted = 0;
@@ -167,7 +177,7 @@ public class GameHandler : MonoBehaviour
         exitPanel.gameObject.SetActive(true);
         exitPanel.PlayAnimation();
     }
-    
+
     private void DisableExitPanel()
     {
         exitPanel.gameObject.SetActive(false);
