@@ -11,14 +11,10 @@ public class GameHandler : MonoBehaviour
 
     public static Vector2 StartPosition;
     public static GameObject Player;
-
-    private Boss boss;
-
+    
     private static int NeedCastleScenesToPass { get; set; } = 1;
     private bool IsPaused { get; set; }
     private bool IsMapActive { get; set; }
-
-    private bool isBossDead;
     private static bool IsPowerUpSelected { get; set; }
     public static int LevelsCompleted { get; private set; }
 
@@ -26,14 +22,21 @@ public class GameHandler : MonoBehaviour
     {
         ExitLvl.OnExitLvlCollision += CompleteLvl;
         SuperPlayer.OnSuperPlayerDeath += OnPLayerDeath;
+        BossExitLvl.OnBossExitDoorCollision += ResetGame;
     }
 
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
         SuperPlayer.OnSuperPlayerDeath -= OnPLayerDeath;
+        BossExitLvl.OnBossExitDoorCollision -= ResetGame;
     }
-
+    
+    private void ResetGame()
+    {
+        LevelsCompleted = 0;
+    }
+    
     private void Awake()
     {
         IsPowerUpSelected = false;
@@ -50,8 +53,6 @@ public class GameHandler : MonoBehaviour
         {
             powerUpManager.gameObject.SetActive(true);
         }
-
-        boss = FindObjectOfType<Boss>();
     }
 
     private void Update()

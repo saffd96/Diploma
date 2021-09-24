@@ -1201,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &435372611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 713547349
-  m_SortingOrder: 100
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!224 &435372614
 RectTransform:
@@ -1644,7 +1644,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16375
+    m_Bits: 32759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1952,8 +1952,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1251613430}
   fadeDuration: 0.5
-  baseAlpha: 1
-  targetAlpha: 0
+  baseAlpha: 0
+  targetAlpha: 1
 --- !u!1 &556559620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2727,7 +2727,6 @@ GameObject:
   - component: {fileID: 737930907}
   - component: {fileID: 737930906}
   - component: {fileID: 737930909}
-  - component: {fileID: 737930910}
   m_Layer: 5
   m_Name: GoToMainMenu
   m_TagString: Untagged
@@ -2906,21 +2905,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &737930910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737930904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e4e9f229f176db43b0939c4121fdd21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventTrigger: {fileID: 0}
-  audioManager: {fileID: 0}
-  button: {fileID: 0}
 --- !u!1 &774998483
 GameObject:
   m_ObjectHideFlags: 0
@@ -6164,7 +6148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1715087209
 MonoBehaviour:
   m_ObjectHideFlags: 0

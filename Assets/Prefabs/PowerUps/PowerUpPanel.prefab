@@ -142,9 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: -800, z: 0}
   endPosition: {x: 0, y: -375, z: 0}
-  moveTime: 1.5
+  moveTime: 0.5
   toStartPointEase: 1
-  toEndPointEase: 30
+  toEndPointEase: 1
   loops: 1
 --- !u!114 &1648664497854069548
 MonoBehaviour:

@@ -64,6 +64,12 @@ MonoBehaviour:
   - Clip: {fileID: 8300000, guid: 5517dbabfaa271144a34f6f6ffc0c705, type: 3}
     SfxType: 16
     Volume: 1
+  - Clip: {fileID: 8300000, guid: f738f5f2745b2754c975bd5020871749, type: 3}
+    SfxType: 17
+    Volume: 1
+  - Clip: {fileID: 8300000, guid: eb15073aca2b8924daa83b2cfc1e0f96, type: 3}
+    SfxType: 18
+    Volume: 1
   musics:
   - Clips:
     - {fileID: 8300000, guid: a6625f14e710dbc48bf1cdae4734a872, type: 3}

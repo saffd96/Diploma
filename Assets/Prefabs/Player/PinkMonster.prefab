@@ -390,7 +390,7 @@ MonoBehaviour:
   colliderDetectRadius: 0.25
   attackRadius: 0.5
   colliderDetector: {fileID: 792138301657510428}
-  jumpForce: 8
+  jumpForce: 8.5
   isMultipleJumpsActive: 0
   extraJumps: 1
   extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}

@@ -22,7 +22,7 @@ public class SceneLoadUi : MonoBehaviour
 
         if (progressText != null)
         {
-            progressText.text = slider.value * 100f + "%";
+            progressText.text = $"{slider.value:P1}";
         }
     }
 
@@ -35,7 +35,7 @@ public class SceneLoadUi : MonoBehaviour
 
         if (progressText != null)
         {
-            progressText.text = slider.value * 100f + "%";
+            progressText.text = $"{slider.value:P1}";
         }
     }
 }

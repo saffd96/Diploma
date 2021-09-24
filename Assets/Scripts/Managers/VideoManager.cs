@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -5,28 +6,20 @@ public class VideoManager : MonoBehaviour
 {
     [SerializeField] private SceneLoadManager sceneLoadManager;
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private AnimatedPanel animatedPanel;
 
-    private void OnEnable()
-    {
-        animatedPanel.OnCompleteAnimation += LoadSceneAfterAnimation;
-    }
+    private AudioManager audioManager;
 
-    private void OnDisable()
+    private void Start()
     {
-        animatedPanel.OnCompleteAnimation -= LoadSceneAfterAnimation;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
     {
         if (!videoPlayer.isPlaying)
         {
-            animatedPanel.PlayAnimation();
+            sceneLoadManager.LoadScene(SceneNamesConstants.MenuScene);
+            Destroy(audioManager);
         }
-    }
-
-    private void LoadSceneAfterAnimation()
-    {
-        sceneLoadManager.LoadScene(SceneNamesConstants.MenuScene);
     }
 }

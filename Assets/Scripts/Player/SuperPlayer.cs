@@ -92,11 +92,13 @@ public class SuperPlayer : DamageableObject
     private void OnEnable()
     {
         ExitLvl.OnExitLvlCollision += SaveStats;
+        BossExitLvl.OnBossExitDoorCollision += ResetStats;
     }
 
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= SaveStats;
+        BossExitLvl.OnBossExitDoorCollision -= ResetStats;
     }
 
     private void OnDrawGizmosSelected()
@@ -195,6 +197,23 @@ public class SuperPlayer : DamageableObject
         PlayerPrefs.SetInt(SaveLoadConstants.CurrentStonesPrefsKey, CurrentStones);
         PlayerPrefs.SetInt(SaveLoadConstants.MaxHealthPrefsKey, maxHealth);
         PlayerPrefs.SetInt(SaveLoadConstants.CurrentHealthPrefsKey, CurrentHealth);
+    }
+    
+    private void ResetStats()
+    {
+        PlayerPrefs.DeleteKey(SaveLoadConstants.AttackValuePrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.IsRangeAttackEnabledPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.MaxSpeedPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.IsRunActivePrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.RunningSpeedMultiplierPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.JumpForcePrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.IsMultipleJumpsActivePrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.IsShieldActivePrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.ExtraJumpsPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.StonesMaxPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.CurrentStonesPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.MaxHealthPrefsKey);
+        PlayerPrefs.DeleteKey(SaveLoadConstants.CurrentHealthPrefsKey);
     }
 
     private void LoadStats()

@@ -16,5 +16,7 @@ public enum SfxType
     PickUp = 13,
     ButtonHover = 14,
     ButtonClick = 15,
-    PlayerAttack = 16
+    PlayerAttack = 16,
+    Fireball = 17,
+    FireWormDie= 18
 }

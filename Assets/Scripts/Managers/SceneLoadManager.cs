@@ -77,7 +77,6 @@ public class SceneLoadManager : MonoBehaviour
         }
 
         panel.PlayAnimation();
-
         nextSceneName = sceneName;
     }
 }
