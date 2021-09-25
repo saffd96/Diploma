@@ -67,10 +67,20 @@ public class FireWorm : BaseEnemy
     private void CreateFireBall()
     {
         var a = Mathf.Sqrt(player.position.x * player.position.x + player.position.y * player.position.y);
-        var b = Mathf.Sqrt(fireballSpawner.position.x * player.position.x + player.position.y * player.position.y);
+        var b = Mathf.Sqrt(fireballSpawner.position.x * fireballSpawner.position.x + fireballSpawner.position.y * fireballSpawner.position.y);
         var fireballAngle = 180 * Mathf.Cos((a * b) / (Mathf.Abs(a) * Mathf.Abs(b))) / Mathf.PI;
 
-        projectile = Instantiate(fireball, fireballSpawner.position, Quaternion.Euler(0, 0, fireballAngle - 90));
+        if (player.position.x> transform.position.x)
+        {
+            fireballAngle += transform.eulerAngles.z;
+        }
+        else
+        {
+            fireballAngle -= transform.eulerAngles.z;
+        }
+        
+        projectile = Instantiate(fireball, fireballSpawner.position, Quaternion.Euler(0, 0, fireballAngle), transform);
+        projectile.transform.localScale = projectile.transform.parent.localScale;
         projectile.GetComponent<Rigidbody2D>()
                .AddForce((player.position - transform.position).normalized * throwForce, ForceMode2D.Impulse);
     }
