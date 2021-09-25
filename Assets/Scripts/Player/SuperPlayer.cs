@@ -442,11 +442,11 @@ public class SuperPlayer : DamageableObject
         attackTimer += Time.deltaTime;
         rangeAttackTimer += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             isMeleeAttack = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse1))
+        else if (Input.GetKey(KeyCode.Mouse1))
         {
             isMeleeAttack = false;
         }
