@@ -193,8 +193,15 @@ public class LevelGeneration : MonoBehaviour
 
                 CreateRoom(!generateBossLvl ? Exit : Boss);
 
-                StopGeneration = true;
-                astarPath.Scan();
+                foreach (var progress in astarPath.ScanAsync())
+                {
+                    Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
+
+                    if (progress.progress >= 0.95f)
+                    {
+                        StopGeneration = true;
+                    }
+                }
             }
         }
     }

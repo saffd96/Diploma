@@ -116,7 +116,7 @@ public class GameHandler : MonoBehaviour
             Instantiate(onClickVfx, mousePos, quaternion.identity, transform);
         }
     }
-
+    
     public void CreateOnHoverSound()
     {
         AudioManager.Instance.PlayButtonOnHoverSfx();

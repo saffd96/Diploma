@@ -52,7 +52,7 @@ public class SceneLoadManager : MonoBehaviour
 
     private void LoadSceneAfterAnimation()
     {
-        SceneManager.LoadScene(nextSceneName);
+        SceneManager.LoadSceneAsync(nextSceneName);
     }
 
     private void LoadEndScene()

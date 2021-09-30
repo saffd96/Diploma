@@ -14,6 +14,7 @@ public class RoomSpawner : MonoBehaviour
         if (roomDetection == null)
         {
             Instantiate(block, transform.position, Quaternion.identity, levelGeneration.LevelTransform);
+            
             Destroy(gameObject);
         }
     }

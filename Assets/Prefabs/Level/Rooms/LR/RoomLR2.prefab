@@ -3467,7 +3467,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1199010596108825898, guid: 7b505649767ed894ea8d550bd0e0d482, type: 3}
       propertyPath: attackRange
-      value: 7.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8188025971040173646, guid: 7b505649767ed894ea8d550bd0e0d482, type: 3}
       propertyPath: m_RootOrder

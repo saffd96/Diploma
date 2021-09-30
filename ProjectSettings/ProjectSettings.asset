@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Diploma
-  defaultCursor: {fileID: 2800000, guid: c206331cdc9bea74eaff22f50b02898a, type: 3}
-  cursorHotspot: {x: 141, y: 141}
+  defaultCursor: {fileID: 2800000, guid: f4e13f3726c6e7f4395879d98dab219a, type: 3}
+  cursorHotspot: {x: 15, y: 15}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
@@ -553,7 +553,7 @@ PlayerSettings:
   webGLTemplate: APPLICATION:Default
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 0
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
