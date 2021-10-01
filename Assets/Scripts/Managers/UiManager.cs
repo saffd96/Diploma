@@ -11,12 +11,14 @@ public class UiManager : MonoBehaviour
 
     [Space]
     [SerializeField] private GameObject rangeAttackImage;
+    [SerializeField] private GameObject aimTargetImage;
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
 
     private void Update()
     {
         rangeAttackImage.SetActive(stoneView.CanvasGroup.alpha >= 1);
+        aimTargetImage.SetActive(stoneView.CanvasGroup.alpha >= 1);
     }
 
     public void PauseToggle(bool isActive)

@@ -311,6 +311,10 @@ public class Player : DamageableObject
 
     private void UpDateTrajectoryPoints()
     {
+        if (!playerAttack.IsRangeAttackEnabled)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCtrlPressed = true;
