@@ -429,12 +429,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6502859443754222715}
-  - component: {fileID: 7917223400228285152}
-  - component: {fileID: 6502859443754222694}
-  - component: {fileID: 6502859443754222695}
-  - component: {fileID: 6502859443754222692}
+  - component: {fileID: 8368332977449591603}
+  - component: {fileID: 7774563625231691085}
+  - component: {fileID: -8942023839405705565}
+  - component: {fileID: -8052763944029331576}
   - component: {fileID: 7708874844341430804}
+  - component: {fileID: -4073227003475185801}
+  - component: {fileID: 7499086525133782933}
+  - component: {fileID: 6502859443754222694}
   - component: {fileID: 5179572158605742387}
+  - component: {fileID: 6502859443754222692}
+  - component: {fileID: 6502859443754222695}
   m_Layer: 7
   m_Name: DudeMonster
   m_TagString: Player
@@ -463,7 +468,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7917223400228285152
+--- !u!114 &8368332977449591603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,46 +477,132 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502859443754222691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 027da80baaaa4f3aa45771938b01f9ce, type: 3}
+  m_Script: {fileID: 11500000, guid: ea9bc2e9e1d9481a93c7e23fdb643c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
   deathVfx: {fileID: 100006, guid: 38fbb81fc39316b45bd1357feaf23463, type: 3}
   hitVfx: {fileID: 7351831182345197516, guid: 136e83f893533d74ba973f1f86706dc2, type: 3}
-  attackValue: 1
-  attackVfx: {fileID: 3462215136627729583, guid: c407aab7fc8bf014f8d823b116d71849, type: 3}
-  attackRate: 0.5
-  throwForce: 10
-  stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
-  stoneSpawner: {fileID: 81181125529002187}
-  isRangeAttackEnabled: 0
-  shield: {fileID: 4968876682125668977}
-  unableShieldVfx: {fileID: 7224703387119497805, guid: 5c28624ebd63ff941a22008f634ca85d, type: 3}
-  invulnerableTime: 1
-  invulnerableItemShield: {fileID: 1237789432653065485}
-  isInvulnerableItem: 0
-  invulnerableItemTime: 10
-  maxSpeed: 6
-  isRunActive: 0
-  runningSpeedMultiplier: 1.5
-  runVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
-  legsPosition: {fileID: 6502859442602330302}
-  groundDetectRadius: 0.1
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  colliderDetectRadius: 0.25
-  attackRadius: 0.5
-  colliderDetector: {fileID: 603352202858267006}
-  jumpForce: 8
-  isMultipleJumpsActive: 0
-  extraJumps: 1
-  extraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
+  playerAttack: {fileID: 7774563625231691085}
+  playerMoving: {fileID: -8942023839405705565}
+  playerVfx: {fileID: -8052763944029331576}
   shadowTransform: {fileID: 503101407943252531}
   shadowShowRange: 1
+  invulnerableTime: 1
   trajectoryPointPrefab: {fileID: 8890989479973115199, guid: 43a746558b9d7f54f851d7d25f3298e2, type: 3}
   trajectoryPoints: []
-  numberOfPoints: 30
+  numberOfPoints: 20
+--- !u!114 &7774563625231691085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56326ffc0e194d0e9cd72f44b74fef96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsRangeAttackEnabled: 0
+  StonesMax: 0
+  AttackValue: 1
+  AttackRate: 0.5
+  ThrowForce: 10
+  StoneSpawner: {fileID: 81181125529002187}
+  AttackTimer: 0
+  RangeAttackTimer: 0
+  IsMeleeAttack: 0
+  CurrentStones: 0
+  DirectionVector: {x: 0, y: 0}
+  stonePrefab: {fileID: 40916147298159540, guid: 1399efc56b688c0459dff2b2febd697d, type: 3}
+  attackRadius: 0.25
+  colliderDetector: {fileID: 603352202858267006}
+--- !u!114 &-8942023839405705565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a951771c38a4dedb40f3ada2f1e4429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsRunActive: 0
+  IsMultipleJumpsActive: 0
+  MAXSpeed: 6
+  RunningSpeedMultiplier: 1.5
+  JumpForce: 7.5
+  GroundDetectRadius: 0.1
+  ExtraJumps: 1
+  LegsPosition: {fileID: 6502859442602330302}
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  Rb: {fileID: 0}
+  IsClimbing: 0
+  IsGrounded: 0
+  colliderDetectRadius: 0.15
+  colliderDetector: {fileID: 603352202858267006}
+--- !u!114 &-8052763944029331576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2352438acace4767a1132a14de49afc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackVfx: {fileID: 3462215136627729583, guid: c407aab7fc8bf014f8d823b116d71849, type: 3}
+  Shield: {fileID: 4968876682125668977}
+  UnableShieldVfx: {fileID: 7224703387119497805, guid: 5c28624ebd63ff941a22008f634ca85d, type: 3}
+  InvulnerableItemShield: {fileID: 1237789432653065485}
+  RunVfx: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
+  ExtraJumpVfx: {fileID: 2480710757439887269, guid: 522d0a1f586ee9c468e2ce57ab286bb6, type: 3}
+  DustFromRun: {fileID: 7821160109623534394, guid: 3e6ae7086943de046bc10bd1f373dfe0, type: 3}
+--- !u!114 &7708874844341430804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927b4daca4d84405a61aeb92fb954015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4073227003475185801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0f9c7bc8234515841999bf45c6c358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7499086525133782933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502859443754222691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7975dd9498074c01a240ccc4659ac8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsInvulnerableItem: 0
+  IsShieldEnabled: 0
 --- !u!212 &6502859443754222694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -563,25 +654,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6502859443754222695
-Animator:
-  serializedVersion: 3
+--- !u!70 &5179572158605742387
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502859443754222691}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 7840f8af34f56ca4ca7be4f74dcff5ed, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_Size: {x: 0.45, y: 0.675}
+  m_Direction: 0
 --- !u!50 &6502859443754222692
 Rigidbody2D:
   serializedVersion: 4
@@ -603,34 +691,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7708874844341430804
-MonoBehaviour:
+--- !u!95 &6502859443754222695
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502859443754222691}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927b4daca4d84405a61aeb92fb954015, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!70 &5179572158605742387
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502859443754222691}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15}
-  m_Size: {x: 0.45, y: 0.675}
-  m_Direction: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7840f8af34f56ca4ca7be4f74dcff5ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3187739186916272905
 PrefabInstance:
   m_ObjectHideFlags: 0

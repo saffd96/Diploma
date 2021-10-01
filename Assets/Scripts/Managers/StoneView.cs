@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using PlayerComponents;
 
 public class StoneView : MonoBehaviour
 {
@@ -8,26 +9,26 @@ public class StoneView : MonoBehaviour
 
     public CanvasGroup CanvasGroup => canvasGroup;
 
-    private SuperPlayer player;
+    private PlayerAttack playerAttack;
     private int stones;
 
     private void OnEnable()
     {
-        SuperPlayer.OnSuperPlayerStonesChanged += UpdateStones;
+        PlayerAttack.OnStonesChanged += UpdateStones;
     }
 
     private void OnDisable()
     {
-        SuperPlayer.OnSuperPlayerStonesChanged -= UpdateStones;
+        PlayerAttack.OnStonesChanged -= UpdateStones;
     }
 
     private void Start()
     {
-        player = FindObjectOfType<SuperPlayer>();
+        playerAttack = FindObjectOfType<PlayerAttack>();
 
         UpdateStones();
 
-        if (player.CurrentStones == 0)
+        if (playerAttack.CurrentStones == 0)
         {
             canvasGroup.alpha = 0f;
         }
@@ -35,7 +36,7 @@ public class StoneView : MonoBehaviour
 
     private void UpdateStones()
     {
-        stones = player.CurrentStones;
+        stones = playerAttack.CurrentStones;
 
         if (canvasGroup.alpha < 1f)
         {

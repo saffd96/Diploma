@@ -8,7 +8,7 @@ public class DamageDealer : MonoBehaviour
     {
         if (other.collider.CompareTag(Tags.Player))
         {
-            other.gameObject.GetComponent<SuperPlayer>().ApplyDamage(damageAmount);
+            other.gameObject.GetComponent<Player>().ApplyDamage(damageAmount);
         }
     }
 }

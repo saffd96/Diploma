@@ -59,7 +59,7 @@ public class Boss : BaseEnemy
 
     protected void Start()
     {
-        player = FindObjectOfType<SuperPlayer>().transform;
+        player = FindObjectOfType<Player>().transform;
     }
 
     private void Update()

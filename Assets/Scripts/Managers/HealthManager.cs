@@ -14,7 +14,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private GameObject bossHp;
 
     [SerializeField] private Slider slider;
-    private SuperPlayer player;
+    private Player player;
     private Boss boss;
 
     private int numberOfHearts;
@@ -22,14 +22,14 @@ public class HealthManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SuperPlayer.OnSuperPlayerHpChanged += UpdateHearts;
+        Player.OnPlayerHpChanged += UpdateHearts;
         Boss.OnBossHpChanged += UpdateBossHp;
         Boss.OnEnterChaseZone += SetupBossHp;
     }
 
     private void OnDisable()
     {
-        SuperPlayer.OnSuperPlayerHpChanged -= UpdateHearts;
+        Player.OnPlayerHpChanged -= UpdateHearts;
         Boss.OnBossHpChanged -= UpdateBossHp;
         Boss.OnEnterChaseZone -= SetupBossHp;
     }
@@ -38,7 +38,7 @@ public class HealthManager : MonoBehaviour
     {
         bossHp.SetActive(false);
 
-        player = FindObjectOfType<SuperPlayer>();
+        player = FindObjectOfType<Player>();
         UpdateHearts();
     }
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using PlayerComponents;
 
 public class PowerUpManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.2f;
 
     private Tweener tweenAnimation;
-    private SuperPlayer superPlayer;
+    private PlayerPowerUp playerPowerUp;
 
     private List<PowerUpPanel> powerUpPanels = new List<PowerUpPanel>();
     private List<PowerUp> usedPowerUps = new List<PowerUp>();
@@ -23,7 +24,7 @@ public class PowerUpManager : MonoBehaviour
 
     private void Start()
     {
-        superPlayer = FindObjectOfType<SuperPlayer>();
+        playerPowerUp = FindObjectOfType<PlayerPowerUp>();
         usedPowerUps.Clear();
 
         for (int i = 0; i < panelPositions.Length; i++)
@@ -60,57 +61,57 @@ public class PowerUpManager : MonoBehaviour
 
     public void AddMaxLives()
     {
-        superPlayer.AddMaxLives();
+        playerPowerUp.HealthPowerUp();
     }
 
     public void FillHp()
     {
-        superPlayer.FillHp();
+        playerPowerUp.HealthPowerUp();
     }
 
     public void AddSpeed()
     {
-        superPlayer.AddSpeed();
+        playerPowerUp.AddSpeed();
     }
 
     public void EnableRun()
     {
-        superPlayer.EnableRun();
+        playerPowerUp.RunPowerUp();
     }
 
     public void AddRunningSpeedMultiplier()
     {
-        superPlayer.AddRunningSpeedMultiplier();
+        playerPowerUp.RunPowerUp();
     }
 
     public void AddJumpForce()
     {
-        superPlayer.AddJumpForce();
+        playerPowerUp.AddJumpForce();
     }
 
     public void AddAdditionalJump()
     {
-        superPlayer.AddAdditionalJumps();
+        playerPowerUp.AdditionalJumpsPowerUp();
     }
 
     public void EnableExtraJump()
     {
-        superPlayer.EnableExtraJumps();
+        playerPowerUp.AdditionalJumpsPowerUp();
     }
 
     public void AddAttackValue()
     {
-        superPlayer.AddAttackValue();
+        playerPowerUp.AddAttackValue();
     }
 
     public void AddAdditionalStones()
     {
-        superPlayer.AddAdditionalStones();
+        playerPowerUp.RangedPowerUp();
     }
 
     public void EnableRangeAttack()
     {
-        superPlayer.EnableRangeAttack();
+        playerPowerUp.RangedPowerUp();
     }
 
     public void Hide()

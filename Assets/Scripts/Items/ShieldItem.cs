@@ -1,7 +1,9 @@
+using PlayerComponents;
+
 public class ShieldItem : BaseItem
 {
-    protected override void ApplyEffect(SuperPlayer superPlayer)
+    protected override void ApplyEffect(PlayerItemEffects playerItemEffects)
     {
-        superPlayer.AddShieldItem();
+        playerItemEffects.AddShieldItem();
     }
 }

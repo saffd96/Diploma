@@ -2024,8 +2024,8 @@ MonoBehaviour:
         m_MethodName: SelectPlayer
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8603441436906941012, guid: c347c7aa04163a441b40c22ee5b14a30, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 7201614174040961680, guid: c347c7aa04163a441b40c22ee5b14a30, type: 3}
+          m_ObjectArgumentAssemblyTypeName: Player, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: LoadingScene
@@ -6432,8 +6432,8 @@ MonoBehaviour:
         m_MethodName: SelectPlayer
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6502859443754222691, guid: dec0c5cd5907dbe4ea27672b488a3d74, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 8368332977449591603, guid: dec0c5cd5907dbe4ea27672b488a3d74, type: 3}
+          m_ObjectArgumentAssemblyTypeName: Player, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: LoadingScene
@@ -6654,8 +6654,8 @@ MonoBehaviour:
         m_MethodName: SelectPlayer
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 4955594709239865557, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: -9087679627845551645, guid: a08eeba0f19cf9f4eb23d5932e6fcd56, type: 3}
+          m_ObjectArgumentAssemblyTypeName: Player, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: LoadingScene

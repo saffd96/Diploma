@@ -1,7 +1,12 @@
+using UnityEngine;
+using PlayerComponents;
+
 public class InvulnerablePotion : BaseItem
 {
-    protected override void ApplyEffect(SuperPlayer player)
+    [SerializeField] private int seconds = 5;
+
+    protected override void ApplyEffect(PlayerItemEffects playerItemEffects)
     {
-        player.InvulnerableItem();
+        playerItemEffects.InvulnerableItem(seconds);
     }
 }

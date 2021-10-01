@@ -24,7 +24,7 @@ public class FireWorm : BaseEnemy
     private void Start()
     {
         attackTimer = attackTime;
-        player = FindObjectOfType<SuperPlayer>().transform;
+        player = FindObjectOfType<Player>().transform;
     }
 
     private void Update()

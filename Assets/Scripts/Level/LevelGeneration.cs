@@ -53,7 +53,7 @@ public class LevelGeneration : MonoBehaviour
     private GameObject instance;
     private GameObject tempRoom;
 
-    private GameObject player;
+    private Player player;
 
     private bool generateBossLvl;
 
@@ -104,9 +104,9 @@ public class LevelGeneration : MonoBehaviour
         if (GameHandler.Player != null)
         {
             player = Instantiate(GameHandler.Player, GameHandler.StartPosition, Quaternion.identity);
+            cinemachineCamera.Follow = player.transform;
         }
 
-        cinemachineCamera.Follow = player.transform;
     }
 
     private void GenerateLvl()
@@ -195,8 +195,6 @@ public class LevelGeneration : MonoBehaviour
 
                 foreach (var progress in astarPath.ScanAsync())
                 {
-                    Debug.Log("Scanning... " + progress.description + " - " + (progress.progress*100).ToString("0") + "%");
-
                     if (progress.progress >= 0.95f)
                     {
                         StopGeneration = true;

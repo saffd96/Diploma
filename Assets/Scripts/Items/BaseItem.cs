@@ -1,4 +1,5 @@
 using UnityEngine;
+using PlayerComponents;
 
 public abstract class BaseItem : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public abstract class BaseItem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.gameObject.TryGetComponent(out SuperPlayer player)) return;
+        if (!other.gameObject.TryGetComponent(out PlayerItemEffects player)) return;
 
         if (activateVfx != null)
         {
@@ -18,5 +19,5 @@ public abstract class BaseItem : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected abstract void ApplyEffect(SuperPlayer player);
+    protected abstract void ApplyEffect(PlayerItemEffects player);
 }

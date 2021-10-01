@@ -11,7 +11,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private AnimatedPanel exitPanel;
 
     public static Vector2 StartPosition;
-    public static GameObject Player;
+    public static Player Player;
 
     private static int NeedCastleScenesToPass { get; set; } = 1;
     private bool IsPaused { get; set; }
@@ -22,7 +22,7 @@ public class GameHandler : MonoBehaviour
     private void OnEnable()
     {
         ExitLvl.OnExitLvlCollision += CompleteLvl;
-        SuperPlayer.OnSuperPlayerDeath += OnPLayerDeath;
+        Player.OnPlayerDeath += OnPLayerDeath;
         BossExitLvl.OnBossExitDoorCollision += ResetGame;
 
         if (exitPanel != null)
@@ -35,7 +35,7 @@ public class GameHandler : MonoBehaviour
     private void OnDisable()
     {
         ExitLvl.OnExitLvlCollision -= CompleteLvl;
-        SuperPlayer.OnSuperPlayerDeath -= OnPLayerDeath;
+        Player.OnPlayerDeath -= OnPLayerDeath;
         BossExitLvl.OnBossExitDoorCollision -= ResetGame;
 
         if (exitPanel != null)
@@ -74,6 +74,7 @@ public class GameHandler : MonoBehaviour
         CheckPauseToggle();
 
         CheckMapToggle();
+
     }
 
     public void PauseToggle()
@@ -86,7 +87,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void SelectPlayer(GameObject selectedPlayer)
+    public void SelectPlayer(Player selectedPlayer)
     {
         Player = selectedPlayer;
     }

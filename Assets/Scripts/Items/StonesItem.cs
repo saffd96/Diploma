@@ -1,7 +1,12 @@
+using UnityEngine;
+using PlayerComponents;
+
 public class StonesItem : BaseItem
 {
-    protected override void ApplyEffect(SuperPlayer player)
+    [SerializeField] private int stonesAmount = 2;
+
+    protected override void ApplyEffect(PlayerItemEffects playerItemEffects)
     {
-        player.AddStonesItem();
+        playerItemEffects.AddStonesItem(stonesAmount);
     }
 }

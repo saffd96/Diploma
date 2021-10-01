@@ -1,7 +1,12 @@
+using UnityEngine;
+using PlayerComponents;
+
 public class Potion : BaseItem
 {
-    protected override void ApplyEffect(SuperPlayer player)
+    [SerializeField] private int hpAmount = 1;
+
+    protected override void ApplyEffect(PlayerItemEffects playerItemEffects)
     {
-        player.PotionItem();
+        playerItemEffects.PotionItem(hpAmount);
     }
 }
