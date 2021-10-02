@@ -545,10 +545,10 @@ MonoBehaviour:
   Rb: {fileID: 0}
   IsClimbing: 0
   IsGrounded: 0
-  maxEndurance: 1
-  currentEndurance: 0
   colliderDetectRadius: 0.15
   colliderDetector: {fileID: 603352202858267006}
+  maxStamina: 100
+  usedStaminaAmount: 2
 --- !u!114 &-8052763944029331576
 MonoBehaviour:
   m_ObjectHideFlags: 0

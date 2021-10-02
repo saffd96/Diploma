@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace PlayerComponents
@@ -29,13 +30,22 @@ namespace PlayerComponents
         [SerializeField] private float colliderDetectRadius;
         [SerializeField] private Transform colliderDetector;
 
+        [SerializeField] private int maxStamina = 100;
+        [SerializeField] private int usedStaminaAmount = 2;
+
+        private int currentStamina;
+
+        private StaminaBarView staminaBarView;
         private PlayerVfx playerVfx;
-        
+
         private PlayerAnimationController playerAnimationController;
 
         private float moveVerticalInput;
         private float speed;
         private float climbSpeed;
+
+        private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
+        private Coroutine regen;
 
         private int jumps;
 
@@ -77,9 +87,13 @@ namespace PlayerComponents
         protected void Awake()
         {
             Rb = GetComponent<Rigidbody2D>();
+            staminaBarView = FindObjectOfType<StaminaBarView>();
             climbSpeed = MAXSpeed;
             jumps = ExtraJumps;
             speed = MAXSpeed;
+            currentStamina = maxStamina;
+            staminaBarView.SetMaxValue(maxStamina);
+            staminaBarView.SetValue(currentStamina);
         }
 
         private void Start()
@@ -126,24 +140,30 @@ namespace PlayerComponents
 
         public void CheckRunCondition()
         {
-            playerVfx.RunVfx.SetActive(IsShiftPressed && IsGrounded && Mathf.Abs(MoveHorizontalInput)>0.25f );
+            playerVfx.RunVfx.SetActive(IsShiftPressed && IsGrounded && Mathf.Abs(MoveHorizontalInput) > 0.25f);
 
             playerVfx.SetActiveDustFromRun();
 
+            if (IsShiftPressed && IsGrounded && Mathf.Abs(MoveHorizontalInput) > 0.25f)
+            {
+                UseStamina(usedStaminaAmount);
+            }
+
+            if (currentStamina == 0)
+            {
+                StopRun();
+
+                return;
+            }
+
             switch (IsRunActive)
             {
-                case true when Input.GetKey(KeyCode.LeftShift) && IsGrounded && !IsShiftPressed:
-                    IsShiftPressed = true;
-
-                    playerAnimationController.SetIsRunning(true);
-                    speed *= RunningSpeedMultiplier;
+                case true when Input.GetKey(KeyCode.LeftShift) && IsGrounded && !IsShiftPressed && currentStamina > 0:
+                    StartRun();
 
                     break;
                 case true when Input.GetKeyUp(KeyCode.LeftShift):
-
-                    playerAnimationController.SetIsRunning(false);
-                    speed /= RunningSpeedMultiplier;
-                    IsShiftPressed = false;
+                    StopRun();
 
                     break;
             }
@@ -200,6 +220,21 @@ namespace PlayerComponents
             playerAnimationController.SetIsPushing(IsPushing);
         }
 
+        private void StartRun()
+        {
+            IsShiftPressed = true;
+
+            playerAnimationController.SetIsRunning(true);
+            speed *= RunningSpeedMultiplier;
+        }
+
+        private void StopRun()
+        {
+            playerAnimationController.SetIsRunning(false);
+            speed = MAXSpeed;
+            IsShiftPressed = false;
+        }
+
         private void Jump()
         {
             playerAnimationController.Jump();
@@ -241,6 +276,38 @@ namespace PlayerComponents
             {
                 IsMultipleJumpsActive = true;
             }
+        }
+
+        private void UseStamina(int amount)
+        {
+            if (currentStamina - amount >= 0)
+            {
+                currentStamina -= amount;
+
+                staminaBarView.SetValue(currentStamina);
+
+                if (regen != null)
+                {
+                    StopCoroutine(regen);
+                }
+
+                regen = StartCoroutine(RegenStamina());
+            }
+        }
+
+        private IEnumerator RegenStamina()
+        {
+            yield return new WaitForSeconds(2);
+
+            while (currentStamina < maxStamina)
+            {
+                currentStamina += maxStamina / 100;
+                staminaBarView.SetValue(currentStamina);
+
+                yield return regenTick;
+            }
+
+            regen = null;
         }
     }
 }

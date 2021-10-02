@@ -1,3 +1,5 @@
+using System;
+using PlayerComponents;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +10,28 @@ public class UiManager : MonoBehaviour
     [SerializeField] private MapView mapView;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private StoneView stoneView;
+    [SerializeField] private StaminaBarView staminaBarView;
 
     [Space]
     [SerializeField] private GameObject rangeAttackImage;
     [SerializeField] private GameObject aimTargetImage;
     [SerializeField] private Image mapUIImage;
     [SerializeField] private Sprite[] mapUISprites = new Sprite[2];
+
+    private void OnEnable()
+    {
+        PlayerPowerUp.OnRunPowerUp += ShowStamina;
+    }
+
+    private void OnDisable()
+    {
+        PlayerPowerUp.OnRunPowerUp -= ShowStamina;
+    }
+
+    private void Start()
+    {
+        staminaBarView.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -54,7 +72,11 @@ public class UiManager : MonoBehaviour
 
     public void ShowDeathScreen()
     {
-        //DoTweenAnim
         deathScreen.SetActive(true);
+    }
+
+    public void ShowStamina()
+    {
+        staminaBarView.gameObject.SetActive(true);
     }
 }
