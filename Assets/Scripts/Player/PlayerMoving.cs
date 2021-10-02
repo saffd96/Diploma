@@ -13,12 +13,12 @@ namespace PlayerComponents
         public float JumpForce;
         public float GroundDetectRadius;
 
-        public int ExtraJumps;
-
         public Transform LegsPosition;
 
         public LayerMask WhatIsGround;
 
+        [HideInInspector]
+        public int ExtraJumps = 1;
         [HideInInspector]
         public Rigidbody2D Rb;
         [HideInInspector]
@@ -30,7 +30,7 @@ namespace PlayerComponents
         [SerializeField] private Transform colliderDetector;
 
         private PlayerVfx playerVfx;
-
+        
         private PlayerAnimationController playerAnimationController;
 
         private float moveVerticalInput;
@@ -77,7 +77,6 @@ namespace PlayerComponents
         protected void Awake()
         {
             Rb = GetComponent<Rigidbody2D>();
-
             climbSpeed = MAXSpeed;
             jumps = ExtraJumps;
             speed = MAXSpeed;
@@ -125,16 +124,10 @@ namespace PlayerComponents
             }
         }
 
-        private void Jump()
-        {
-            playerAnimationController.Jump();
-
-            Rb.velocity = Vector2.up * JumpForce;
-            AudioManager.Instance.PLaySfx(SfxType.Jump);
-        }
-
         public void CheckRunCondition()
         {
+            playerVfx.RunVfx.SetActive(IsShiftPressed && IsGrounded && Mathf.Abs(MoveHorizontalInput)>0.25f );
+
             playerVfx.SetActiveDustFromRun();
 
             switch (IsRunActive)
@@ -142,22 +135,11 @@ namespace PlayerComponents
                 case true when Input.GetKey(KeyCode.LeftShift) && IsGrounded && !IsShiftPressed:
                     IsShiftPressed = true;
 
-                    if (playerVfx.RunVfx != null)
-                    {
-                        playerVfx.DustFromRun = Instantiate(playerVfx.RunVfx, transform);
-                        playerVfx.DustFromRun.SetActive(false);
-                    }
-
                     playerAnimationController.SetIsRunning(true);
                     speed *= RunningSpeedMultiplier;
 
                     break;
                 case true when Input.GetKeyUp(KeyCode.LeftShift):
-
-                    if (playerVfx.DustFromRun != null)
-                    {
-                        Destroy(playerVfx.DustFromRun);
-                    }
 
                     playerAnimationController.SetIsRunning(false);
                     speed /= RunningSpeedMultiplier;
@@ -216,6 +198,14 @@ namespace PlayerComponents
                 LayerMask.GetMask(Layers.InteractObjects));
 
             playerAnimationController.SetIsPushing(IsPushing);
+        }
+
+        private void Jump()
+        {
+            playerAnimationController.Jump();
+
+            Rb.velocity = Vector2.up * JumpForce;
+            AudioManager.Instance.PLaySfx(SfxType.Jump);
         }
 
         private void AddSpeed()

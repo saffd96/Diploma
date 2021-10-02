@@ -137,7 +137,7 @@ namespace PlayerComponents
             OnStonesChanged?.Invoke();
         }
 
-        public void RangeAttackPowerUp()
+        public void RangeAttackPowerUp() // make private
         {
             if (IsRangeAttackEnabled)
             {
