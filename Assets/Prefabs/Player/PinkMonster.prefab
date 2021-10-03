@@ -435,7 +435,8 @@ MonoBehaviour:
   colliderDetectRadius: 0.15
   colliderDetector: {fileID: 792138301657510428}
   maxStamina: 100
-  usedStaminaAmount: 2
+  runUsedStaminaAmount: 2
+  jumpUsedStamina: 15
 --- !u!114 &-4000633156625524223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +533,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 713547349
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: fd0b66f4fb1f4234eba3bd04215a66c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

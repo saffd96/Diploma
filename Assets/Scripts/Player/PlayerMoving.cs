@@ -31,7 +31,8 @@ namespace PlayerComponents
         [SerializeField] private Transform colliderDetector;
 
         [SerializeField] private int maxStamina = 100;
-        [SerializeField] private int usedStaminaAmount = 2;
+        [SerializeField] private int runUsedStaminaAmount = 2;
+        [SerializeField] private int jumpUsedStamina = 10;
 
         private int currentStamina;
 
@@ -146,10 +147,10 @@ namespace PlayerComponents
 
             if (IsShiftPressed && IsGrounded && Mathf.Abs(MoveHorizontalInput) > 0.25f)
             {
-                UseStamina(usedStaminaAmount);
+                UseStamina(runUsedStaminaAmount);
             }
 
-            if (currentStamina == 0)
+            if (currentStamina <= runUsedStaminaAmount)
             {
                 StopRun();
 
@@ -158,7 +159,7 @@ namespace PlayerComponents
 
             switch (IsRunActive)
             {
-                case true when Input.GetKey(KeyCode.LeftShift) && IsGrounded && !IsShiftPressed && currentStamina > 0:
+                case true when Input.GetKey(KeyCode.LeftShift) && IsGrounded && !IsShiftPressed && currentStamina >= runUsedStaminaAmount:
                     StartRun();
 
                     break;
@@ -176,6 +177,11 @@ namespace PlayerComponents
             if (IsGrounded)
             {
                 jumps = ExtraJumps;
+            }
+
+            if (currentStamina <= jumpUsedStamina)
+            {
+                return;
             }
 
             switch (IsMultipleJumpsActive)
@@ -237,6 +243,8 @@ namespace PlayerComponents
 
         private void Jump()
         {
+            UseStamina(jumpUsedStamina);
+
             playerAnimationController.Jump();
 
             Rb.velocity = Vector2.up * JumpForce;
