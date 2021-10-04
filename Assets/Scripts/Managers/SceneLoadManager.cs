@@ -73,7 +73,7 @@ public class SceneLoadManager : MonoBehaviour
 
         if (sceneLoadUi != null)
         {
-            sceneLoadUi.SetProgress();
+            sceneLoadUi.CompleteProgress();
         }
 
         panel.PlayAnimation();
