@@ -10,30 +10,34 @@ public class Player : DamageableObject
     [SerializeField] private PlayerAttack playerAttack;
     [SerializeField] private PlayerMoving playerMoving;
     [SerializeField] private PlayerVfx playerVfx;
-    
+
     [Header("ShadowSettings")]
     [SerializeField] private Transform shadowTransform;
     [SerializeField] private float shadowShowRange = 3f;
 
     [Space]
     [SerializeField] private float invulnerableTime = 1f;
-    
+
     [Header("TrajectorySettings")]
     [SerializeField] private GameObject trajectoryPointPrefab;
     [SerializeField] private GameObject[] trajectoryPoints;
     [SerializeField] private int numberOfPoints = 20;
 
     private PlayerAnimationController playerAnimationController;
-    
+
     private RaycastHit2D hit;
-    
+
     private PlayerItemEffects playerItemEffects;
-    
+
+    private SpriteRenderer sr;
+
     private bool isGrounded;
     private bool isClimbing;
     private bool isFacingRight;
     private bool isCtrlPressed;
     private bool isShadowEnabled;
+
+    private bool invulnerableAnimationSwitch;
 
     public static event Action OnPlayerHpChanged;
     public static event Action OnPlayerDeath;
@@ -62,6 +66,8 @@ public class Player : DamageableObject
         playerAnimationController = GetComponent<PlayerAnimationController>();
         playerItemEffects = GetComponent<PlayerItemEffects>();
 
+        sr = GetComponent<SpriteRenderer>();
+        
         playerAttack.AttackTimer = playerAttack.AttackRate;
         playerAttack.RangeAttackTimer = playerAttack.AttackRate;
 
@@ -109,6 +115,16 @@ public class Player : DamageableObject
         MoveShadow();
     }
 
+    private void AnimationInvulnerable()
+    {
+        
+        if (IsInvulnerable)
+        {
+            sr.color = invulnerableAnimationSwitch ? Color.clear : Color.white;
+            invulnerableAnimationSwitch = !invulnerableAnimationSwitch;
+        }
+    }
+
     public override void ApplyDamage(int amount)
     {
         if (playerItemEffects.IsShieldEnabled || playerItemEffects.IsInvulnerableItem)
@@ -134,6 +150,7 @@ public class Player : DamageableObject
         playerAnimationController.GetDamage();
         IsInvulnerable = true;
 
+        InvokeRepeating(nameof(AnimationInvulnerable), 0, 0.1f);
         StartCoroutine(InvulnerablePlayer(invulnerableTime));
     }
 
@@ -315,6 +332,7 @@ public class Player : DamageableObject
         {
             return;
         }
+
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCtrlPressed = true;
@@ -340,6 +358,10 @@ public class Player : DamageableObject
         IsInvulnerable = false;
 
         playerItemEffects.IsInvulnerableItem = false;
+        
+        CancelInvoke(nameof(AnimationInvulnerable));
+        sr.color = Color.white;
+
     }
 
     private void Flip()
