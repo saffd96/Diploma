@@ -75,7 +75,7 @@ public class UiManager : MonoBehaviour
         deathScreen.SetActive(true);
     }
 
-    public void ShowStamina()
+    private void ShowStamina()
     {
         staminaBarView.gameObject.SetActive(true);
     }

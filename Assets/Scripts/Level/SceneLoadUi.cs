@@ -29,7 +29,7 @@ public class SceneLoadUi : MonoBehaviour
                 vfxTransform.anchoredPosition = new Vector2(barImage.fillAmount / -0.5f *barImage.rectTransform.rect.x, 0);
             }
             
-            if (barImage.fillAmount >= 0.9f)
+            if (barImage.fillAmount >= 0.95f)
             {
                 return;
             }
