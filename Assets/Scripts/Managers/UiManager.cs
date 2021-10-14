@@ -27,12 +27,7 @@ public class UiManager : MonoBehaviour
     {
         PlayerPowerUp.OnRunPowerUp -= ShowStamina;
     }
-
-    private void Start()
-    {
-        staminaBarView.gameObject.SetActive(false);
-    }
-
+    
     private void Update()
     {
         rangeAttackImage.SetActive(stoneView.CanvasGroup.alpha >= 1);

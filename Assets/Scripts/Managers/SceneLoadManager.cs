@@ -62,7 +62,6 @@ public class SceneLoadManager : MonoBehaviour
 
     private IEnumerator SceneLoadDelay(string sceneName)
     {
-
         if (SceneManager.GetActiveScene().name == SceneNamesConstants.LoadingScene)
         {
             yield return new WaitForSeconds(2f);
